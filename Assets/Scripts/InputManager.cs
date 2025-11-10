@@ -10,21 +10,15 @@ public class InputManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             inputActions = new InputSystem_Actions();
+            inputActions.Player.Enable();
+            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    private void OnEnable()
-    {
-        
-        inputActions.Enable();
-    }
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
+   
 }
