@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteractable {
-    
+    public int Gold { get; set; } = 100;
+    [SerializeField] AudioClip openSound;
     public bool IsInRange {
         get => _isInRange;
         set {
@@ -34,7 +35,10 @@ public class Chest : MonoBehaviour, IInteractable {
         { 
             isOpen = value;
             Debug.Log("Chest is now open: " + value);
-            if (value) animator.SetTrigger(openAnimationParameter);
+            if (value){
+                animator.SetTrigger(openAnimationParameter);
+                SoundManager.Instance.PlaySound(openSound);
+            }
         }
     }
     public bool TryInteract() {
