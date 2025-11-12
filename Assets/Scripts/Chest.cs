@@ -1,5 +1,5 @@
 using UnityEngine;
-
+   
 public class Chest : MonoBehaviour, IInteractable {
     public int Gold { get; set; } = 100;
     [SerializeField] AudioClip openSound;
@@ -38,14 +38,23 @@ public class Chest : MonoBehaviour, IInteractable {
             if (value){
                 animator.SetTrigger(openAnimationParameter);
                 SoundManager.Instance.PlaySound(openSound);
+                
             }
         }
     }
-    public bool TryInteract() {
+    public bool TryInteract(PlayerController playerController) {
+      
         if (CanInteract) {
-            IsOpen = true;
-            return true;
+            playerController.Coin += OpenChest();
+            return true; 
         }
-        return false;
+        else {
+            return false;
+        }
+    }
+    public int OpenChest() {
+        int gold = Gold;
+        IsOpen = true;
+        return gold;    
     }
 }

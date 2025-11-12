@@ -2,23 +2,30 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public int Damage = 10;
-
-    public bool CanInflictDamage = false;
-
+    [SerializeField] int Damage = 10;
+    [SerializeField] private AudioClip trapSFX; 
+    private BoxCollider2D trapCollider;
     private void Awake()
     {
-
+        trapCollider = GetComponent<BoxCollider2D>();
     }
     //Activated by animation event
     public void ActivateTrap()
     {
-        CanInflictDamage = true;
+     
+        SoundManager.Instance.PlaySound(trapSFX);
+        trapCollider.enabled = true;
     }
     //Deactivated by animation event
     public void DeactivateTrap()
     {
-        CanInflictDamage = false;
+
+        trapCollider.enabled = false;
+    }
+    public int TakeDamage() {
+       
+        return Damage; 
+    
     }
     
 }

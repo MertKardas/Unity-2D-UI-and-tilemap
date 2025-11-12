@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,9 +7,35 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public PlayerData playerData = new PlayerData();
+    public int Health {
+        get { return (int)playerData.health; }
+        set 
+        { 
+            playerData.health = value;
+            if(playerData.health < 0)
+            {
+                playerData.health = 0;
+                OnPlayerDeath?.Invoke();
+            }
+            OnHealthChanged?.Invoke();
+        }
+    }
+    public int Coin {
+        get { return (int)playerData.coin; }
+        set 
+        { 
+            playerData.coin = value;
+            OnCoinChanged?.Invoke();
+        }
+    }
+    public event Action OnHealthChanged;
+    public event Action OnCoinChanged;
+    public event Action OnTakeDamage; 
+    public event Action OnPlayerDeath;
     public Vector2 Movement { get; private set; }
     Rigidbody2D _rb;
     CapsuleCollider2D collider2D;
+
     void Awake()
     {
         
@@ -38,16 +65,18 @@ public class PlayerController : MonoBehaviour
         
        
     }
-    private void OnTriggerStay2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.TryGetComponent<Trap>(out Trap trap))
         {
+
             Debug.Log("Player in trap area");
             // Handle trap interaction
-            if (trap.CanInflictDamage)
-            {
-                playerData.health -= trap.Damage;
-                Debug.Log($"Player took {trap.Damage} damage from trap. Current health: {playerData.health}");
-            }
+           
+           
+            Health -= trap.TakeDamage();
+            OnTakeDamage?.Invoke();
+           
+            
         }
     }
 }
@@ -56,11 +85,13 @@ public class PlayerData {
    public PlayerState state = PlayerState.Idle;
    public float speed;
    public int health;
-   public int damage;
+   public int coin;
+   public float damage;
 }
 public enum PlayerState {
     Idle,
     Moving,
+    TakeDamage,
     Interacting,
     Dead
 }

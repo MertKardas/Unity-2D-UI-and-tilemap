@@ -6,7 +6,9 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     private List<IInteractable> interactables = new List<IInteractable>();
+    private PlayerController playerController;
     private void Start() {
+        playerController = GetComponentInParent<PlayerController>();
         InputManager.Instance.inputActions.Player.Interact.performed += ctx => {
             Debug.Log("Interact pressed");
             if (interactables.Count == 0) return;
@@ -16,7 +18,7 @@ public class Interact : MonoBehaviour
             .FirstOrDefault();
 
             if (closest != null) {
-                bool success= closest.TryInteract();
+                bool success = closest.TryInteract(playerController);
                 if(success)
                     interactables.Remove(closest);
 

@@ -7,6 +7,8 @@ using NaughtyAttributes;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField]private AudioClip footstepClip;
+    [SerializeField] private AudioClip takeDamageClip;
+    [SerializeField] private AudioClip deathClip;
     private AudioSource _audioSource; 
     private Animator _animator;
     private PlayerController _playerController;
@@ -19,6 +21,17 @@ public class PlayerAnimation : MonoBehaviour
         _playerController = GetComponentInParent<PlayerController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
+        _playerController.OnTakeDamage += () =>
+        {
+            _animator.SetTrigger("TakeDamage");
+            _audioSource.PlayOneShot(takeDamageClip);
+           
+        };
+        _playerController.OnPlayerDeath += () =>
+        {
+            _animator.SetTrigger("Die");
+            _audioSource.PlayOneShot(deathClip);
+        };
     }
 
     // Update is called once per frame
