@@ -16,7 +16,8 @@ public class LevelManager : MonoBehaviour
         }
     }
     private void HandlePlayerDeath() {
-        InputManager.Instance.inputActions.Player.Disable();
+
+        playerController.enabled = false;
     }
     public void LoadCurrentScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);   

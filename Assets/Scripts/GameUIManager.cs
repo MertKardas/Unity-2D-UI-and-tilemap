@@ -12,6 +12,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField]private TextMeshProUGUI coinText;
 
     [SerializeField]private GameObject playerDeathPanel;
+    [SerializeField]private GameObject playerDeathMenu;
     private void Start() {
         playerController.OnHealthChanged += UpdateHealthUI;
         playerController.OnCoinChanged += UpdateCoinUI;
@@ -34,6 +35,10 @@ public class GameUIManager : MonoBehaviour
     }
     private void OpenPlayerDeathPanel() {
         playerDeathPanel.SetActive(true);
+
+        LeanTween.alphaCanvas(playerDeathPanel.GetComponent<CanvasGroup>(), 1f, 2f).setEase(LeanTweenType.easeOutQuad);
+       
+
     }
     
     

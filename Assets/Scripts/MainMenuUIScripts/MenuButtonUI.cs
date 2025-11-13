@@ -11,14 +11,14 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Color _hoverColor = Color.yellow;
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _animationSpeed = 5f;
-
+    [SerializeField] private AudioSource _audioSource;
     private Vector3 _originalScale;
     protected Button _button;
     public void OnPointerEnter(PointerEventData eventData) {
         //Animation scale up
         LeanTween.scale(gameObject, _originalScale * _hoverScale, 0.2f).setEase(LeanTweenType.easeOutBack);
         if (_hoverSound != null )
-            UIManager.Instance.AudioPlay(_hoverSound);
+           _audioSource.PlayOneShot(_hoverSound);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
@@ -35,7 +35,7 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public virtual void ButtonOnClick() {
         Debug.Log("Menu Button Clicked");
         if (_pressedSound != null)
-            UIManager.Instance.AudioPlay(_pressedSound);
+           _audioSource.PlayOneShot(_pressedSound);
     }
    
 

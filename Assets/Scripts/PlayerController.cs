@@ -12,12 +12,10 @@ public class PlayerController : MonoBehaviour
         set 
         { 
             playerData.health = value;
-            if(playerData.health < 0)
-            {
+            if (playerData.health <= 0) {
                 playerData.health = 0;
                 OnPlayerDeath?.Invoke();
-            }
-            OnHealthChanged?.Invoke();
+            } else { OnHealthChanged?.Invoke(); }
         }
     }
     public int Coin {
@@ -34,16 +32,18 @@ public class PlayerController : MonoBehaviour
     public event Action OnPlayerDeath;
     public Vector2 Movement { get; private set; }
     Rigidbody2D _rb;
-    CapsuleCollider2D collider2D;
+    Collider2D _collider2D;
 
-    void Awake()
-    {
-        
-        _rb = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<CapsuleCollider2D>();
-    }
+    
     void OnEnable()
     {
+        _collider2D = GetComponent<Collider2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        OnPlayerDeath += () => {
+            InputManager.Instance.inputActions.Player.Disable();
+        };
+
+        InputManager.Instance.inputActions.Player.Enable();
         InputManager.Instance.inputActions.Player.Move.performed += ctx => {
             Movement = ctx.ReadValue<Vector2>() * playerData.speed;
         };
@@ -54,8 +54,13 @@ public class PlayerController : MonoBehaviour
     }
     void OnDisable()
     {
-        
+        Movement = Vector2.zero;
+        _rb.linearVelocity = Vector2.zero;
+        InputManager.Instance.inputActions.Player.Disable();
+        _collider2D.enabled = false;
     }
+
+
 
     // Update is called once per frame
     void Update()
