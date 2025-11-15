@@ -16,7 +16,8 @@ public class GameUIManager : MonoBehaviour
     private void Start() {
         playerController.OnHealthChanged += UpdateHealthUI;
         playerController.OnCoinChanged += UpdateCoinUI;
-        playerController.OnPlayerDeath += OpenPlayerDeathPanel; 
+        playerController.OnPlayerDeath += OpenPlayerDeathPanel;
+        playerController.OnPlayerDeath += UpdateHealthUI; 
         healthSlider.maxValue = playerController.Health; 
         UpdateHealthUI();
         UpdateCoinUI();

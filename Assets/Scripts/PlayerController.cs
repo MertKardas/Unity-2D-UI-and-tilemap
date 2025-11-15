@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
             if (playerData.health <= 0) {
                 playerData.health = 0;
                 OnPlayerDeath?.Invoke();
-            } else { OnHealthChanged?.Invoke(); }
+            } else 
+            { 
+                OnHealthChanged?.Invoke(); 
+            }
         }
     }
     public int Coin {
