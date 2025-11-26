@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    public PlayerData playerData = new PlayerData();
+    public PlayerRunTimeData playerData = new PlayerRunTimeData();
     public int Health {
         get { return (int)playerData.health; }
         set 
@@ -89,12 +91,13 @@ public class PlayerController : MonoBehaviour
     }
 }
 [System.Serializable]
-public class PlayerData {
+public class PlayerRunTimeData {
    public PlayerState state = PlayerState.Idle;
    public float speed;
    public int health;
    public int coin;
    public float damage;
+   public List<ItemSO> items = new List<ItemSO>();
 }
 public enum PlayerState {
     Idle,

@@ -1,24 +1,16 @@
 using UnityEngine;
-
-public class InputManager : MonoBehaviour
-{
-    public static InputManager Instance;
+using MyUtility; 
+public class InputManager : Singleton<InputManager> {
     public InputSystem_Actions inputActions;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            inputActions = new InputSystem_Actions();
-            inputActions.Player.Enable();
-            DontDestroyOnLoad(gameObject);
-            
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
+        inputActions = new InputSystem_Actions();
+        
     }
-   
+    public void EnablePlayerInput()
+    {
+        inputActions.Player.Enable();
+    }   
 }
