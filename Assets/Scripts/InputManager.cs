@@ -7,7 +7,7 @@ public class InputManager : Singleton<InputManager> {
     {
         base.Awake();
         inputActions = new InputSystem_Actions();
-        
+        inputActions.UI.Enable();
     }
     public void EnablePlayerInput()
     {

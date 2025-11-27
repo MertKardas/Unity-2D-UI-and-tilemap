@@ -1,8 +1,10 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GameUIManager : MonoBehaviour
+public class GameUI : MonoBehaviour
 {
     [SerializeField]private PlayerController playerController;
 
@@ -12,16 +14,25 @@ public class GameUIManager : MonoBehaviour
     [SerializeField]private TextMeshProUGUI coinText;
 
     [SerializeField]private GameObject playerDeathPanel;
-    [SerializeField]private GameObject playerDeathMenu;
+    [SerializeField] private GameObject pauseMenu; 
     private void Start() {
         playerController.OnHealthChanged += UpdateHealthUI;
         playerController.OnCoinChanged += UpdateCoinUI;
         playerController.OnPlayerDeath += OpenPlayerDeathPanel;
         playerController.OnPlayerDeath += UpdateHealthUI; 
-        healthSlider.maxValue = playerController.Health; 
+        healthSlider.maxValue = playerController.Health;
+
+        InputManager.Instance.inputActions.UI.Cancel.performed += ctx => {
+            if (pauseMenu.activeSelf) {
+                ClosePauseMenu();
+            } else {
+                OpenPauseMenu();
+            }
+        };
         UpdateHealthUI();
         UpdateCoinUI();
     }
+    
 
     
 
@@ -41,7 +52,14 @@ public class GameUIManager : MonoBehaviour
        
 
     }
-    
-    
+    public void OpenPauseMenu() {
+        pauseMenu.SetActive(true);
+        GameManager.Instance.PauseGame(); 
+    }
+    public void ClosePauseMenu() {
+        pauseMenu.SetActive(false);
+        GameManager.Instance.ResumeGame();
+    }
 
+    
 }

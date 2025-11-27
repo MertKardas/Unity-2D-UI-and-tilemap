@@ -38,7 +38,8 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         HandleAnimation();
-        HandleFlip();  
+        HandleFlip();
+        _spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100f);
     }
 
     private void HandleAnimation()

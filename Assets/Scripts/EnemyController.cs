@@ -30,12 +30,12 @@ public class EnemyController : MonoBehaviour {
         _agent.updateUpAxis = false;
         _graph = GetComponent<BehaviorGraphAgent>();
         EnemyMovement enemyMovement = GetComponent<EnemyMovement>();
-        EnemyMovement.Init(enemyData, _agent);
+        enemyMovement.Init(enemyData, _agent);
 
        
     }
     private void GraphSetup() {
-        _graph.BlackboardReference.SetVariableValue<Transform>("SpawnPoint", spawnPoint);
+        
         _graph.BlackboardReference.SetVariableValue<float>("FollowRange", enemyData.FollowRange);
         _graph.BlackboardReference.SetVariableValue<float>("AttackRange", enemyData.AttackRange);
     }
