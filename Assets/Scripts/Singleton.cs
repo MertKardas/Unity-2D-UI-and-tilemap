@@ -30,7 +30,7 @@ namespace MyUtility {
 
                             // Make instance persistent across scenes
                             DontDestroyOnLoad(singletonObject);
-
+                            
                             Debug.Log($"[Singleton] An instance of {typeof(T)} was created.");
                         }
                     }
@@ -44,6 +44,7 @@ namespace MyUtility {
             if (_instance == null) {
                 _instance = this as T;
                 DontDestroyOnLoad(gameObject);
+                transform.SetParent(null);
             } else if (_instance != this) {
                 Debug.LogWarning($"[Singleton] Duplicate instance of {typeof(T)} found. Destroying new instance.");
                 Destroy(gameObject);

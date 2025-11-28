@@ -13,7 +13,7 @@ public class Trap : MonoBehaviour
     public void ActivateTrap()
     {
      
-        SoundManager.Instance.PlaySound(trapSFX);
+        AudioManager.Instance.PlaySound(trapSFX);
         trapCollider.enabled = true;
     }
     //Deactivated by animation event

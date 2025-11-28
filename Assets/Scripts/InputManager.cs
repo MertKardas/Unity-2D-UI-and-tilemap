@@ -13,4 +13,9 @@ public class InputManager : Singleton<InputManager> {
     {
         inputActions.Player.Enable();
     }   
+    public void DisablePlayerInput()
+    {
+        inputActions.Player.Disable();
+    }
+    
 }

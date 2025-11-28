@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]private AudioClip footstepClip;
     [SerializeField] private AudioClip takeDamageClip;
     [SerializeField] private AudioClip deathClip;
+    
     private AudioSource _audioSource; 
     private Animator _animator;
     private PlayerController _playerController;
@@ -77,7 +78,7 @@ public class PlayerAnimation : MonoBehaviour
         if (_audioSource != null && footstepClip != null)
         {
             _audioSource.pitch = Random.Range(0.8f, 1.2f);
-            _audioSource.volume = Random.Range(0.4f, 0.7f);
+            _audioSource.volume = Random.Range(0.4f, 0.7f) * AudioManager.Instance.Volume;
             _audioSource.PlayOneShot(footstepClip);
         }
     }

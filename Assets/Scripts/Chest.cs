@@ -37,7 +37,7 @@ public class Chest : MonoBehaviour, IInteractable {
             Debug.Log("Chest is now open: " + value);
             if (value){
                 animator.SetTrigger(openAnimationParameter);
-                SoundManager.Instance.PlaySound(openSound);
+                AudioManager.Instance.PlaySound(openSound);
                 
             }
         }

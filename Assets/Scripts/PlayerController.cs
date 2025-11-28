@@ -44,25 +44,24 @@ public class PlayerController : MonoBehaviour
     {
         _collider2D = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        OnPlayerDeath += () => {
-            InputManager.Instance.inputActions.Player.Disable();
-        };
+        OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
 
-        InputManager.Instance.inputActions.Player.Enable();
-        InputManager.Instance.inputActions.Player.Move.performed += ctx => {
-            Movement = ctx.ReadValue<Vector2>() * playerData.speed;
-        };
-        InputManager.Instance.inputActions.Player.Move.canceled += ctx => {
-            Movement = Vector2.zero;
-        };
-        
+        InputManager.Instance.EnablePlayerInput(); 
+        InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
+        InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInputCanceled;
+
     }
     void OnDisable()
     {
+        
         Movement = Vector2.zero;
-        _rb.linearVelocity = Vector2.zero;
-        InputManager.Instance.inputActions.Player.Disable();
+        _rb.linearVelocity = Vector2.zero; 
         _collider2D.enabled = false;
+        if (InputManager.Instance == null || InputManager.Instance.inputActions == null)
+            return;
+        InputManager.Instance.inputActions.Player.Move.performed -= OnMoveInput;
+        InputManager.Instance.inputActions.Player.Move.canceled -= OnMoveInputCanceled;
+        InputManager.Instance.DisablePlayerInput();
     }
 
 
@@ -74,6 +73,12 @@ public class PlayerController : MonoBehaviour
         _rb.linearVelocity = Movement;
         
        
+    }
+    public void OnMoveInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
+        Movement = ctx.ReadValue<Vector2>() * playerData.speed;
+    }
+    private void OnMoveInputCanceled(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
+        Movement = Vector2.zero;
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.TryGetComponent<Trap>(out Trap trap))
