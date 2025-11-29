@@ -14,6 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator _animator;
     private PlayerController _playerController;
     const string IsMoving = "IsMoving";
+    const string isAttack = "isAttacking";
     private SpriteRenderer _spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +34,8 @@ public class PlayerAnimation : MonoBehaviour
             _animator.SetTrigger("Die");
             _audioSource.PlayOneShot(deathClip);
         };
+        _playerController.OnAttack += TriggerAttackAnimation;
+
     }
 
     // Update is called once per frame
@@ -80,6 +83,13 @@ public class PlayerAnimation : MonoBehaviour
             _audioSource.pitch = Random.Range(0.8f, 1.2f);
             _audioSource.volume = Random.Range(0.4f, 0.7f) * AudioManager.Instance.Volume;
             _audioSource.PlayOneShot(footstepClip);
+        }
+    }
+    public void TriggerAttackAnimation()
+    {
+        if (_animator != null)
+        {
+            _animator.SetBool(isAttack, true);
         }
     }
 }

@@ -9,13 +9,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public PlayerRunTimeData playerData = new PlayerRunTimeData();
+    public bool canMove = true;
     public int Health {
         get { return (int)playerData.health; }
         set 
         { 
+            if(playerData.state == PlayerState.Dead)
+                return;
             playerData.health = value;
-            if (playerData.health <= 0) {
+            if (playerData.health <= 0 && playerData.state != PlayerState.Dead) {
                 playerData.health = 0;
+                playerData.state = PlayerState.Dead;
                 OnPlayerDeath?.Invoke();
             } else 
             { 
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public event Action OnCoinChanged;
     public event Action OnTakeDamage; 
     public event Action OnPlayerDeath;
+    public event Action OnAttack;
     public Vector2 Movement { get; private set; }
     Rigidbody2D _rb;
     Collider2D _collider2D;
@@ -45,18 +50,16 @@ public class PlayerController : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
         OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
-
+        
         InputManager.Instance.EnablePlayerInput(); 
         InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
         InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInputCanceled;
+        InputManager.Instance.inputActions.Player.Attack.performed += ctx => OnAttack?.Invoke();
+        OnAttack += Thrust;
 
     }
     void OnDisable()
     {
-        
-        Movement = Vector2.zero;
-        _rb.linearVelocity = Vector2.zero; 
-        _collider2D.enabled = false;
         if (InputManager.Instance == null || InputManager.Instance.inputActions == null)
             return;
         InputManager.Instance.inputActions.Player.Move.performed -= OnMoveInput;
@@ -67,9 +70,9 @@ public class PlayerController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-      
+    void Update() {
+        if (!canMove || _rb == null) return;
+
         _rb.linearVelocity = Movement;
         
        
@@ -80,8 +83,18 @@ public class PlayerController : MonoBehaviour
     private void OnMoveInputCanceled(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
         Movement = Vector2.zero;
     }
+    private void Thrust() {
+        if (_rb != null) {
+            _rb.AddForce(Vector2.right /2, ForceMode2D.Impulse);
+          
+        }
+            
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.TryGetComponent<Trap>(out Trap trap))
+        if(playerData.state == PlayerState.Dead)
+            return; 
+        if (collision.TryGetComponent<Trap>(out Trap trap))
         {
 
             Debug.Log("Player in trap area");
