@@ -22,10 +22,11 @@ public class Trap : MonoBehaviour
 
         trapCollider.enabled = false;
     }
-    public int TakeDamage() {
-       
-        return Damage; 
-    
+    public int InflictDamage(PlayerController playerData) {
+
+        playerData.Health -= Damage;
+        return Damage;
+
     }
     
 }

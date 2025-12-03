@@ -5,11 +5,9 @@ public class GameManager : Singleton<GameManager>
 {
     public Action OnGamePaused;
     public Action OnGameStarted;
-    protected override void Awake()
-    {
-        base.Awake();
-        
-    }
+    public Action OnGameover; 
+    protected override void Awake() => base.Awake(); 
+
     public void PauseGame() 
     {
         Time.timeScale = 0f; 
@@ -20,6 +18,9 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1f; 
         OnGameStarted?.Invoke();
     }
-
+    
+    public void Gameover() {
+        OnGameover?.Invoke();
+    }
 }
 

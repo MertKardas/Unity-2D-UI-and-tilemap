@@ -6,22 +6,22 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField]private PlayerController playerController;
+    private PlayerController playerController;
 
     [SerializeField]private Slider healthSlider;
     [SerializeField]private TextMeshProUGUI healtText;
 
     [SerializeField]private TextMeshProUGUI coinText;
-
+    [SerializeField]private GameObject statsPanel;
     [SerializeField]private GameObject playerDeathPanel;
     [SerializeField] private GameObject pauseMenu; 
     private void Start() {
+        playerController = Object.FindAnyObjectByType<PlayerController>();
         playerController.OnHealthChanged += UpdateHealthUI;
         playerController.OnCoinChanged += UpdateCoinUI;
         playerController.OnPlayerDeath += OpenPlayerDeathPanel;
-        playerController.OnPlayerDeath += UpdateHealthUI; 
         healthSlider.maxValue = playerController.Health;
-
+        GameManager.Instance.OnGameover += CloseStatsPanel;
         InputManager.Instance.inputActions.UI.Cancel.performed += ctx => {
             if (pauseMenu.activeSelf) {
                 ClosePauseMenu();
@@ -29,21 +29,21 @@ public class GameUI : MonoBehaviour
                 OpenPauseMenu();
             }
         };
-        UpdateHealthUI();
-        UpdateCoinUI();
+        UpdateHealthUI(playerController.Health);
+        UpdateCoinUI(playerController.Coin);
     }
     
 
     
 
-    private void UpdateHealthUI() {
+    private void UpdateHealthUI(int currentHealth) {
 
-        healthSlider.value = playerController.Health;
-        healtText.text =  playerController.Health.ToString();
+        healthSlider.value = currentHealth;
+        healtText.text =  currentHealth.ToString();
     }
 
-    private void UpdateCoinUI() {
-        coinText.text =  playerController.Coin.ToString();
+    private void UpdateCoinUI(int currentCoin) {
+        coinText.text =  currentCoin.ToString();
     }
     private void OpenPlayerDeathPanel() {
         playerDeathPanel.SetActive(true);
@@ -59,6 +59,13 @@ public class GameUI : MonoBehaviour
     public void ClosePauseMenu() {
         pauseMenu.SetActive(false);
         GameManager.Instance.ResumeGame();
+    }
+    public void CloseStatsPanel() { 
+        // Faded out and close
+
+        LeanTween.alphaCanvas(statsPanel.GetComponent<CanvasGroup>(), 0f, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(() => {
+            statsPanel.SetActive(false);
+        });
     }
 
     

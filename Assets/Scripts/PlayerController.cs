@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// This class handles player movements and interactions within the game.
@@ -9,7 +10,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public PlayerRunTimeData playerData = new PlayerRunTimeData();
-    public bool canMove = true;
+    
+    public PlayerState State {
+        get { return playerData.state; }
+        set 
+        { 
+            if(playerData.state == value)
+                return;
+            PlayerState previousState = playerData.state;
+            playerData.state = value;
+            OnStateChanged?.Invoke(previousState, playerData.state);
+        }
+    }
+
     public int Health {
         get { return (int)playerData.health; }
         set 
@@ -21,9 +34,11 @@ public class PlayerController : MonoBehaviour
                 playerData.health = 0;
                 playerData.state = PlayerState.Dead;
                 OnPlayerDeath?.Invoke();
+                OnHealthChanged?.Invoke(playerData.health);
+                GameManager.Instance.Gameover();
             } else 
             { 
-                OnHealthChanged?.Invoke(); 
+                OnHealthChanged?.Invoke(playerData.health); 
             }
         }
     }
@@ -32,14 +47,15 @@ public class PlayerController : MonoBehaviour
         set 
         { 
             playerData.coin = value;
-            OnCoinChanged?.Invoke();
+            OnCoinChanged?.Invoke(playerData.coin);
         }
     }
-    public event Action OnHealthChanged;
-    public event Action OnCoinChanged;
-    public event Action OnTakeDamage; 
+    public event Action<int> OnHealthChanged;
+    public event Action<int> OnCoinChanged;
+    public event Action<int> OnTakeDamage; 
     public event Action OnPlayerDeath;
     public event Action OnAttack;
+    public event Action<PlayerState, PlayerState> OnStateChanged;
     public Vector2 Movement { get; private set; }
     Rigidbody2D _rb;
     Collider2D _collider2D;
@@ -47,6 +63,7 @@ public class PlayerController : MonoBehaviour
     
     void OnEnable()
     {
+        OnStateChanged += (previous, current) => { if(current == PlayerState.Dead) GameManager.Instance.Gameover(); };
         _collider2D = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
         OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
@@ -70,9 +87,12 @@ public class PlayerController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update() {
-        if (!canMove || _rb == null) return;
-
+    void FixedUpdate() {
+        if ( _rb == null) return;
+        if(State == PlayerState.Dead ) {
+            _rb.linearVelocity = Vector2.zero;
+            return;
+        }
         _rb.linearVelocity = Movement;
         
        
@@ -84,7 +104,7 @@ public class PlayerController : MonoBehaviour
         Movement = Vector2.zero;
     }
     private void Thrust() {
-        if (_rb != null) {
+        if (State != PlayerState.Dead) {
             _rb.AddForce(Vector2.right /2, ForceMode2D.Impulse);
           
         }
@@ -100,17 +120,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player in trap area");
             // Handle trap interaction
            
-           
-            Health -= trap.TakeDamage();
-            OnTakeDamage?.Invoke();
-           
-            
+            int takenDamage = trap.InflictDamage(this);
+            OnTakeDamage?.Invoke(takenDamage);
         }
     }
 }
 [System.Serializable]
 public class PlayerRunTimeData {
    public PlayerState state = PlayerState.Idle;
+   public bool IsFLip;
    public float speed;
    public int health;
    public int coin;

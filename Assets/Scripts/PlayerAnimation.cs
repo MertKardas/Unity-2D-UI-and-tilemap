@@ -16,6 +16,13 @@ public class PlayerAnimation : MonoBehaviour
     const string IsMoving = "IsMoving";
     const string isAttack = "isAttacking";
     private SpriteRenderer _spriteRenderer;
+    public bool IsFlip { 
+        get => _spriteRenderer.flipX;
+        private set { 
+            _spriteRenderer.flipX = value;
+            _playerController.playerData.IsFLip= value;
+            }
+        }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,7 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         _playerController = GetComponentInParent<PlayerController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
-        _playerController.OnTakeDamage += () =>
+        _playerController.OnTakeDamage += (takenDamage) =>
         {
             _animator.SetTrigger("TakeDamage");
             _audioSource.PlayOneShot(takeDamageClip);
@@ -35,7 +42,7 @@ public class PlayerAnimation : MonoBehaviour
             _audioSource.PlayOneShot(deathClip);
         };
         _playerController.OnAttack += TriggerAttackAnimation;
-
+        
     }
 
     // Update is called once per frame
@@ -69,11 +76,11 @@ public class PlayerAnimation : MonoBehaviour
 
         if (movement.x > 0)
         {
-            _spriteRenderer.flipX = false;
+            IsFlip = false;
         }
         else if (movement.x < 0)
         {
-            _spriteRenderer.flipX = true;
+            IsFlip = true;
         }
     }
     public void PlayFootstepSound()
