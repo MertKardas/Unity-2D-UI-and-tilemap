@@ -20,7 +20,7 @@ namespace MyUtility {
                 lock (_lock) {
                     if (_instance == null) {
                         // Search for existing instance
-                        _instance = FindObjectOfType<T>();
+                        _instance = Object.FindAnyObjectByType<T>();
 
                         // Create new instance if one doesn't already exist
                         if (_instance == null) {

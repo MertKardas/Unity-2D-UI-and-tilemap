@@ -20,6 +20,12 @@ public class AudioManager :Singleton<AudioManager> {
         } else {
             Volume = PlayerPrefs.GetFloat("volume");
         }
+        GameManager.Instance.OnGameover += () => {
+            audioSource.volume = 0;
+        };
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += (scene, mode) => {
+            audioSource.volume = Volume;
+        };
     }
 
     public void PlaySound(AudioClip clip)

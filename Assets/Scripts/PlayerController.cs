@@ -60,19 +60,21 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rb;
     Collider2D _collider2D;
 
-    
+    private void Awake() {
+        _collider2D = GetComponent<Collider2D>();
+        _rb = GetComponent<Rigidbody2D>();
+        var attackComponent = GetComponent<AttackComponent>();  
+        attackComponent.Init(this);
+    }
     void OnEnable()
     {
         OnStateChanged += (previous, current) => { if(current == PlayerState.Dead) GameManager.Instance.Gameover(); };
-        _collider2D = GetComponent<Collider2D>();
-        _rb = GetComponent<Rigidbody2D>();
         OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
-        
         InputManager.Instance.EnablePlayerInput(); 
         InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
-        InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInputCanceled;
+        InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInput;
         InputManager.Instance.inputActions.Player.Attack.performed += ctx => OnAttack?.Invoke();
-        OnAttack += Thrust;
+       
 
     }
     void OnDisable()
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (InputManager.Instance == null || InputManager.Instance.inputActions == null)
             return;
         InputManager.Instance.inputActions.Player.Move.performed -= OnMoveInput;
-        InputManager.Instance.inputActions.Player.Move.canceled -= OnMoveInputCanceled;
+        InputManager.Instance.inputActions.Player.Move.canceled -= OnMoveInput;
         InputManager.Instance.DisablePlayerInput();
     }
 
@@ -93,23 +95,20 @@ public class PlayerController : MonoBehaviour
             _rb.linearVelocity = Vector2.zero;
             return;
         }
-        _rb.linearVelocity = Movement;
-        
-       
+        if( State == PlayerState.Idle) 
+            _rb.linearVelocity = playerData.speed * Movement;
+
+
+
     }
     public void OnMoveInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
-        Movement = ctx.ReadValue<Vector2>() * playerData.speed;
+        if (ctx.performed)
+            Movement = ctx.ReadValue<Vector2>() ;
+        if(ctx.canceled)
+            Movement = Vector2.zero;
     }
-    private void OnMoveInputCanceled(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
-        Movement = Vector2.zero;
-    }
-    private void Thrust() {
-        if (State != PlayerState.Dead) {
-            _rb.AddForce(Vector2.right /2, ForceMode2D.Impulse);
-          
-        }
-            
-    }
+    
+  
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(playerData.state == PlayerState.Dead)
@@ -140,5 +139,6 @@ public enum PlayerState {
     Moving,
     TakeDamage,
     Interacting,
-    Dead
+    Dead,
+    Attacking
 }
