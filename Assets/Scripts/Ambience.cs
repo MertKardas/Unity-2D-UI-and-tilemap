@@ -9,6 +9,7 @@ public class Ambience : MonoBehaviour
         GameManager.Instance.OnGameover += () => {
             audioSource.Pause();
         };
+        
     }
     private void OnEnable() {
         AudioManager.Instance.OnVolumeChanged += UpdateVolume;

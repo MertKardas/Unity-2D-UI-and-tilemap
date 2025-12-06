@@ -43,10 +43,10 @@ public class PlayerAnimation : MonoBehaviour
             _animator.SetTrigger("Die");
             _audioSource.PlayOneShot(deathClip);
         };
-        _playerController.OnAttack += TriggerAttackAnimation;
+        _playerController.AttackComponent.OnAttackStarted += TriggerAttackAnimation;
         _playerController.OnStateChanged += (previousState, newState) =>
         {
-            if (newState != PlayerState.Attacking)
+            if (newState == PlayerState.Attacking)
             {
                 AttackSound();
             }

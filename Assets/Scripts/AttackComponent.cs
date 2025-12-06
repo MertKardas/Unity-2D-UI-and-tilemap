@@ -1,26 +1,53 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class AttackComponent : MonoBehaviour
 {
-    PlayerController _playerController;
-    Rigidbody2D rigidbody2D;
-    
-    public void Init(PlayerController playerController) {
+    private PlayerController _playerController;
+    private Rigidbody2D _rigidbody2D;
+    public event Action OnAttackStarted;
+
+   
+  
+
+    public void Init(PlayerController playerController)
+    {
         _playerController = playerController;
+        _rigidbody2D = _playerController.GetComponent<Rigidbody2D>();
+
         InputManager.Instance.inputActions.Player.Attack.performed += OnAttackInput;
-        rigidbody2D = _playerController.GetComponent<Rigidbody2D>();
+        _playerController.OnPlayerDeath += OnPlayerDeath;
     }
-    public void OnAttackInput(InputAction.CallbackContext ctx) {
-        if (_playerController.State == PlayerState.Dead || _playerController.State == PlayerState.Attacking) return;
-        if (ctx.performed) {
-            _playerController.State = PlayerState.Attacking;
-            rigidbody2D.AddForce((_playerController.playerData.IsFLip ? Vector2.left : Vector2.right), ForceMode2D.Impulse);
-            Debug.Log("Attack performed");
-            Invoke(nameof(FinishAttack), 0.5f);
+
+    private void OnAttackInput(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
+            return;
+
+        if (_playerController.State == PlayerState.Dead || _playerController.State == PlayerState.Attacking)
+            return;
+       _playerController.State = PlayerState.Attacking;
+        OnAttackStarted.Invoke();
+        var direction = _playerController.playerData.IsFLip ? Vector2.left : Vector2.right;
+        _rigidbody2D.AddForce(direction , ForceMode2D.Impulse);
+        Debug.Log($"Attack input received by " +
+            $"{_rigidbody2D.name}" +
+            $"{_playerController.State}");
+    }
+
+    
+    private void OnPlayerDeath()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.inputActions.Player.Attack.performed -= OnAttackInput;
         }
-    }
-    public void FinishAttack() {
-        if (_playerController.State == PlayerState.Dead) return;
-        _playerController.State = PlayerState.Idle;
     }
 }

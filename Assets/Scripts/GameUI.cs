@@ -14,7 +14,8 @@ public class GameUI : MonoBehaviour
     [SerializeField]private TextMeshProUGUI coinText;
     [SerializeField]private GameObject statsPanel;
     [SerializeField]private GameObject playerDeathPanel;
-    [SerializeField] private GameObject pauseMenu; 
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsPanel; 
     private void Start() {
         playerController = Object.FindAnyObjectByType<PlayerController>();
         playerController.OnHealthChanged += UpdateHealthUI;
@@ -24,9 +25,13 @@ public class GameUI : MonoBehaviour
         GameManager.Instance.OnGameover += CloseStatsPanel;
         InputManager.Instance.inputActions.UI.Cancel.performed += ctx => {
             if (pauseMenu.activeSelf) {
+                InputManager.Instance.inputActions.Player.Enable();
                 ClosePauseMenu();
+            } else if (settingsPanel.activeSelf) {
+                SettingsPanelToPauseMenu();
             } else {
                 OpenPauseMenu();
+                InputManager.Instance.inputActions.Player.Disable();
             }
         };
         UpdateHealthUI(playerController.Health);
@@ -67,6 +72,13 @@ public class GameUI : MonoBehaviour
             statsPanel.SetActive(false);
         });
     }
+    public void PauseMenuToSettingsPanel() { 
+        pauseMenu.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+    public void SettingsPanelToPauseMenu() {
+        settingsPanel.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
 
-    
 }

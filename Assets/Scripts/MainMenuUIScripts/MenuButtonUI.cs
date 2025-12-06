@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
+    [Header("Sounds")]
     [SerializeField] AudioClip _hoverSound;
     [SerializeField] AudioClip _pressedSound;
+    float ButtonSoundVolume; 
+
     [SerializeField] private Color _hoverColor = Color.yellow;
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _animationSpeed = 5f;
@@ -19,7 +22,8 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         LeanTween.scale(gameObject, _originalScale * _hoverScale, 0.2f).setEase(LeanTweenType.easeOutBack);
         LeanTween.color(gameObject, _hoverColor, 0.2f).setEase(LeanTweenType.easeOutQuad);
         if (_hoverSound != null && _audioSource != null)
-           _audioSource.PlayOneShot(_hoverSound);
+   
+            _audioSource.PlayOneShot(_hoverSound);
         Debug.Log("Pointer Enter");
     }
 
@@ -33,7 +37,11 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     protected virtual void Awake() {
         _originalScale = transform.localScale;
         _originalColor = Color.white;
-
+        ButtonSoundVolume = AudioManager.Instance.Volume;
+        AudioManager.Instance.OnVolumeChanged += (volume) => {
+            ButtonSoundVolume = volume;
+            _audioSource.volume = ButtonSoundVolume;
+        };
     }
     protected virtual void OnEnable() {
         transform.localScale = _originalScale;

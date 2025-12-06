@@ -52,19 +52,19 @@ public class PlayerController : MonoBehaviour
     }
     public event Action<int> OnHealthChanged;
     public event Action<int> OnCoinChanged;
-    public event Action<int> OnTakeDamage; 
+    public event Action<int> OnTakeDamage;
     public event Action OnPlayerDeath;
-    public event Action OnAttack;
+
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public Vector2 Movement { get; private set; }
     Rigidbody2D _rb;
     Collider2D _collider2D;
-
+    public AttackComponent AttackComponent;
     private void Awake() {
         _collider2D = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        var attackComponent = GetComponent<AttackComponent>();  
-        attackComponent.Init(this);
+        AttackComponent = GetComponent<AttackComponent>();
+        AttackComponent.Init(this);
     }
     void OnEnable()
     {
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.EnablePlayerInput(); 
         InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
         InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInput;
-        InputManager.Instance.inputActions.Player.Attack.performed += ctx => OnAttack?.Invoke();
+        
        
 
     }
@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
             // Handle trap interaction
            
             int takenDamage = trap.InflictDamage(this);
+            
+            
             OnTakeDamage?.Invoke(takenDamage);
         }
     }
