@@ -3,7 +3,7 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     [SerializeField] int Damage = 10;
-    [SerializeField] private AudioClip trapSFX; 
+    [SerializeField] private AudioData trapSFX; 
     private BoxCollider2D trapCollider;
     private void Awake()
     {

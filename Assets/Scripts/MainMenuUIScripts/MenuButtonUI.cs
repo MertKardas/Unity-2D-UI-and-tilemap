@@ -7,23 +7,22 @@ using UnityEngine.UI;
 public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     [Header("Sounds")]
-    [SerializeField] AudioClip _hoverSound;
-    [SerializeField] AudioClip _pressedSound;
+    [SerializeField] AudioData _hoverSound;
+    [SerializeField] AudioData _pressedSound;
     float ButtonSoundVolume; 
 
     [SerializeField] private Color _hoverColor = Color.yellow;
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _animationSpeed = 5f;
-    [SerializeField] private AudioSource _audioSource;
+
     private Vector3 _originalScale;
     private Color _originalColor;
     protected Button _button;
     public void OnPointerEnter(PointerEventData eventData) {
         LeanTween.scale(gameObject, _originalScale * _hoverScale, 0.2f).setEase(LeanTweenType.easeOutBack);
         LeanTween.color(gameObject, _hoverColor, 0.2f).setEase(LeanTweenType.easeOutQuad);
-        if (_hoverSound != null && _audioSource != null)
-   
-            _audioSource.PlayOneShot(_hoverSound);
+        if (_hoverSound != null)
+            AudioManager.Instance.PlaySound(_hoverSound);
         Debug.Log("Pointer Enter");
     }
 
@@ -37,11 +36,7 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     protected virtual void Awake() {
         _originalScale = transform.localScale;
         _originalColor = Color.white;
-        ButtonSoundVolume = AudioManager.Instance.Volume;
-        AudioManager.Instance.OnVolumeChanged += (volume) => {
-            ButtonSoundVolume = volume;
-            _audioSource.volume = ButtonSoundVolume;
-        };
+        
     }
     protected virtual void OnEnable() {
         transform.localScale = _originalScale;
@@ -52,7 +47,7 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public virtual void ButtonOnClick() {
         Debug.Log("Menu Button Clicked");
         if (_pressedSound != null)
-           _audioSource.PlayOneShot(_pressedSound);
+           AudioManager.Instance.PlaySound(_pressedSound);
     }
    
 

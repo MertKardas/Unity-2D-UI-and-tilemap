@@ -7,12 +7,12 @@ using NaughtyAttributes;
 public class PlayerAnimation : MonoBehaviour
 {
     [Header("Audio Clips")]
-    [SerializeField]private AudioClip footstepClip;
-    [SerializeField] private AudioClip takeDamageClip;
-    [SerializeField] private AudioClip deathClip;
-    [SerializeField]private AudioClip attackClip;
+    [SerializeField]private AudioData footstepClip;
+    [SerializeField] private AudioData takeDamageClip;
+    [SerializeField] private AudioData deathClip;
+    [SerializeField]private AudioData attackClip;
 
-    private AudioSource _audioSource; 
+
     private Animator _animator;
     private PlayerController _playerController;
     const string IsMoving = "IsMoving";
@@ -31,17 +31,15 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerController = GetComponentInParent<PlayerController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _audioSource = GetComponent<AudioSource>();
         _playerController.OnTakeDamage += (takenDamage) =>
         {
             _animator.SetTrigger("TakeDamage");
-            _audioSource.PlayOneShot(takeDamageClip);
-           
+            AudioManager.Instance.PlaySound(takeDamageClip);    
         };
         _playerController.OnPlayerDeath += () =>
         {
             _animator.SetTrigger("Die");
-            _audioSource.PlayOneShot(deathClip);
+            AudioManager.Instance.PlaySound(deathClip);
         };
         _playerController.AttackComponent.OnAttackStarted += TriggerAttackAnimation;
         _playerController.OnStateChanged += (previousState, newState) =>
@@ -93,19 +91,13 @@ public class PlayerAnimation : MonoBehaviour
     }
     public void PlayFootstepSound()
     {
-        if (_audioSource != null && footstepClip != null)
-        {
-            _audioSource.pitch = Random.Range(0.8f, 1.2f);
-            _audioSource.volume = Random.Range(0.4f, 0.7f) * AudioManager.Instance.Volume;
-            _audioSource.PlayOneShot(footstepClip);
-        }
+        if (footstepClip == null) return;
+        AudioManager.Instance.PlaySound(footstepClip);
     }
     public void AttackSound()
     {
-        if (_audioSource == null || attackClip == null) return;
-        _audioSource.pitch = Random.Range(0.8f, 1.2f);
-        _audioSource.volume = Random.Range(0.4f, 0.7f) * AudioManager.Instance.Volume;
-        _audioSource.PlayOneShot(attackClip);
+        if (attackClip == null) return;
+        AudioManager.Instance.PlaySound(attackClip);
     }
 
   

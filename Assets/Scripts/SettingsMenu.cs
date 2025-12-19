@@ -4,17 +4,12 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    [ShowNonSerializedField]float volumeLevel;
     [SerializeField]private Slider volumeSlider;
 
     
     private void OnEnable()
     {
-        
-        volumeLevel = AudioManager.Instance.Volume;
-        Debug.Log("1-Settings Menu Volume Level: " + volumeLevel);
-        volumeSlider.value = Mathf.Clamp01(volumeLevel);
-        Debug.Log("2-Settings Menu Volume Level: " + volumeLevel);
+        Debug.Log("2-Settings Menu Volume Level: " + volumeSlider.value);
         volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
      
         
@@ -26,13 +21,7 @@ public class SettingsMenu : MonoBehaviour
     public void OnVolumeChanged(float value)
     {
         Debug.Log("Volume Slider Changed to: " + value);
-        volumeLevel = Mathf.Clamp01(value);
-        AudioManager.Instance.SetAndSaveVolume(volumeLevel);
-    
-        
-       
+        AudioManager.Instance.SetVolume(AudioType.Master, value);
     }
-    public void SaveSettings(){
-        AudioManager.Instance.SetAndSaveVolume(volumeLevel);
-    }
+   
 }

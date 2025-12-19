@@ -2,7 +2,7 @@ using UnityEngine;
    
 public class Chest : MonoBehaviour, IInteractable {
     public int Gold { get; set; } = 100;
-    [SerializeField] AudioClip openSound;
+    [SerializeField] AudioData openSound;
     public bool IsInRange {
         get => _isInRange;
         set {

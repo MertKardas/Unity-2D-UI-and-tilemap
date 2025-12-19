@@ -1,25 +1,18 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Ambience : MonoBehaviour
 {
-    private AudioSource audioSource;
+    [SerializeField] AudioData ambienceData; 
     private void Start() {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.volume = AudioManager.Instance.Volume;
+        AudioManager.Instance.PlaySound(ambienceData);
         GameManager.Instance.OnGameover += () => {
-            audioSource.Pause();
+            AudioManager.Instance.StopAudioByType(AudioType.Ambience);
+           
         };
         
     }
-    private void OnEnable() {
-        AudioManager.Instance.OnVolumeChanged += UpdateVolume;
-    }
-    private void OnDisable() {
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.OnVolumeChanged -= UpdateVolume;
-    }
+    
 
-    private void UpdateVolume(float volume) {
-        audioSource.volume = volume;
-    }
+   
 }
