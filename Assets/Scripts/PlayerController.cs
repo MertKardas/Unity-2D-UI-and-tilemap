@@ -68,7 +68,10 @@ public class PlayerController : MonoBehaviour
     }
     void OnEnable()
     {
-        OnStateChanged += (previous, current) => { if(current == PlayerState.Dead) GameManager.Instance.Gameover(); };
+        OnStateChanged += (previous, current) => {
+            if(current == PlayerState.Dead)
+                GameManager.Instance.Gameover();
+        };
         OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
         InputManager.Instance.EnablePlayerInput(); 
         InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
@@ -129,7 +132,7 @@ public class PlayerController : MonoBehaviour
 [System.Serializable]
 public class PlayerRunTimeData {
    public PlayerState state = PlayerState.Idle;
-   public bool IsFLip;
+   public bool isFlip;
    public float speed;
    public int health;
    public int coin;

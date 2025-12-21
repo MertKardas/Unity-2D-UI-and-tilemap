@@ -4,7 +4,7 @@ public class DeathMenuUI : MonoBehaviour
 {
     public void RestartLevel()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        GameManager.Instance.RestartGame();
     }
     public void QuitGame()
     {
@@ -13,7 +13,12 @@ public class DeathMenuUI : MonoBehaviour
     private void OnEnable()
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        LeanTween.alphaCanvas(canvasGroup, 1f, 0.5f);
+        canvasGroup.alpha = 0f;
+        //openinig alpha animation
+        LeanTween.alphaCanvas(canvasGroup, 1f, 0.5f)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setIgnoreTimeScale(true);
+
     }
 
     

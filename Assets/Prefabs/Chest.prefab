@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29a01f2e54689946abd8e1220b2e0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chest
-  openSound: {fileID: 8300000, guid: 57f81f0e803357b45a4ea1e179d32dda, type: 3}
+  openSound: {fileID: 11400000, guid: 2a9f63e3d41b11e46b644e516a818269, type: 2}
   openAnimationParameter: isOpen
   chestInteractable: isInteractable
 --- !u!61 &5726956335769569096

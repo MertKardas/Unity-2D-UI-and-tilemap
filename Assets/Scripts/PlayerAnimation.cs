@@ -22,7 +22,7 @@ public class PlayerAnimation : MonoBehaviour
         get => _spriteRenderer.flipX;
         private set { 
             _spriteRenderer.flipX = value;
-            _playerController.playerData.IsFLip= value;
+            _playerController.playerData.isFlip= value;
             }
         }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

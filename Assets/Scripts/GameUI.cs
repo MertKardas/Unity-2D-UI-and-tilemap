@@ -1,84 +1,59 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GameUI : MonoBehaviour
-{
-    private PlayerController playerController;
+public class GameUI : MonoBehaviour {
+    //Backing fields for UI Panels
 
-    [SerializeField]private Slider healthSlider;
-    [SerializeField]private TextMeshProUGUI healtText;
 
-    [SerializeField]private TextMeshProUGUI coinText;
-    [SerializeField]private GameObject statsPanel;
-    [SerializeField]private GameObject playerDeathPanel;
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject settingsPanel; 
+    public StatsPanelUI StatsPanel;
+    public DeathMenuUI PlayerDeathPanel;
+    public PauseMenu PauseMenu;
+    public SettingsMenu SettingsPanel;
+
     private void Start() {
-        playerController = Object.FindAnyObjectByType<PlayerController>();
-        playerController.OnHealthChanged += UpdateHealthUI;
-        playerController.OnCoinChanged += UpdateCoinUI;
-        playerController.OnPlayerDeath += OpenPlayerDeathPanel;
-        healthSlider.maxValue = playerController.Health;
-        GameManager.Instance.OnGameover += CloseStatsPanel;
-        InputManager.Instance.inputActions.UI.Cancel.performed += ctx => {
-            if (pauseMenu.activeSelf) {
-                InputManager.Instance.inputActions.Player.Enable();
-                ClosePauseMenu();
-            } else if (settingsPanel.activeSelf) {
-                SettingsPanelToPauseMenu();
-            } else {
-                OpenPauseMenu();
-                InputManager.Instance.inputActions.Player.Disable();
-            }
-        };
-        UpdateHealthUI(playerController.Health);
-        UpdateCoinUI(playerController.Coin);
+
+        InputManager.Instance.inputActions.UI.Cancel.performed += OnCancelInput;
+        GameManager.Instance.OnGameover += OnGameover;
+        GameManager.Instance.OnGameStarted += OnGameStarted;
     }
-    
+    private void OnDestroy() {
+        InputManager.Instance.inputActions.UI.Cancel.performed -= OnCancelInput;
+        GameManager.Instance.OnGameover -= OnGameover;
+        GameManager.Instance.OnGameStarted -= OnGameStarted;
+    }
+    private void OnCancelInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
+        if (PauseMenu.gameObject.activeSelf) {
+            InputManager.Instance.inputActions.Player.Enable();
+            GameManager.Instance.ResumeGame();
+            PauseMenu.gameObject.SetActive(false);
 
-    
-
-    private void UpdateHealthUI(int currentHealth) {
-
-        healthSlider.value = currentHealth;
-        healtText.text =  currentHealth.ToString();
+        } else if (SettingsPanel.gameObject.activeSelf) {
+            SwitchPanel(SettingsPanel.gameObject, PauseMenu.gameObject);
+        } else {
+            SwitchPanel(null, PauseMenu.gameObject);
+            GameManager.Instance.PauseGame();
+            
+        }
     }
 
-    private void UpdateCoinUI(int currentCoin) {
-        coinText.text =  currentCoin.ToString();
-    }
-    private void OpenPlayerDeathPanel() {
-        playerDeathPanel.SetActive(true);
-
-        LeanTween.alphaCanvas(playerDeathPanel.GetComponent<CanvasGroup>(), 1f, 2f).setEase(LeanTweenType.easeOutQuad);
-       
-
-    }
-    public void OpenPauseMenu() {
-        pauseMenu.SetActive(true);
-        GameManager.Instance.PauseGame(); 
-    }
-    public void ClosePauseMenu() {
-        pauseMenu.SetActive(false);
-        GameManager.Instance.ResumeGame();
-    }
-    public void CloseStatsPanel() { 
-        // Faded out and close
-
-        LeanTween.alphaCanvas(statsPanel.GetComponent<CanvasGroup>(), 0f, 1f).setEase(LeanTweenType.easeInQuad).setOnComplete(() => {
-            statsPanel.SetActive(false);
-        });
-    }
-    public void PauseMenuToSettingsPanel() { 
-        pauseMenu.SetActive(false);
-        settingsPanel.SetActive(true);
-    }
-    public void SettingsPanelToPauseMenu() {
-        settingsPanel.SetActive(false);
-        pauseMenu.SetActive(true);
+    private void OnGameover() {
+        SwitchPanel(StatsPanel.gameObject, PlayerDeathPanel.gameObject);
     }
 
+    private void OnGameStarted() {
+        SwitchPanel(PlayerDeathPanel.gameObject, StatsPanel.gameObject);
+    }
+
+    public void SwitchPanel(GameObject fromPanel, GameObject toPanel) {
+        if(fromPanel == toPanel)
+            return;
+        if(fromPanel!= null)
+            fromPanel.SetActive(false);
+        if(toPanel != null)
+            toPanel.SetActive(true);
+    }
 }

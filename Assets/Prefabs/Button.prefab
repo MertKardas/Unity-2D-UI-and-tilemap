@@ -146,12 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f41a4714b1db047b08c1d0718710c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuButtonUI
-  _hoverSound: {fileID: 8300000, guid: 66711258d34018b428229af18374a953, type: 3}
+  _hoverSound: {fileID: 11400000, guid: a544bad55efa9d84c90b7a9adfb2109b, type: 2}
   _pressedSound: {fileID: 0}
   _hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _hoverScale: 1.1
   _animationSpeed: 5
-  _audioSource: {fileID: 0}
 --- !u!1 &7671087660415461336
 GameObject:
   m_ObjectHideFlags: 0

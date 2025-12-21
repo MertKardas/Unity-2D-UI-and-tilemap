@@ -9,7 +9,6 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [Header("Sounds")]
     [SerializeField] AudioData _hoverSound;
     [SerializeField] AudioData _pressedSound;
-    float ButtonSoundVolume; 
 
     [SerializeField] private Color _hoverColor = Color.yellow;
     [SerializeField] private float _hoverScale = 1.1f;
@@ -19,18 +18,26 @@ public class MenuButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private Color _originalColor;
     protected Button _button;
     public void OnPointerEnter(PointerEventData eventData) {
-        LeanTween.scale(gameObject, _originalScale * _hoverScale, 0.2f).setEase(LeanTweenType.easeOutBack);
-        LeanTween.color(gameObject, _hoverColor, 0.2f).setEase(LeanTweenType.easeOutQuad);
+        LeanTween.scale(gameObject, _originalScale * _hoverScale, 0.2f)
+            .setEase(LeanTweenType.easeOutBack)
+            .setIgnoreTimeScale(true);
+        LeanTween.color(gameObject, _hoverColor, 0.2f)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setIgnoreTimeScale(true);
         if (_hoverSound != null)
             AudioManager.Instance.PlaySound(_hoverSound);
-        Debug.Log("Pointer Enter");
+       
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         //Animation scale down
-        LeanTween.scale(gameObject, _originalScale, 0.2f).setEase(LeanTweenType.easeOutBack);
-        LeanTween.color(gameObject, _originalColor, 0.2f).setEase(LeanTweenType.easeOutQuad);
-        Debug.Log("Pointer Exit");
+        LeanTween.scale(gameObject, _originalScale, 0.2f)
+            .setEase(LeanTweenType.easeOutBack)
+            .setIgnoreTimeScale(true);
+        LeanTween.color(gameObject, _originalColor, 0.2f)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setIgnoreTimeScale(true);
+       
     }
 
     protected virtual void Awake() {

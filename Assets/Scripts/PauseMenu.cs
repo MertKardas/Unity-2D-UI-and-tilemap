@@ -7,6 +7,12 @@ public class PauseMenu : MonoBehaviour
     [NaughtyAttributes.Scene, SerializeField] public string mainMenuSceneName;
     private string GitHubURL = "https://github.com/MertKardas";
     private string LinkedInURL = "https://www.linkedin.com/in/mert-karda%C5%9F-b1600a298/";
+    private GameUI gameUI;
+    
+    private void Start() {
+        gameUI = FindAnyObjectByType<GameUI>();
+    }
+
     public void OpenGitHub() {
         ProcessStartInfo psi = new ProcessStartInfo {
             FileName = GitHubURL,
@@ -30,5 +36,9 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void PauseToSettings()
+    {
+        gameUI.SwitchPanel(this.gameObject, gameUI.SettingsPanel.gameObject);
     }
 }

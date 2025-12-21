@@ -30,7 +30,7 @@ public class AttackComponent : MonoBehaviour
             return;
        _playerController.State = PlayerState.Attacking;
         OnAttackStarted.Invoke();
-        var direction = _playerController.playerData.IsFLip ? Vector2.left : Vector2.right;
+        var direction = _playerController.playerData.isFlip ? Vector2.left : Vector2.right;
         _rigidbody2D.AddForce(direction , ForceMode2D.Impulse);
         Debug.Log($"Attack input received by " +
             $"{_rigidbody2D.name}" +

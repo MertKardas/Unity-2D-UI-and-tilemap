@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2998837615283745097, guid: 2aadea1f73a1e3248907825625207bc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   Damage: 25
-  trapSFX: {fileID: 8300000, guid: 312d9604f125ae141b85a2096ed302e8, type: 3}
+  trapSFX: {fileID: 11400000, guid: 4bdf3f7d759796440811e4b256c77871, type: 2}
+  randomTrapActivate: {x: 1, y: 2}
 --- !u!95 &2802385586998777726
 Animator:
   serializedVersion: 7

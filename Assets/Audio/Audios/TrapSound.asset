@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b82408451a80d44b128df319a0fa68, type: 3}
+  m_Name: TrapSound
+  m_EditorClassIdentifier: Assembly-CSharp::AudioData
+  audioClips:
+  - {fileID: 8300000, guid: 312d9604f125ae141b85a2096ed302e8, type: 3}
+  audioType: 2
+  loop: 0
+  volume: 1
+  pitch: 1
+  volumeVariance: 0.034
+  pitchVariance: 0.116
+  spatialBlend: 1
+  minDistance: 1
+  maxDistance: 500
+  rolloffMode: 0
