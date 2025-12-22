@@ -12,17 +12,18 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         SceneManager.sceneLoaded += SceneLoaded; 
-
+        
     }
 
     public void PauseGame() 
     {
-        InputManager.Instance.inputActions.Player.Disable();
+        InputManager.Instance.DisablePlayerInput();
         Time.timeScale = 0f; 
         OnGamePaused?.Invoke();
     }
     public void ResumeGame() 
     {
+        InputManager.Instance.EnablePlayerInput();
         Time.timeScale = 1f; 
         OnGameStarted?.Invoke();
     }
@@ -35,12 +36,12 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.StopAudioByType(AudioType.Ambience);
     }
     public void RestartGame() { 
-        Time.timeScale = 1f;
-        InputManager.Instance.inputActions.Player.Enable();
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
     public void SceneLoaded(Scene scene, LoadSceneMode mode) {
+        InputManager.Instance.EnablePlayerInput();
         Time.timeScale = 1f;
         if(scene.name != "MainMenu")
             OnGameStarted?.Invoke();

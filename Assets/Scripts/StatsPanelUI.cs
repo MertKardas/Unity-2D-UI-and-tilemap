@@ -8,7 +8,8 @@ public class StatsPanelUI : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healtText;
     [SerializeField] private TextMeshProUGUI coinText;
-   
+
+    private bool isQuitting = false;
     private void OnEnable()
     {
         playerController = FindAnyObjectByType<PlayerController>();
@@ -26,10 +27,14 @@ public class StatsPanelUI : MonoBehaviour
     private void OnDisable() {
         playerController.OnHealthChanged -= UpdateHealthUI;
         playerController.OnCoinChanged -= UpdateCoinUI;
-        LeanTween.alphaCanvas(GetComponent<CanvasGroup>(), 0f, 1f)
+        if (isQuitting) return;
+        LeanTween.alphaCanvas(GetComponent<CanvasGroup>(), 0f, 3f)
            .setEase(LeanTweenType.easeInQuad)
            .setIgnoreTimeScale(true)
            .setOnComplete(() => gameObject.SetActive(false));
+    }
+    private void OnApplicationQuit() {
+        isQuitting = true;
     }
 
     private void UpdateHealthUI(int currentHealth)

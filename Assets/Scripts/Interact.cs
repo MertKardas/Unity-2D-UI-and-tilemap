@@ -2,31 +2,35 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class Interact : MonoBehaviour
 {
     private List<IInteractable> interactables = new List<IInteractable>();
     private PlayerController playerController;
     private void Start() {
         playerController = GetComponentInParent<PlayerController>();
-        InputManager.Instance.inputActions.Player.Interact.performed += ctx => {
-            Debug.Log("Interact pressed");
-            if (interactables.Count == 0) return;
-            IInteractable? closest = interactables
-            .Where(a => a is MonoBehaviour mb && mb.transform != null) // Filter valid objects
-            .OrderBy(a => Vector2.Distance(transform.position, ((MonoBehaviour)a).transform.position))
-            .FirstOrDefault();
-
-            if (closest != null) {
-                bool success = closest.TryInteract(playerController);
-                if(success)
-                    interactables.Remove(closest);
-
-            }
-        };
+        InputManager.Instance.Subscribe(InputType.Interact, InteractAction, InputActionPhase.Performed);
+        playerController.OnPlayerDeath += OnPlayerDeath;
     }
+    private void InteractAction(InputAction.CallbackContext ctx) {
+        if (!ctx.performed) return; 
+        Debug.Log("Interact pressed");
+        if (interactables.Count == 0) return;
+        IInteractable closest = interactables
+        .Where(a => a is MonoBehaviour mb && mb.transform != null) // Filter valid objects
+        .OrderBy(a => Vector2.Distance(transform.position, ((MonoBehaviour)a).transform.position))
+        .FirstOrDefault();
 
+        if (closest != null) {
+            bool success = closest.TryInteract(playerController);
+            if (success)
+                interactables.Remove(closest);
 
+        }
+    }
+    public void OnPlayerDeath() {
+        InputManager.Instance.Unsubscribe(InputType.Interact, InteractAction, InputActionPhase.Performed);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.TryGetComponent<IInteractable>(out IInteractable interactable)) {

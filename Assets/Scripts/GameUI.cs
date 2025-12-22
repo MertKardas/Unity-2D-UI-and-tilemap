@@ -4,30 +4,36 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using UnityEngine.InputSystem;
 public class GameUI : MonoBehaviour {
     //Backing fields for UI Panels
-
-
     public StatsPanelUI StatsPanel;
     public DeathMenuUI PlayerDeathPanel;
     public PauseMenu PauseMenu;
     public SettingsMenu SettingsPanel;
 
-    private void Start() {
-
-        InputManager.Instance.inputActions.UI.Cancel.performed += OnCancelInput;
+    private void OnEnable() {
         GameManager.Instance.OnGameover += OnGameover;
         GameManager.Instance.OnGameStarted += OnGameStarted;
+        InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Performed);
+      
+
     }
-    private void OnDestroy() {
-        InputManager.Instance.inputActions.UI.Cancel.performed -= OnCancelInput;
-        GameManager.Instance.OnGameover -= OnGameover;
-        GameManager.Instance.OnGameStarted -= OnGameStarted;
+    private void OnDisable() {
+        if(GameManager.Instance != null) {
+            GameManager.Instance.OnGameover -= OnGameover;
+            GameManager.Instance.OnGameStarted -= OnGameStarted;
+        }
+        if(InputManager.Instance != null)
+            InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Performed);
     }
-    private void OnCancelInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
+    //Cancel Input Handler
+    void OnCancel(InputAction.CallbackContext ctx) {
+        if (!ctx.performed)
+            return;
+        Debug.Log("Cancel input received in GameUI");
         if (PauseMenu.gameObject.activeSelf) {
-            InputManager.Instance.inputActions.Player.Enable();
+            InputManager.Instance.DisablePlayerInput();
             GameManager.Instance.ResumeGame();
             PauseMenu.gameObject.SetActive(false);
 
@@ -56,4 +62,6 @@ public class GameUI : MonoBehaviour {
         if(toPanel != null)
             toPanel.SetActive(true);
     }
+
+    
 }

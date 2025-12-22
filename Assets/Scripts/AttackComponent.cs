@@ -9,15 +9,13 @@ public class AttackComponent : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     public event Action OnAttackStarted;
 
-   
-  
 
     public void Init(PlayerController playerController)
     {
         _playerController = playerController;
         _rigidbody2D = _playerController.GetComponent<Rigidbody2D>();
 
-        InputManager.Instance.inputActions.Player.Attack.performed += OnAttackInput;
+        InputManager.Instance.Subscribe(InputType.Attack,OnAttackInput, InputActionPhase.Performed);
         _playerController.OnPlayerDeath += OnPlayerDeath;
     }
 
@@ -40,14 +38,9 @@ public class AttackComponent : MonoBehaviour
     
     private void OnPlayerDeath()
     {
+        InputManager.Instance.Unsubscribe(InputType.Attack, OnAttackInput, InputActionPhase.Performed);
         
     }
 
-    private void OnDisable()
-    {
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.inputActions.Player.Attack.performed -= OnAttackInput;
-        }
-    }
+   
 }

@@ -73,45 +73,35 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.Gameover();
         };
         OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
-        InputManager.Instance.EnablePlayerInput(); 
-        InputManager.Instance.inputActions.Player.Move.performed += OnMoveInput;
-        InputManager.Instance.inputActions.Player.Move.canceled += OnMoveInput;
-        
-       
 
     }
-    void OnDisable()
-    {
-        if (InputManager.Instance == null || InputManager.Instance.inputActions == null)
-            return;
-        InputManager.Instance.inputActions.Player.Move.performed -= OnMoveInput;
-        InputManager.Instance.inputActions.Player.Move.canceled -= OnMoveInput;
-        InputManager.Instance.DisablePlayerInput();
-    }
+    
 
 
 
     // Update is called once per frame
     void FixedUpdate() {
         if ( _rb == null) return;
-        if(State == PlayerState.Dead ) {
-            _rb.linearVelocity = Vector2.zero;
+        if(State == PlayerState.Idle ) {
+            _rb.linearVelocity = Movement * playerData.speed;
             return;
         }
-        if( State == PlayerState.Idle) 
-            _rb.linearVelocity = playerData.speed * Movement;
+        else if( State == PlayerState.TakeDamage) {
+            _rb.linearVelocity = Movement * playerData.speed / 2;
+        }
+          
 
 
 
     }
-    public void OnMoveInput(UnityEngine.InputSystem.InputAction.CallbackContext ctx) {
-        if (ctx.performed)
-            Movement = ctx.ReadValue<Vector2>() ;
-        if(ctx.canceled)
-            Movement = Vector2.zero;
+    private void Update() {
+        if(State == PlayerState.Dead && _rb != null && State == PlayerState.Attacking )
+            return;
+        Movement = InputManager.Instance.ReadInput<Vector2>(InputType.Move);
+
     }
-    
-  
+
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(playerData.state == PlayerState.Dead)
