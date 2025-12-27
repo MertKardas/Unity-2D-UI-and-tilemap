@@ -1,8 +1,7 @@
-using NUnit.Framework;
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 /// <summary>
 /// This class handles player movements and interactions within the game.
@@ -20,6 +19,7 @@ public class PlayerController : MonoBehaviour
             PlayerState previousState = playerData.state;
             playerData.state = value;
             OnStateChanged?.Invoke(previousState, playerData.state);
+          
         }
     }
 
@@ -31,11 +31,12 @@ public class PlayerController : MonoBehaviour
                 return;
             playerData.health = value;
             if (playerData.health <= 0 && playerData.state != PlayerState.Dead) {
-                playerData.health = 0;
-                playerData.state = PlayerState.Dead;
-                OnPlayerDeath?.Invoke();
+                playerData.health = 0;     
                 OnHealthChanged?.Invoke(playerData.health);
-                GameManager.Instance.Gameover();
+                State = PlayerState.Dead;
+                InputManager.Instance.DisablePlayerInput();
+                 LeanTween.delayedCall(0.6f,
+                    () => GameManager.Instance.Gameover());
             } else 
             { 
                 OnHealthChanged?.Invoke(playerData.health); 
@@ -53,55 +54,18 @@ public class PlayerController : MonoBehaviour
     public event Action<int> OnHealthChanged;
     public event Action<int> OnCoinChanged;
     public event Action<int> OnTakeDamage;
-    public event Action OnPlayerDeath;
+    //public event Action OnPlayerDeath;
 
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public Vector2 Movement { get; private set; }
-    Rigidbody2D _rb;
-    Collider2D _collider2D;
+
     public AttackComponent AttackComponent;
     private void Awake() {
-        _collider2D = GetComponent<Collider2D>();
-        _rb = GetComponent<Rigidbody2D>();
         AttackComponent = GetComponent<AttackComponent>();
         AttackComponent.Init(this);
     }
-    void OnEnable()
-    {
-        OnStateChanged += (previous, current) => {
-            if(current == PlayerState.Dead)
-                GameManager.Instance.Gameover();
-        };
-        OnPlayerDeath += InputManager.Instance.DisablePlayerInput;
-
-    }
     
-
-
-
-    // Update is called once per frame
-    void FixedUpdate() {
-        if ( _rb == null) return;
-        if(State == PlayerState.Idle ) {
-            _rb.linearVelocity = Movement * playerData.speed;
-            return;
-        }
-        else if( State == PlayerState.TakeDamage) {
-            _rb.linearVelocity = Movement * playerData.speed / 2;
-        }
-          
-
-
-
-    }
-    private void Update() {
-        if(State == PlayerState.Dead && _rb != null && State == PlayerState.Attacking )
-            return;
-        Movement = InputManager.Instance.ReadInput<Vector2>(InputType.Move);
-
-    }
-
-
+    
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(playerData.state == PlayerState.Dead)
@@ -114,7 +78,7 @@ public class PlayerController : MonoBehaviour
            
             int takenDamage = trap.InflictDamage(this);
             
-            
+            State = PlayerState.TakeDamage;
             OnTakeDamage?.Invoke(takenDamage);
         }
     }

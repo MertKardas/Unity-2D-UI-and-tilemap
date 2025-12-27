@@ -14,6 +14,11 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded += SceneLoaded; 
         
     }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
 
     public void PauseGame() 
     {
@@ -31,7 +36,6 @@ public class GameManager : Singleton<GameManager>
     public void Gameover() {
         OnGameover?.Invoke();
         Time.timeScale = 0f;
-        AudioManager.Instance.StopAudioByType(AudioType.SFX);
         AudioManager.Instance.StopAudioByType(AudioType.Music);
         AudioManager.Instance.StopAudioByType(AudioType.Ambience);
     }

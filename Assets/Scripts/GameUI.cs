@@ -11,13 +11,18 @@ public class GameUI : MonoBehaviour {
     public DeathMenuUI PlayerDeathPanel;
     public PauseMenu PauseMenu;
     public SettingsMenu SettingsPanel;
-
+    public GameObject backgroundPanel;
+    public UITransition panelTransition;
     private void OnEnable() {
         GameManager.Instance.OnGameover += OnGameover;
         GameManager.Instance.OnGameStarted += OnGameStarted;
-        InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Performed);
-      
-
+        InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+        (PlayerDeathPanel as IGamePanel).SetPanelController(this);
+        (PauseMenu as IGamePanel).SetPanelController(this);
+        (SettingsPanel as IGamePanel).SetPanelController(this);
+    }
+    private void Start() {
+        
     }
     private void OnDisable() {
         if(GameManager.Instance != null) {
@@ -25,43 +30,48 @@ public class GameUI : MonoBehaviour {
             GameManager.Instance.OnGameStarted -= OnGameStarted;
         }
         if(InputManager.Instance != null)
-            InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Performed);
+            InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
     }
     //Cancel Input Handler
     void OnCancel(InputAction.CallbackContext ctx) {
-        if (!ctx.performed)
+        if (!ctx.started) return;
+        if (!PauseMenu.gameObject.activeInHierarchy && !backgroundPanel.gameObject.activeInHierarchy) {
+            backgroundPanel.SetActive(true);
+            SwitchPanel(StatsPanel.gameObject, PauseMenu.gameObject, panelTransition);
+        } else if (PauseMenu.gameObject.activeInHierarchy && backgroundPanel.gameObject.activeInHierarchy) {
+            SwitchPanel(null, StatsPanel.gameObject, panelTransition);
+            backgroundPanel.SetActive(true);
+        }
+    }
+    private void OnGameover() {
+        backgroundPanel.SetActive(true);
+        if (PauseMenu.gameObject.activeInHierarchy) {
+            //close pause menu first
+            SwitchPanel(PauseMenu.gameObject, PlayerDeathPanel.gameObject, panelTransition);
             return;
-        Debug.Log("Cancel input received in GameUI");
-        if (PauseMenu.gameObject.activeSelf) {
-            InputManager.Instance.DisablePlayerInput();
-            GameManager.Instance.ResumeGame();
-            PauseMenu.gameObject.SetActive(false);
-
-        } else if (SettingsPanel.gameObject.activeSelf) {
-            SwitchPanel(SettingsPanel.gameObject, PauseMenu.gameObject);
+        } else if (SettingsPanel.gameObject.activeInHierarchy) {
+            //close settings menu first
+            SwitchPanel(null, PlayerDeathPanel.gameObject, panelTransition);
+            return;
         } else {
-            SwitchPanel(null, PauseMenu.gameObject);
-            GameManager.Instance.PauseGame();
-            
+            SwitchPanel(StatsPanel.gameObject, PlayerDeathPanel.gameObject, panelTransition);
         }
     }
 
-    private void OnGameover() {
-        SwitchPanel(StatsPanel.gameObject, PlayerDeathPanel.gameObject);
-    }
+            private void OnGameStarted() {
+                backgroundPanel.SetActive(false);
+            }
 
-    private void OnGameStarted() {
-        SwitchPanel(PlayerDeathPanel.gameObject, StatsPanel.gameObject);
-    }
+    public LTSeq SwitchPanel(GameObject fromPanel, GameObject toPanel, UITransition panelTransition) {
+        if (panelTransition == null) {
+            Debug.LogWarning("UITransition is not assigned");
+            return LeanTween.sequence();
+        }
 
-    public void SwitchPanel(GameObject fromPanel, GameObject toPanel) {
-        if(fromPanel == toPanel)
-            return;
-        if(fromPanel!= null)
-            fromPanel.SetActive(false);
-        if(toPanel != null)
-            toPanel.SetActive(true);
+        var sequence = panelTransition.Transition(fromPanel, toPanel);
+        return sequence;
     }
 
     
 }
+

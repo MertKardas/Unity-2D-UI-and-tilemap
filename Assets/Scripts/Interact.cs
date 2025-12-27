@@ -10,7 +10,7 @@ public class Interact : MonoBehaviour
     private void Start() {
         playerController = GetComponentInParent<PlayerController>();
         InputManager.Instance.Subscribe(InputType.Interact, InteractAction, InputActionPhase.Performed);
-        playerController.OnPlayerDeath += OnPlayerDeath;
+        playerController.OnStateChanged += OnStateChange;
     }
     private void InteractAction(InputAction.CallbackContext ctx) {
         if (!ctx.performed) return; 
@@ -28,8 +28,12 @@ public class Interact : MonoBehaviour
 
         }
     }
-    public void OnPlayerDeath() {
-        InputManager.Instance.Unsubscribe(InputType.Interact, InteractAction, InputActionPhase.Performed);
+    public void OnStateChange(PlayerState previous, PlayerState current) {
+        if(current == PlayerState.Dead) {
+            interactables.Clear();
+            InputManager.Instance.Unsubscribe(InputType.Interact, InteractAction, InputActionPhase.Performed);
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

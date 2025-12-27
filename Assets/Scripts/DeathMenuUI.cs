@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class DeathMenuUI : MonoBehaviour
+public class DeathMenuUI : MonoBehaviour,IGamePanel
 {
+    GameUI gameUI;
     public void RestartLevel()
     {
         GameManager.Instance.RestartGame();
     }
     public void QuitGame()
     {
+#if UNITY_EDITOR
+         UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
-    private void OnEnable()
-    {
-        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0f;
-        //openinig alpha animation
-        LeanTween.alphaCanvas(canvasGroup, 1f, 0.5f)
-            .setEase(LeanTweenType.easeOutQuad)
-            .setIgnoreTimeScale(true);
-
+    void IGamePanel.SetPanelController(GameUI controller) {
+        gameUI = controller;
     }
 
-    
+
+    private void OnDisable() {
+        LeanTween.cancel(this.gameObject);
+    }
+
 }
+

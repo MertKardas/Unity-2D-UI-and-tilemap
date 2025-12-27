@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BackGameBuıttonUI : MenuButtonUI{
+public class BackGameButtonUI : MenuButtonUI{
     [SerializeField] private Transform _newGamePanel;  
-    protected override void Awake() {
-        base.Awake();
+    protected override void Start() {
+        base.Start();
         
     }
 

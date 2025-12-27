@@ -16,7 +16,7 @@ public class AttackComponent : MonoBehaviour
         _rigidbody2D = _playerController.GetComponent<Rigidbody2D>();
 
         InputManager.Instance.Subscribe(InputType.Attack,OnAttackInput, InputActionPhase.Performed);
-        _playerController.OnPlayerDeath += OnPlayerDeath;
+        
     }
 
     private void OnAttackInput(InputAction.CallbackContext ctx)
@@ -36,7 +36,7 @@ public class AttackComponent : MonoBehaviour
     }
 
     
-    private void OnPlayerDeath()
+    private void OnDisable()
     {
         InputManager.Instance.Unsubscribe(InputType.Attack, OnAttackInput, InputActionPhase.Performed);
         

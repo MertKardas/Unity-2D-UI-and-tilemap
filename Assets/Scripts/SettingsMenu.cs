@@ -1,9 +1,9 @@
 using NaughtyAttributes;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class SettingsMenu : MonoBehaviour
-{
+[RequireComponent(typeof(CanvasGroup))]
+public class SettingsMenu : MonoBehaviour, IGamePanel {
     [BoxGroup("Volume Sliders"), SerializeField]
     private Slider 
         masterVolumeSlider,
@@ -11,7 +11,11 @@ public class SettingsMenu : MonoBehaviour
         sfxVolumeSlider,
         ambienceVolumeSlider,
         uiVolumeSlider;
-
+    GameUI gameUI; 
+    CanvasGroup canvasGroup;
+    private void Awake() {
+        canvasGroup = this.gameObject.GetComponent<CanvasGroup>();
+    }
     private void OnEnable()
     {
         masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
@@ -19,14 +23,23 @@ public class SettingsMenu : MonoBehaviour
         sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         ambienceVolumeSlider.onValueChanged.AddListener(OnAmbienceVolumeChanged);
         uiVolumeSlider.onValueChanged.AddListener(OnUIVolumeChanged);
+        canvasGroup.interactable = false;
+        InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+    }
+    void IGamePanel.SetPanelController(GameUI controller) {
+        gameUI = controller;
     }
     private void OnDisable()
     {
+        
         masterVolumeSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
         musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
         sfxVolumeSlider.onValueChanged.RemoveListener(OnSFXVolumeChanged);
         ambienceVolumeSlider.onValueChanged.RemoveListener(OnAmbienceVolumeChanged);
         uiVolumeSlider.onValueChanged.RemoveListener(OnUIVolumeChanged);
+        LeanTween.cancel(this.gameObject);
+        InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+
     }
     #region Volume Change Handlers
     public void OnMasterVolumeChanged(float value)
@@ -51,10 +64,14 @@ public class SettingsMenu : MonoBehaviour
     }
 
     #endregion
-    public void ReturnToPauseMenu()
-    {
-        GameUI gameUI = FindAnyObjectByType<GameUI>();
-        gameUI.SwitchPanel(this.gameObject, gameUI.PauseMenu.gameObject);
+    
+    public void OnReturnClicked() {
+        gameUI.SwitchPanel(gameUI.SettingsPanel.gameObject, gameUI.PauseMenu.gameObject, gameUI.panelTransition);
     }
+    private void OnCancel(InputAction.CallbackContext ctx) {
+        if (!ctx.started) return;
+        OnReturnClicked();
+    }
+
 
 }

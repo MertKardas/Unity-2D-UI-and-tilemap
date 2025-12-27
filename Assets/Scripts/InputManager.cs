@@ -11,9 +11,10 @@ public class InputManager : Singleton<InputManager> {
     {
         base.Awake();
         _inputActions = new InputSystem_Actions(); 
+        _inputActions.Enable();
+        _inputActions.UI.Enable();
         InitActionMap();
-        EnablePlayerInput();
-        EnableUIInput();
+
 
     }
     void InitActionMap() {

@@ -1,5 +1,6 @@
-using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -25,30 +26,17 @@ public class PlayerAnimation : MonoBehaviour
             _playerController.playerData.isFlip= value;
             }
         }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    
+    private void OnEnable() {
+
         _animator = GetComponent<Animator>();
         _playerController = GetComponentInParent<PlayerController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerController.OnTakeDamage += (takenDamage) =>
-        {
-            _animator.SetTrigger("TakeDamage");
-            AudioManager.Instance.PlaySound(takeDamageClip);    
-        };
-        _playerController.OnPlayerDeath += () =>
-        {
-            _animator.SetTrigger("Die");
-            AudioManager.Instance.PlaySound(deathClip);
-        };
-        _playerController.AttackComponent.OnAttackStarted += TriggerAttackAnimation;
-        _playerController.OnStateChanged += (previousState, newState) =>
-        {
-            if (newState == PlayerState.Attacking)
-            {
-                AttackSound();
-            }
-        };
+        if (_playerController == null) return;   
+            _playerController.OnStateChanged += OnStateChange;
+        if( _playerController.AttackComponent != null) 
+            _playerController.AttackComponent.OnAttackStarted += TriggerAttackAnimation;
+     
     }
 
     // Update is called once per frame
@@ -62,8 +50,8 @@ public class PlayerAnimation : MonoBehaviour
     private void HandleAnimation()
     {
         if (_playerController == null) return;
-
-        Vector2 movement = _playerController.Movement;
+        if(_playerController.playerData.state == PlayerState.Dead) return;
+        Vector2 movement = InputManager.Instance.ReadInput<Vector2>(InputType.Move);
 
         if (movement != Vector2.zero)
         {
@@ -77,8 +65,8 @@ public class PlayerAnimation : MonoBehaviour
     private void HandleFlip()
     {
         if (_playerController == null) return;
-
-        Vector2 movement = _playerController.Movement;
+        if(_playerController.playerData.state == PlayerState.Dead) return;
+        Vector2 movement = InputManager.Instance.ReadInput<Vector2>(InputType.Move);
 
         if (movement.x > 0)
         {
@@ -107,5 +95,24 @@ public class PlayerAnimation : MonoBehaviour
         {
             _animator.SetBool(isAttack, true);
         }
+    }
+    private void OnStateChange(PlayerState previous, PlayerState current)
+    {
+        Debug.Log($"Player state changed from {previous} to {current} in PlayerAnimation");
+        if (current == PlayerState.Dead) {
+            _animator.SetTrigger("Die");
+            AudioManager.Instance.PlaySound(deathClip);
+        }else if (current == PlayerState.TakeDamage) {
+            Debug.Log("Player took damage, triggering animation.");
+            _animator.SetTrigger("TakeDamage");
+            AudioManager.Instance.PlaySound(takeDamageClip);
+        } else if (current == PlayerState.Attacking) {
+            AttackSound();
+        }
+    }
+   
+    private void OnDisable() {
+        _playerController.OnStateChanged -= OnStateChange;
+        _playerController.AttackComponent.OnAttackStarted -= TriggerAttackAnimation;
     }
 }

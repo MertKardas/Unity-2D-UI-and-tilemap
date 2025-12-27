@@ -1,44 +1,70 @@
-using System.Diagnostics;
+using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using static System.Net.WebRequestMethods;
-public class PauseMenu : MonoBehaviour
+using DentedPixel;
+public class PauseMenu : MonoBehaviour,IGamePanel
 {
     [NaughtyAttributes.Scene, SerializeField] public string mainMenuSceneName;
-    private string GitHubURL = "https://github.com/MertKardas";
-    private string LinkedInURL = "https://www.linkedin.com/in/mert-karda%C5%9F-b1600a298/";
     private GameUI gameUI;
-    
-    private void Start() {
-        gameUI = FindAnyObjectByType<GameUI>();
+    private CanvasGroup canvasGroup;
+    [SerializeField] Button selectedButton;
+    private void Awake() {
+       
+        canvasGroup = this.gameObject.GetComponent<CanvasGroup>();
+       
+    }
+    private void OnEnable() {
+        if(selectedButton!= null) 
+            EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+         InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+        
     }
 
-    public void OpenGitHub() {
-        ProcessStartInfo psi = new ProcessStartInfo {
-            FileName = GitHubURL,
-            UseShellExecute = true
-        };
-        Process.Start(psi);
+    #region Button Methods
+    public void OpenSocialLink(string url) { 
+        try {
+            Application.OpenURL(url);
+        } catch (System.Exception e) {
+            UnityEngine.Debug.LogError("Failed to open URL: " + e.Message);
+        }
     }
-    public void OpenLinkedIn() {
-        ProcessStartInfo psi = new ProcessStartInfo {
-            FileName = LinkedInURL,
-            UseShellExecute = true
-        };
-        UnityEngine.Debug.Log("Opening LinkedIn URL: " + LinkedInURL);
-        Process.Start(psi);
-    }
-
     public void ReturnMainMenu()
     {
         SceneManager.LoadScene(mainMenuSceneName);
     }
-    public void QuitGame()
-    {
-        Application.Quit();
+    public void QuitGame() {
+        Time.timeScale = 1f; // Reset time scale
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
     public void PauseToSettings()
     {
-        gameUI.SwitchPanel(this.gameObject, gameUI.SettingsPanel.gameObject);
+        gameUI.SwitchPanel(gameObject, gameUI.SettingsPanel.gameObject, gameUI.panelTransition);
     }
+#endregion
+
+    void IGamePanel.SetPanelController(GameUI controller) {
+        gameUI = controller;
+    }
+    private void OnDisable() {
+        LeanTween.cancel(this.gameObject);
+        InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+    }
+    private void OnCancel(InputAction.CallbackContext ctx) {
+        if (!ctx.started) return;
+        var sequence = gameUI.SwitchPanel(gameObject, gameUI.StatsPanel.gameObject, gameUI.panelTransition);
+        sequence.append(() => {
+            gameUI.backgroundPanel.SetActive(false);
+        });
+    }
+
+
 }
+
