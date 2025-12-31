@@ -33,16 +33,21 @@ public class Trap : MonoBehaviour
         trapCollider.enabled = false;
     }
     //called by animation event
-    public int InflictDamage(PlayerController playerData) {
+    public void InflictDamage(IDamagable damagable) {
 
-        playerData.Health -= Damage;
-        return Damage;
-
+        damagable.TakeDamage(Damage); 
     }
     //Activated first time onEnable
     private void ActivateTrapFirstTme()
     {
         animator.SetBool("isTrapActive", true);
+    }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        // Check if the colliding object has the IDamagable interface
+        if (collision.TryGetComponent<IDamagable>(out var damagable))
+        {
+            InflictDamage(damagable);
+        }
     }
 
 }

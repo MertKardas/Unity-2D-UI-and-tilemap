@@ -11,6 +11,7 @@ public class AudioManager : Singleton<AudioManager> {
     // 'endTime' yerine 'elapsed' sayacý kullanýyoruz ki Pause yapýnca süreyi dondurabilelim.
     private struct ActiveSound {
         public AudioSource source;
+        public AudioData data; 
         public float duration;      // Sesin toplam süresi
         public float elapsed;       // Ne kadar süredir çalýyor?
         public bool isUnscaled;     // UI sesi mi?
@@ -141,7 +142,8 @@ public class AudioManager : Singleton<AudioManager> {
             duration = length,
             elapsed = 0f,
             isUnscaled = (data.audioType == AudioType.UI),
-            isPaused = false
+            isPaused = false,
+            data = data
         });
 
         return source;
@@ -222,6 +224,32 @@ public class AudioManager : Singleton<AudioManager> {
     public void StopSound(AudioSource source) {
         if (source != null && source.gameObject.activeSelf) {
             ReturnToPool(source);
+        }
+    }
+    public void StopSound(AudioData data) {
+        if (data == null) return;
+        for (int i = 0; i < activeSounds.Count;) {
+
+
+            ActiveSound sound = activeSounds[i];
+
+            if (sound.data == data) {
+                AudioSource sourceToStop = sound.source;
+
+                int lastIndex = activeSounds.Count - 1;
+
+                if (i < lastIndex) {
+
+                    activeSounds[i] = activeSounds[lastIndex];
+                }
+
+                activeSounds.RemoveAt(lastIndex);
+
+                audioPool.Release(sourceToStop);
+
+            } else {
+                i++;
+            }
         }
     }
 

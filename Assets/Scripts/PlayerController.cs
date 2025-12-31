@@ -1,4 +1,5 @@
 
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,41 +9,20 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
+    //Player data. 
     public PlayerRunTimeData playerData = new PlayerRunTimeData();
-    
-    public PlayerState State {
-        get { return playerData.state; }
-        set 
-        { 
-            if(playerData.state == value)
-                return;
-            PlayerState previousState = playerData.state;
-            playerData.state = value;
-            OnStateChanged?.Invoke(previousState, playerData.state);
-          
-        }
-    }
 
-    public int Health {
-        get { return (int)playerData.health; }
-        set 
-        { 
-            if(playerData.state == PlayerState.Dead)
-                return;
-            playerData.health = value;
-            if (playerData.health <= 0 && playerData.state != PlayerState.Dead) {
-                playerData.health = 0;     
-                OnHealthChanged?.Invoke(playerData.health);
-                State = PlayerState.Dead;
-                InputManager.Instance.DisablePlayerInput();
-                 LeanTween.delayedCall(0.6f,
-                    () => GameManager.Instance.Gameover());
-            } else 
-            { 
-                OnHealthChanged?.Invoke(playerData.health); 
-            }
-        }
-    }
+    [Header("Components")]
+    public AttackComponent AttackComponent;
+    public InteractionComponent InteractionComponent;
+    public HealthComponent HealthComponent;
+    public StateMachine<PlayerController> Machine;
+    public MovementComponent MovementComponent; 
+    public PlayerVisualComponent VisualComponent;
+    public Rigidbody2D Rigidbody;
+
+
+    /*
     public int Coin {
         get { return (int)playerData.coin; }
         set 
@@ -50,54 +30,55 @@ public class PlayerController : MonoBehaviour
             playerData.coin = value;
             OnCoinChanged?.Invoke(playerData.coin);
         }
-    }
-    public event Action<int> OnHealthChanged;
-    public event Action<int> OnCoinChanged;
-    public event Action<int> OnTakeDamage;
-    //public event Action OnPlayerDeath;
+    }*/
 
-    public event Action<PlayerState, PlayerState> OnStateChanged;
-    public Vector2 Movement { get; private set; }
 
-    public AttackComponent AttackComponent;
+
     private void Awake() {
-        AttackComponent = GetComponent<AttackComponent>();
-        AttackComponent.Init(this);
-    }
-    
-    
+        //State Machine setup
+        
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if(playerData.state == PlayerState.Dead)
-            return; 
-        if (collision.TryGetComponent<Trap>(out Trap trap))
-        {
-
-            Debug.Log("Player in trap area");
-            // Handle trap interaction
-           
-            int takenDamage = trap.InflictDamage(this);
-            
-            State = PlayerState.TakeDamage;
-            OnTakeDamage?.Invoke(takenDamage);
-        }
+        (AttackComponent as IComponent)?.Initialize(this);
+        (InteractionComponent as IComponent)?.Initialize(this);
+        (MovementComponent as IComponent)?.Initialize(this);
+        (VisualComponent as IComponent)?.Initialize(this);
+        (HealthComponent as IComponent)?.Initialize(this);
+     
+    
     }
+    private void Update() {
+        Machine?.Update();
+    }
+    private void FixedUpdate() {
+        Machine?.FixedUpdate();
+    }
+
+
+    private void Start() {
+        Machine = new StateMachine<PlayerController>();
+        Machine.AddState(new IdleState(this, Machine));
+        Machine.AddState(new MoveState(this, Machine));
+        Machine.AddState(new TakingDamageState(this, Machine));
+        Machine.AddState(new DeathState(this, Machine));
+        Machine.SetState(Machine.GetState<IdleState>());
+    }
+
+
 }
+//TODO runtime data is carried out later
 [System.Serializable]
 public class PlayerRunTimeData {
-   public PlayerState state = PlayerState.Idle;
+   public State<PlayerController> state;
    public bool isFlip;
-   public float speed;
-   public int health;
+    //Movement
+    public float speed;
+    public float acceleration;
+    public float deceleration;
+    //Health
+    public int health;
+   public int maxHealth;
+
    public int coin;
    public float damage;
    public List<ItemSO> items = new List<ItemSO>();
-}
-public enum PlayerState {
-    Idle,
-    Moving,
-    TakeDamage,
-    Interacting,
-    Dead,
-    Attacking
 }

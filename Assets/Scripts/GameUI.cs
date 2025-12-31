@@ -22,7 +22,7 @@ public class GameUI : MonoBehaviour {
         (SettingsPanel as IGamePanel).SetPanelController(this);
     }
     private void Start() {
-        
+        StatsPanel.gameObject.SetActive(true);
     }
     private void OnDisable() {
         if(GameManager.Instance != null) {

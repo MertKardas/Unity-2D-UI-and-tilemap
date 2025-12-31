@@ -11,27 +11,31 @@ public class StatsPanelUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI healthText; // Yazým hatasý düzeltildi (healt -> health)
     [SerializeField] private TextMeshProUGUI coinText;
 
-    private int _tweenId; // Tween kontrolü için ID
-
+    HealthComponent healthComp; 
     private void Awake() {
+
         // Eðer inspector'dan atanmadýysa, oyun baþýnda bir kez bul.
         if (playerController == null) {
             playerController = FindAnyObjectByType<PlayerController>();
             if (playerController == null)
-                Debug.LogError("PlayerController sahnede bulunamadý!");
+                Debug.LogError("PlayerController not found in the scene!");
+            return; 
         }
-    }
+        
 
+    }
+ 
     private void OnEnable() {
         if (playerController != null) {
             // Initial setup
-            healthSlider.maxValue = playerController.Health;
-            UpdateHealthUI(playerController.Health, false); // Ýlk açýlýþta animasyonsuz set et
-            UpdateCoinUI(playerController.Coin);
+            healthComp = playerController.HealthComponent;
+            healthSlider.maxValue = healthComp.MaxHealth;
+            UpdateHealthUI(healthComp.Health, true); 
+            //UpdateCoinUI(playerController.Coin);
 
    
-            playerController.OnHealthChanged += OnHealthChangedHandler;
-            playerController.OnCoinChanged += UpdateCoinUI;
+            healthComp.OnHealthChanged += OnHealthChangedHandler;
+            //playerController.OnCoinChanged += UpdateCoinUI;
         }
     }
 
@@ -41,8 +45,8 @@ public class StatsPanelUI : MonoBehaviour {
 
         //(Null Check)
         if (playerController != null) {
-            playerController.OnHealthChanged -= OnHealthChangedHandler;
-            playerController.OnCoinChanged -= UpdateCoinUI;
+            healthComp.OnHealthChanged -= OnHealthChangedHandler;
+            //playerController.OnCoinChanged -= UpdateCoinUI;
         }
     }
 
@@ -52,10 +56,10 @@ public class StatsPanelUI : MonoBehaviour {
     }
 
     private void UpdateHealthUI(int currentHealth, bool animate) {
-        // Eski animasyonu iptal et, çakýþmayý önle
+        
         LeanTween.cancel(gameObject);
 
-        healthText.text = currentHealth.ToString();
+        healthText.SetText($"{currentHealth} / {healthComp.MaxHealth}");
 
         if (animate) {
             float startValue = healthSlider.value;

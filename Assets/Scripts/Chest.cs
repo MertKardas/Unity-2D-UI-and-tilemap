@@ -2,6 +2,7 @@ using UnityEngine;
    
 public class Chest : MonoBehaviour, IInteractable {
     public int Gold { get; set; } = 100;
+    private bool isOpen = false;
     [SerializeField] AudioData openSound;
     public bool IsInRange {
         get => _isInRange;
@@ -24,11 +25,9 @@ public class Chest : MonoBehaviour, IInteractable {
     private void Awake() {
         animator = GetComponent<Animator>();
     }
-    public bool CanInteract {
-        get { return IsInRange && !IsOpen; }
-        set { }
-    }
-    private bool isOpen = false;
+    public bool CanInteract => IsInRange && !IsOpen;
+       
+    
     public bool IsOpen {
         get { return isOpen; }
         set 
@@ -45,7 +44,8 @@ public class Chest : MonoBehaviour, IInteractable {
     public bool TryInteract(PlayerController playerController) {
       
         if (CanInteract) {
-            playerController.Coin += OpenChest();
+            int goldReceived = OpenChest();
+            //playerController.Coin += OpenChest();
             return true; 
         }
         else {
