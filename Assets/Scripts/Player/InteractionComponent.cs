@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InteractionComponent : MonoBehaviour,IComponent    
 {
-    private List<IInteractable> interactables = new List<IInteractable>();
+    [ShowNonSerializedField] private List<IInteractable> interactables = new List<IInteractable>();
     private PlayerController playerController;
     void IComponent.Initialize(PlayerController controller) {
         playerController = controller;

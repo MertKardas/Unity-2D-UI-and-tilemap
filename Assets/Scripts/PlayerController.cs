@@ -19,18 +19,8 @@ public class PlayerController : MonoBehaviour
     public StateMachine<PlayerController> Machine;
     public MovementComponent MovementComponent; 
     public PlayerVisualComponent VisualComponent;
+    public InventoryComponent InventoryComponent;
     public Rigidbody2D Rigidbody;
-
-
-    /*
-    public int Coin {
-        get { return (int)playerData.coin; }
-        set 
-        { 
-            playerData.coin = value;
-            OnCoinChanged?.Invoke(playerData.coin);
-        }
-    }*/
 
 
 
@@ -43,8 +33,8 @@ public class PlayerController : MonoBehaviour
         (MovementComponent as IComponent)?.Initialize(this);
         (VisualComponent as IComponent)?.Initialize(this);
         (HealthComponent as IComponent)?.Initialize(this);
-     
-    
+        (InventoryComponent as IComponent)?.Initialize(this);
+
     }
     private void Update() {
         Machine?.Update();

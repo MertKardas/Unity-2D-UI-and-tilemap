@@ -11,7 +11,8 @@ public class StatsPanelUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI healthText; // Yazým hatasý düzeltildi (healt -> health)
     [SerializeField] private TextMeshProUGUI coinText;
 
-    HealthComponent healthComp; 
+    HealthComponent _healthComp; 
+    InventoryComponent _inventoryComp;
     private void Awake() {
 
         // Eðer inspector'dan atanmadýysa, oyun baþýnda bir kez bul.
@@ -28,14 +29,15 @@ public class StatsPanelUI : MonoBehaviour {
     private void OnEnable() {
         if (playerController != null) {
             // Initial setup
-            healthComp = playerController.HealthComponent;
-            healthSlider.maxValue = healthComp.MaxHealth;
-            UpdateHealthUI(healthComp.Health, true); 
-            //UpdateCoinUI(playerController.Coin);
+            _healthComp = playerController.HealthComponent;
+            _inventoryComp = playerController.InventoryComponent;
+            healthSlider.maxValue = _healthComp.MaxHealth;
+            UpdateHealthUI(_healthComp.Health, true);
+            UpdateCoinUI(_inventoryComp.Coin);
 
    
-            healthComp.OnHealthChanged += OnHealthChangedHandler;
-            //playerController.OnCoinChanged += UpdateCoinUI;
+            _healthComp.OnHealthChanged += OnHealthChangedHandler;
+            _inventoryComp.OnCoinChanged += UpdateCoinUI;
         }
     }
 
@@ -44,10 +46,11 @@ public class StatsPanelUI : MonoBehaviour {
         LeanTween.cancel(gameObject);
 
         //(Null Check)
-        if (playerController != null) {
-            healthComp.OnHealthChanged -= OnHealthChangedHandler;
-            //playerController.OnCoinChanged -= UpdateCoinUI;
-        }
+        if(_healthComp != null)
+            _healthComp.OnHealthChanged -= OnHealthChangedHandler;
+        if(_inventoryComp != null)
+            _inventoryComp.OnCoinChanged -= UpdateCoinUI;
+
     }
 
    
@@ -59,7 +62,7 @@ public class StatsPanelUI : MonoBehaviour {
         
         LeanTween.cancel(gameObject);
 
-        healthText.SetText($"{currentHealth} / {healthComp.MaxHealth}");
+        healthText.SetText($"{currentHealth} / {_healthComp.MaxHealth}");
 
         if (animate) {
             float startValue = healthSlider.value;
@@ -74,6 +77,6 @@ public class StatsPanelUI : MonoBehaviour {
     }
 
     private void UpdateCoinUI(int currentCoin) {
-        coinText.text = currentCoin.ToString();
+        coinText.SetText($"{currentCoin}");
     }
 }

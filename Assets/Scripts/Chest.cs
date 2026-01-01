@@ -42,17 +42,17 @@ public class Chest : MonoBehaviour, IInteractable {
         }
     }
     public bool TryInteract(PlayerController playerController) {
-      
-        if (CanInteract) {
+       if (CanInteract) {
             int goldReceived = OpenChest();
-            //playerController.Coin += OpenChest();
-            return true; 
+            playerController.InventoryComponent.AddCoin(goldReceived);
+            return true;
         }
         else {
             return false;
         }
     }
     public int OpenChest() {
+
         int gold = Gold;
         IsOpen = true;
         return gold;    
