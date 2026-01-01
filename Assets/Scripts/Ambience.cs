@@ -7,7 +7,5 @@ public class Ambience : MonoBehaviour
     private void Start() {
         AudioManager.Instance.PlaySound(ambienceData);
     }
-    
 
-   
 }
