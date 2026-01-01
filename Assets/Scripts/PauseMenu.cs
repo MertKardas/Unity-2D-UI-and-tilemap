@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour,IGamePanel
     }
     public void ReturnMainMenu()
     {
-        SceneManager.LoadScene(mainMenuSceneName);
+        GameManager.Instance.ReturnToMainMenu();
     }
     public void QuitGame() {
         Time.timeScale = 1f; // Reset time scale
@@ -55,7 +55,8 @@ public class PauseMenu : MonoBehaviour,IGamePanel
     }
     private void OnDisable() {
         LeanTween.cancel(this.gameObject);
-        InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+        if(InputManager.Instance != null)   
+            InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
     }
     private void OnCancel(InputAction.CallbackContext ctx) {
         if (!ctx.started) return;

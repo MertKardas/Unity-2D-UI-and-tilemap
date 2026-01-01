@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         (VisualComponent as IComponent)?.Initialize(this);
         (HealthComponent as IComponent)?.Initialize(this);
         (InventoryComponent as IComponent)?.Initialize(this);
-
+        
     }
     private void Update() {
         Machine?.Update();

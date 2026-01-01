@@ -50,7 +50,11 @@ public class GameManager : Singleton<GameManager>
         if(scene.name != "MainMenu")
             OnGameStarted?.Invoke();
     }
+    public void ReturnToMainMenu() {
+        SceneManager.LoadScene("MainMenu");
+        AudioManager.Instance.StopAllAudio();
+    }
 
-    
+
 }
 

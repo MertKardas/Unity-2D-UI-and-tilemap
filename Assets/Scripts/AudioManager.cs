@@ -19,7 +19,7 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     [Header("Settings")]
-    [SerializeField] private GameObject AudioPrefab;
+
 
     [Header("Mixer Groups")]
     [SerializeField] private AudioMixer audioMixer;
@@ -91,7 +91,11 @@ public class AudioManager : Singleton<AudioManager> {
 
     private void InitPool(int defaultCapacity, int maxCapacity) {
         audioPool = new ObjectPool<AudioSource>(
-            createFunc: () => Instantiate(AudioPrefab, transform).GetComponent<AudioSource>(),
+            createFunc: () => { 
+                var _audioGO = new GameObject("PooledAudioSource");
+                _audioGO.AddComponent<AudioSource>();
+                return _audioGO.GetComponent<AudioSource>();
+            },
             actionOnGet: source => source.gameObject.SetActive(true),
             actionOnRelease: source => {
                 source.Stop();
@@ -107,7 +111,9 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     private void InitMusicSource() {
-        GameObject musicGO = Instantiate(AudioPrefab, transform);
+        var _audioGO = new GameObject("MusicSource_Template");
+        _audioGO.AddComponent<AudioSource>();
+        GameObject musicGO = Instantiate(_audioGO, transform);
         musicGO.name = "MusicSource_Main";
         musicSource = musicGO.GetComponent<AudioSource>();
         musicSource.outputAudioMixerGroup = musicGroup;
