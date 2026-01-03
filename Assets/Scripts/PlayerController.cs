@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate() {
         Machine?.FixedUpdate();
+        playerData.position[0] = transform.position.x;
+        playerData.position[1] = transform.position.y;
+
     }
 
 
@@ -58,8 +61,8 @@ public class PlayerController : MonoBehaviour
 //TODO runtime data is carried out later
 [System.Serializable]
 public class PlayerRunTimeData {
-   public State<PlayerController> state;
-   public bool isFlip;
+    public State<PlayerController> state;
+    public float[] position = new float[2];
     //Movement
     public float speed;
     public float acceleration;
