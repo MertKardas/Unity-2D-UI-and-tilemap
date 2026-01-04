@@ -1,9 +1,9 @@
 using System;
-
+using UnityEngine;
 [Serializable]
 public class MetaData {
-    public string id;      // Dosya adý için Unique ID (GUID)
-    public string displayName;  // Kullanýcýnýn göreceði isim (Örn: "Karanlýk Orman")
+    public string id;      //File name
+    public string displayName; 
     public DateTime saveTime;
     public string gameVersion;
 

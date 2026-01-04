@@ -22,8 +22,7 @@ public class AttackComponent : MonoBehaviour,IComponent
         if (!ctx.performed)
             return;
 
-        var direction = _playerController.playerData.isFlip ? Vector2.left : Vector2.right;
-        _rigidbody2D.AddForce(direction , ForceMode2D.Impulse);
+       
        
     }
 
