@@ -7,7 +7,8 @@ using UnityEngine;
 /// <summary>
 /// This class handles player movements and interactions within the game.
 /// </summary>
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(SaveableEntity))]
+public class PlayerController : MonoBehaviour, ISavable
 {
     //Player data. 
     public PlayerRunTimeData playerData = new PlayerRunTimeData();
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public InventoryComponent InventoryComponent;
     public Rigidbody2D Rigidbody;
 
-
+    public string UniqueId => GetComponent<SaveableEntity>().UniqueId;
 
     private void Awake() {
         //State Machine setup
@@ -56,7 +57,17 @@ public class PlayerController : MonoBehaviour
         Machine.SetState(Machine.GetState<IdleState>());
     }
 
+    public object CaptureState() {
+        return playerData;
+    }
 
+    public void RestoreState(object data) {
+        if (data == null)
+            return; 
+        if (data is PlayerRunTimeData runtimeData)
+            playerData = runtimeData;
+
+    }
 }
 //TODO runtime data is carried out later
 [System.Serializable]

@@ -1,83 +1,38 @@
-
-#region Manager
 using MyUtility;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
-
-#region Manager
-public class SaveManager :  Singleton<SaveManager> {
-
-
+using Newtonsoft.Json;
+public class SaveManager : Singleton<SaveManager> {
     private SaveService _saveService;
-    private CancellationTokenSource _cts;
-
-    private string _currentSaveID;
-    private string _currentDisplayName;
-
-    private const string QuickSaveID = "QuickSave"; // Predefined ID for quick save
-
+    private SaveSystemSettings _settings;
+    private GameSaveData currentGameSaveData;
+    public GameSaveData CurrentGameSaveData {
+        get { return currentGameSaveData; }
+        set { currentGameSaveData = value; }
+    }
     protected override void Awake() {
         base.Awake();
-        _saveService = new SaveService(new SaveSystemSettings());
-        _cts = new CancellationTokenSource();
+
+        _settings = new SaveSystemSettings(null);// default settings
+        _saveService = new SaveService(_settings);
+
     }
-
-    private void OnDestroy() {
-        _cts?.Cancel();
-        _cts?.Dispose();
+    protected override void OnDestroy() {
+        base.OnDestroy();
     }
-
-    // Quick Save: Save the current game state to a predefined slot
-    public async Task QuickSave(GameSaveData data) {
-        _currentSaveID = QuickSaveID;
-        _currentDisplayName = "Quick Save";
-
-        await _saveService.SaveGameAsync(_currentSaveID, _currentDisplayName, data, _cts.Token);
+    public MetaData[] GetAllMetaData() {
+        var metaDataList = _saveService.GetAllMetaData();
+        return metaDataList.ToArray();
     }
-
-    // Resume Game: Load the last quick saved game state
-    public async Task<GameSaveData> ResumeGame() {
-        var (data, result) = await _saveService.LoadGameAsync(QuickSaveID, _cts.Token);
-        if (result.Success) {
-            _currentSaveID = QuickSaveID;
-            _currentDisplayName = "Quick Save";
-            return data;
-        }
-        Debug.LogError($"Failed to resume game: {result.ErrorMessage}");
-        return null;
+    public Result QuickSave(GameSaveData saveData) {
+        string quickSaveSlotName = _settings.quickSaveFileName;
+        string displayName = _settings.quickSaveDisplayName;
+        return _saveService.Save(saveData, quickSaveSlotName, displayName);
     }
-
-    // New Game: Create a new save slot
-    public async Task CreateNewGame(string visibleName, GameSaveData initialData) {
-        _currentSaveID = Guid.NewGuid().ToString();
-        _currentDisplayName = visibleName;
-
-        await _saveService.SaveGameAsync(_currentSaveID, _currentDisplayName, initialData, _cts.Token);
+    public Result LoadGame(string slotName) {
+         var result = _saveService.Load(slotName, out GameSaveData data);
+         if (result.Success) {
+             CurrentGameSaveData = data;
+         }
+         return result;
     }
-
-    // Save Current Game: Overwrite the current save slot
-    public async Task SaveCurrentGame(GameSaveData data) {
-        if (string.IsNullOrEmpty(_currentSaveID)) {
-            Debug.LogError("No active save slot!");
-            return;
-        }
-        await _saveService.SaveGameAsync(_currentSaveID, _currentDisplayName, data, _cts.Token);
-    }
-
-    // Load Game: Load a specific save slot
-    public async Task<GameSaveData> LoadGame(string id) {
-        var (data, result) = await _saveService.LoadGameAsync(id, _cts.Token);
-        if (result.Success) {
-            _currentSaveID = id;
-            return data;
-        }
-        return null;
-    }
-
-    public async Task<List<MetaData>> GetSaveList() => await _saveService.GetAllSavesAsync(_cts.Token);
 }
-#endregion
-#endregion

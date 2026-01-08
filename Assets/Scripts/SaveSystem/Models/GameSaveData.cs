@@ -1,10 +1,7 @@
-using UnityEngine;
 
+using System.Collections.Generic;
 public class GameSaveData {
     public string sceneName;
-    public PlayerRunTimeData playerData;
+    public Dictionary<string, object> DataDict = new Dictionary<string, object>();
 
-    public GameSaveData() {
-        playerData = new PlayerRunTimeData();
-    }
 }
