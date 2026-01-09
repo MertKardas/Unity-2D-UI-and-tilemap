@@ -343,8 +343,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.5200195, y: 91.82001}
-  m_SizeDelta: {x: -1886.74, y: -660.58}
+  m_AnchoredPosition: {x: 12.910034, y: -13.830017}
+  m_SizeDelta: {x: -1865.96, y: -449.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192494639
 MonoBehaviour:
@@ -544,6 +544,8 @@ MonoBehaviour:
   _pressedSound: {fileID: 0}
   _hoverScale: 1.1
   _tweenDuration: 0.2
+  _originalScale: {x: 0, y: 0, z: 0}
+  _button: {fileID: 0}
   _newGamePanel: {fileID: 1136241683}
 --- !u!1 &237315564
 GameObject:
@@ -746,12 +748,12 @@ GameObject:
   - component: {fileID: 356642487}
   - component: {fileID: 356642488}
   m_Layer: 5
-  m_Name: 'Load Gmae '
+  m_Name: 'Resume Gmae '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &356642481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -767,10 +769,10 @@ RectTransform:
   - {fileID: 564576760}
   m_Father: {fileID: 192494638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 396.62854, y: -354.6155}
-  m_SizeDelta: {x: 673.2571, y: 143.877}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 143.877}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &356642483
 MonoBehaviour:
@@ -815,7 +817,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 356642484}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1908761366}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &356642484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41704956, g: 0.21845457, b: 0.801, a: 0.7647059}
+  m_Color: {r: 0.41704956, g: 0.21845457, b: 0.801, a: 0.21176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1070,7 +1084,10 @@ MonoBehaviour:
   _pressedSound: {fileID: 0}
   _hoverScale: 1.1
   _tweenDuration: 0.2
+  _originalScale: {x: 0, y: 0, z: 0}
+  _button: {fileID: 0}
   Scene: 1
+  <SaveName>k__BackingField: New Save
 --- !u!114 &373284281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,7 +1936,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LOAD '
+  m_text: 'Resume
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72a059e0bfed17d48adb0c86318a5cbe, type: 2}
   m_sharedMaterial: {fileID: 6521979676975054447, guid: 72a059e0bfed17d48adb0c86318a5cbe, type: 2}
@@ -2520,7 +2539,7 @@ GameObject:
   - component: {fileID: 1157145500}
   - component: {fileID: 1157145499}
   m_Layer: 0
-  m_Name: "\u015F-removebg-preview_0"
+  m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3811,7 +3830,6 @@ GameObject:
   - component: {fileID: 1938815773}
   - component: {fileID: 1938815772}
   - component: {fileID: 1938815771}
-  - component: {fileID: 1938815774}
   - component: {fileID: 1938815775}
   - component: {fileID: 1938815776}
   m_Layer: 5
@@ -3935,25 +3953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938815768}
   m_CullTransparentMesh: 1
---- !u!114 &1938815774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938815768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5971920981a9d4ca0d9c4ba3988c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewGameButtonUI
-  _hoverSound: {fileID: 8300000, guid: 66711258d34018b428229af18374a953, type: 3}
-  _pressedSound: {fileID: 0}
-  _hoverScale: 1.1
-  _tweenDuration: 0.2
-  _originalScale: {x: 0, y: 0, z: 0}
-  _button: {fileID: 0}
-  _newGamePanel: {fileID: 1136241682}
 --- !u!114 &1938815775
 MonoBehaviour:
   m_ObjectHideFlags: 0
