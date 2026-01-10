@@ -1,26 +1,33 @@
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 public class SceneSaveLoader : MonoBehaviour
 {
     bool _isApplicationQuiting;
+   
     private void Awake() {
-        DistributeGameData();
-        
+    
+        SceneManager.sceneLoaded += DistributeGameData;
+
     }
-    private void Start() {
-        
-    }
+    
+    
     private void OnApplicationQuit() {
         _isApplicationQuiting = true;
+ 
         CollectData();
     }
     private void OnDestroy() {
         if (!_isApplicationQuiting) {
-            CollectData();
+            // Oyun bitmiyor
+            if(GameManager.Instance.CurrentGameState != GameState.Gameover)
+                CollectData();
         }
     }
 
-    private void DistributeGameData() {
+    private void DistributeGameData(Scene scene, LoadSceneMode mode) {
+        if(scene.name == "MainMenu") 
+            return;
         var manager = SaveManager.Instance;
         var data = manager.CurrentGameSaveData;
 
@@ -30,7 +37,7 @@ public class SceneSaveLoader : MonoBehaviour
             return;
         }
         //find all ISavable in the scene
-        var savable = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+        var savable = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
             .OfType<ISavable>()
             .ToArray();
         //restore their state
@@ -42,13 +49,14 @@ public class SceneSaveLoader : MonoBehaviour
        
     }
     public void CollectData() {
-        var isGameOver = GameManager.Instance.CurrentGameState == GameState.Gameover;
-        if (isGameOver) return; 
 
         Debug.Log("Collecting scene data for autosave...");
-        var saveManager = SaveManager.Instance;
-        var data = saveManager.CurrentGameSaveData;
 
+        var data = SaveManager.Instance.CurrentGameSaveData;
+        if(data == null) {
+            data = new GameSaveData();
+            SaveManager.Instance.CurrentGameSaveData = data;
+        }
         //find all ISavable in the scene
         var savable = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
             .OfType<ISavable>()
@@ -57,10 +65,6 @@ public class SceneSaveLoader : MonoBehaviour
         foreach (var item in savable) {
             data.DataDict[item.UniqueId] = item.CaptureState();
         }
-
-        //update scene name       
-        data.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        saveManager.CurrentGameSaveData = data;
-        saveManager.QuickSave();
+        SaveManager.Instance.QuickSave();
     }
 }

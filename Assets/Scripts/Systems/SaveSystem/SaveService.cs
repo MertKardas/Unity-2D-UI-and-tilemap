@@ -37,7 +37,7 @@ public class SaveService {
 
                 string folderPath = Path.GetDirectoryName(path);
                 string slotName = Path.GetFileName(folderPath);
-                metaData.SavePath = slotName;
+                metaData.SaveName = slotName;
 
                 metaDataList.Add(metaData);
             } catch (JsonException je) {
@@ -51,29 +51,32 @@ public class SaveService {
     }
      
     #endregion
-    public Result Save(GameSaveData saveData, string slotName, string displayName) {
+    public Result Save(GameSaveData saveData, MetaData metadata) {
         if (saveData == null) {
             return Result.Fail("SaveData null olamaz.");
         }
 
-        if (string.IsNullOrEmpty(slotName)) {
+        if (metadata == null) {
+            return Result.Fail("MetaData null olamaz.");
+        }
+
+        if (string.IsNullOrEmpty(metadata.SaveName)) {
             return Result.Fail("Slot adý boþ olamaz.");
         }
 
-        var savePath = Path.Combine(SaveDirectory, slotName);
+        var savePath = Path.Combine(SaveDirectory, metadata.SaveName);
         try {
             if (!Directory.Exists(savePath)) {
                 Directory.CreateDirectory(savePath);
             }
-
+           
             var saveDataJson = JsonConvert.SerializeObject(saveData, _settings.jsonSettings);
             File.WriteAllText(
                 Path.Combine(savePath, _settings.saveDataFileName),
                 saveDataJson,
                 DefaultEncoding);
 
-            var metaData = new MetaData(slotName, displayName);
-            var metaDataJson = JsonConvert.SerializeObject(metaData, _settings.jsonSettings);
+            var metaDataJson = JsonConvert.SerializeObject(metadata, _settings.jsonSettings);
             File.WriteAllText(
                 Path.Combine(savePath, _settings.metaDataFileName),
                 metaDataJson,
@@ -100,11 +103,11 @@ public class SaveService {
 
             var saveDataJson = File.ReadAllText(savePath, DefaultEncoding);
             saveData = JsonConvert.DeserializeObject<GameSaveData>(saveDataJson, _settings.jsonSettings);
-
+            
             if (saveData == null) {
                 return Result.Fail("Save dosyasý bozuk veya uyumsuz.");
             }
-
+         
             return Result.Ok();
         } catch (JsonException je) {
             return Result.Fail($"Save dosyasý parse edilemedi: {je.Message}");

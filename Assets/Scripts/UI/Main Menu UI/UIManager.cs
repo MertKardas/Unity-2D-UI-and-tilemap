@@ -40,13 +40,22 @@ public class UIManager : MonoBehaviour {
     public  void ResumeGame() {
         var result = SaveManager.Instance.QuickLoad();
         
-        var sceneName = SaveManager.Instance.CurrentGameSaveData.sceneName;
+        var sceneName = SaveManager.Instance.CurrentGameSaveData.SceneName;
         //Load the scene 
         SceneManager.LoadScene(sceneName);
        
     }
     public void OpenURL(string url) {
         Application.OpenURL(url);
+    }
+    private void Start() {
+        SceneManager.sceneUnloaded += (scene) => {
+            Debug.Log($"Unloaded scene: {scene.name}");
+        };
+    }
+    private void OnDisable() => Debug.Log("UIManager OnDisable");
+    private void OnDestroy() {
+        Debug.Log("UIManager OnDestroy");
     }
 }
 

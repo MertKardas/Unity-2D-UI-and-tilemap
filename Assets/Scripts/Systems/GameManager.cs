@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager> {
         OnGamePaused?.Invoke();
         CurrentGameState = GameState.Paused;
     }
-    public void ResumeGame() {
+    public void UnpauseGame() {
         InputManager.Instance.EnablePlayerInput();
         Time.timeScale = 1f;
         OnGameStarted?.Invoke();
@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager> {
             await SceneManager.LoadSceneAsync(0);
         }//successful load 
         else {
-            var lastScene = SaveManager.Instance.CurrentGameSaveData.sceneName;
+            var lastScene = SaveManager.Instance.CurrentGameSaveData.SceneName;
             await SceneManager.LoadSceneAsync(lastScene);
         }
     }
@@ -59,9 +59,13 @@ public class GameManager : Singleton<GameManager> {
         Time.timeScale = 1f;
         if (scene.name != "MainMenu")
             OnGameStarted?.Invoke();
+        else {
+            SaveManager.Instance.CurrentGameSaveData = null;
+        }
     }
     public void ReturnToMainMenu() {
         SceneManager.LoadScene("MainMenu");
+        
         AudioManager.Instance.StopAllAudio();
     }
     
