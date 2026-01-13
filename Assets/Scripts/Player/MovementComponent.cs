@@ -1,37 +1,32 @@
 using UnityEngine;
 using NaughtyAttributes;
 public class MovementComponent : MonoBehaviour, IComponent {
-    
-    Rigidbody2D _rb;
-    PlayerController _playerController;
-
-    [ShowNonSerializedField] private float _maxSpeed;
-    [ShowNonSerializedField] private float _acceleration;
-    [ShowNonSerializedField] private float _deceleration;
-
+    Rigidbody2D rb;
+    [field: SerializeField] public float MaxSpeed { get; set; }
+    [field: SerializeField] public Vector2 CurrentVelocity { get; set; }
+    [field: SerializeField] public float Acceleration { get; set; }
+    [field: SerializeField] public float Deceleration { get; set; }
     public void Initialize(PlayerController controller) {
-        _rb = controller.GetComponent<Rigidbody2D>();
-        _playerController = controller;
-        var data = controller.playerData;
-        _maxSpeed = data.speed;
-        _acceleration = data.acceleration;
-        _deceleration = data.deceleration;
+        rb = controller.Rigidbody;
     }
+ 
 
     /// <summary>
     /// Move character based on input with acceleration and deceleration.
     /// </summary>
     public void MoveCharacter(Vector2 input) {
   
-        Vector2 targetVelocity = input * _maxSpeed;
-        Vector2 currentVelocity = _rb.linearVelocity;
+        Vector2 targetVelocity = input * MaxSpeed;
+        Vector2 currentVelocity = rb.linearVelocity;
 
         if (input.magnitude > 0.01f) {
-           
-            _rb.linearVelocity = Vector2.MoveTowards(currentVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+
+            rb.linearVelocity = Vector2.MoveTowards(currentVelocity, targetVelocity, Acceleration * Time.fixedDeltaTime);
+            CurrentVelocity = rb.linearVelocity;
         } else {
-           
-            _rb.linearVelocity = Vector2.MoveTowards(currentVelocity, Vector2.zero, _deceleration * Time.fixedDeltaTime);
+
+            rb.linearVelocity = Vector2.MoveTowards(currentVelocity, Vector2.zero, Deceleration * Time.fixedDeltaTime);
+            CurrentVelocity = rb.linearVelocity;
         }
     }
 }

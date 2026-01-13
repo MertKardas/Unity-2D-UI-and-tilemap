@@ -3,10 +3,11 @@ using UnityEngine;
 using NaughtyAttributes;
 using System.Collections;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
     [Scene, SerializeField] private string firstLevel;
-
+    [SerializeField] private Button resumeGameButton;
     public void LoadNewgameScene() {
         var asyncOperation = SceneManager.LoadSceneAsync(firstLevel);
         
@@ -42,20 +43,19 @@ public class UIManager : MonoBehaviour {
         
         var sceneName = SaveManager.Instance.CurrentGameSaveData.SceneName;
         //Load the scene 
-        SceneManager.LoadScene(sceneName);
-       
+        var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        StartCoroutine(HandleSceneLoading(asyncOperation));
     }
     public void OpenURL(string url) {
         Application.OpenURL(url);
     }
     private void Start() {
-        SceneManager.sceneUnloaded += (scene) => {
-            Debug.Log($"Unloaded scene: {scene.name}");
-        };
+        resumeGameButton.interactable = false; 
+        var result = SaveManager.Instance.LoadAllMetadata(out var metadatas);
+        if(result.Success && metadatas.Length >0) {
+            resumeGameButton.interactable = true;
+        }
     }
-    private void OnDisable() => Debug.Log("UIManager OnDisable");
-    private void OnDestroy() {
-        Debug.Log("UIManager OnDestroy");
-    }
+   
 }
 

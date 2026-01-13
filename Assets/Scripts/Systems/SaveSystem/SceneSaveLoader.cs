@@ -15,10 +15,9 @@ public class SceneSaveLoader : MonoBehaviour
     private void OnApplicationQuit() {
         _isApplicationQuiting = true;
  
-        CollectData();
     }
     private void OnDestroy() {
-        if (!_isApplicationQuiting) {
+        if (! _isApplicationQuiting) {  
             // Oyun bitmiyor
             if(GameManager.Instance.CurrentGameState != GameState.Gameover)
                 CollectData();

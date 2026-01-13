@@ -31,7 +31,7 @@ public class DeathState : State<PlayerController>
     {
     }
 
-    public override void InputHandle()
+    public override void HandleInput()
     {
     }
 

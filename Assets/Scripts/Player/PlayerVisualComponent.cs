@@ -20,7 +20,7 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
     public static readonly int DeathHash = Animator.StringToHash("Death");
     public static readonly int InputX = Animator.StringToHash("InputX");
     public static readonly int InputY = Animator.StringToHash("InputY");
-    public Vector2 _lastDirection = Vector2.down;
+    public Vector2 LastDirection = Vector2.down;
 
     // Events
     public event Action OnFinishTakeDamage;
@@ -57,14 +57,14 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
 
         if (input.magnitude < 0.1f) {
             // Hareket yoksa son yönü kullan
-            direction = _lastDirection;
+            direction = LastDirection;
         } else {
             // Diagonal input kontrolü
             bool isDiagonal = Mathf.Abs(input.x) > 0.1f && Mathf.Abs(input.y) > 0.1f;
 
             if (isDiagonal) {
                 // Son yönün hangi eksende olduðuna bak
-                if (Mathf.Abs(_lastDirection.x) > 0.1f) {
+                if (Mathf.Abs(LastDirection.x) > 0.1f) {
                     // Son yön yataydaysa, yatay ekseni kullan
                     direction = new Vector2(Mathf.Sign(input.x), 0);
                 } else {
@@ -80,7 +80,7 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
                 }
             }
 
-            _lastDirection = direction;
+            LastDirection = direction;
         }
         
 
@@ -88,7 +88,7 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
         _animator.SetFloat(InputX, direction.x);
         _animator.SetFloat(InputY, direction.y);
     }
-    public Vector2 GetLastDirection() => _lastDirection;
+    public Vector2 GetLastDirection() => LastDirection;
     
     public void TriggerTakeDamage() {
         _animator.SetTrigger(TakeDamageHash);

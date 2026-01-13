@@ -4,15 +4,9 @@ using NaughtyAttributes;
 public class HealthComponent : MonoBehaviour, IComponent, IDamagable
 {
     PlayerController _playerController;
-    PlayerRunTimeData data; 
-    [ShowNativeProperty]public int Health {
-        get {
-            return data?.health ?? 0; }
-        private set { data.health = value; }
-    }
-    [ShowNativeProperty] public int MaxHealth {
-        get { return data?.maxHealth ?? 0; }
-    }
+
+    public int Health = 100; 
+    public int MaxHealth = 100; 
 
     public event Action<int> OnHealthChanged;
     public event Action OnDeath;
@@ -22,10 +16,7 @@ public class HealthComponent : MonoBehaviour, IComponent, IDamagable
     void IComponent.Initialize(PlayerController controller)
     {
         _playerController = controller;
-        if(_playerController.playerData ==null) {
-            Debug.LogError($"PlayerRunTimeData is not assigned in PlayerController.");
-        }
-        data = _playerController.playerData;
+       
     }
     public void TakeDamage(int damage)
     {

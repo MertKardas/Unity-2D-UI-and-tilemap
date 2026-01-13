@@ -1,9 +1,5 @@
 using MyUtility;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //Notes: Metadata is cached in the beginning for quick access.
@@ -60,5 +56,13 @@ public class SaveManager : Singleton<SaveManager> {
              CurrentGameSaveData = data;
          }
          return result;
+    }
+    public Result LoadAllMetadata(out MetaData[] metadatas) {
+        metadatas = _saveService.GetAllMetaData().ToArray();
+        if (metadatas != null) {
+            return Result.Ok();
+        } else {
+            return Result.Fail("Failed to load metadata.");
+        }
     }
 }

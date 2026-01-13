@@ -1,26 +1,34 @@
-using NaughtyAttributes;
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
 public class InventoryComponent : MonoBehaviour, IComponent
 {
-    PlayerController _controller;
-    PlayerRunTimeData _data;
-    [ShowNativeProperty]public int Coin
-        { get {return _data?.coin ?? 0; } 
-        private set { _data.coin = value; } }
+    
+    private List<string> items = new List<string>();
+    public int Coin { get; private set; } = 0;  
     public event Action<int> OnCoinChanged;
     public event Action<int> OnCoinChangedAmount;
-    public void Initialize(PlayerController controller) {
-        _controller = controller;
-        _data = controller.playerData;
-
-    }
+    public void Initialize(PlayerController controller) {}
     public void AddCoin(int amount) {
         Coin += amount;
         OnCoinChanged?.Invoke(Coin);
         OnCoinChangedAmount?.Invoke(amount);
     }
-    
+    public void SpendMoney(int amount) {
+        if (Coin >= amount) {
+            Coin = Math.Max(Coin - amount, 0);
+            OnCoinChanged?.Invoke(Coin);
+            OnCoinChangedAmount?.Invoke(-amount);
+        } else {
+            Debug.LogWarning("Not enough coins to spend.");
+        }
+    }
+    public void LoadInventory(List<string> inventory) {
+        items = inventory;
+    }
+    public List<string> GetInventory() {
+        return items;
+    }
 
 }
