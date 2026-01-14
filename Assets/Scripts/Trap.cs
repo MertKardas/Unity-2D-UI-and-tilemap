@@ -33,7 +33,7 @@ public class Trap : MonoBehaviour
         trapCollider.enabled = false;
     }
     //called by animation event
-    public void InflictDamage(IDamagable damagable) {
+    public void InflictDamage(IDamageable damagable) {
 
         damagable.TakeDamage(Damage); 
     }
@@ -44,7 +44,7 @@ public class Trap : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         // Check if the colliding object has the IDamagable interface
-        if (collision.TryGetComponent<IDamagable>(out var damagable))
+        if (collision.TryGetComponent<IDamageable>(out var damagable))
         {
             InflictDamage(damagable);
         }

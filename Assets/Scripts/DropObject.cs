@@ -1,28 +1,50 @@
 using UnityEngine;
-using Newtonsoft;
 using Newtonsoft.Json;
-using UnityEngine.Rendering;
-public class DropObject : MonoBehaviour,ICollactable {
-    [SerializeField,JsonIgnore] private DropItemData item;
-    public string itemId { get; private set; }
+using System;
+using NaughtyAttributes;
 
-    private void Awake() {
-        itemId = item.id;
-        
-    }
+public class DropObject : MonoBehaviour,ICollectable, ISavable {
    
-    public bool Collect(PlayerController controller, out string itemId) {
-        itemId = this.itemId;
-        // Implement your collection logic here
-        return true;
-    }
-    private void OnTriggerEnter(Collider other) {
-        if (!other.TryGetComponent<PlayerController>(out var player)) {
-            return;
+    [SerializeField]private ItemData _itemData;
+
+    public bool IsCollected { get; private set; } = false;
+    string ISavable.UniqueId => GetComponent<SaveableEntity>().UniqueId;
+
+   
+    private void Start() {
+        if (IsCollected) {
+            gameObject.SetActive(false);
         }
-        //Collect(this);
+       
+    }
+
+    public ItemData Collect(PlayerController controller) {
+        if (IsCollected) {
+            return null; 
+        }
+        gameObject.SetActive(false);
+        IsCollected = true;
+        return this._itemData;
+    }
+    
+
+    object ISavable.CaptureState() {
+        return new DropObjectSaveData {
+            isCollected = this.IsCollected
+        };
+    }
+
+    void ISavable.RestoreState(object data) {
+        if(data == null) return;
+        if (data is DropObjectSaveData saveData) {
+            this.IsCollected = saveData.isCollected;
+        }
     }
 }
-interface ICollactable {
-    public bool Collect(PlayerController controller, out string itemId);
+interface ICollectable {
+    public ItemData Collect(PlayerController controller);
+}
+[Serializable]
+public class DropObjectSaveData {  
+    public bool isCollected;
 }

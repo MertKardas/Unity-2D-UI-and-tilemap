@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c5c1d2c44aceb42931d3ee777068a2, type: 3}
-  m_Name: Key_01
-  m_EditorClassIdentifier: Assembly-CSharp::DropItemData
-  id: key_01
-  itemName: First Key
-  description: Open the door with this key.
-  icon: {fileID: -249422396151011416, guid: d68a1c72cc55f114291800f6550bf0a0, type: 3}
-  prefab: {fileID: 6259938680952012238, guid: 1ac061267c23a2747966de1bdb067369, type: 3}
-  dropAnimation: {fileID: 7400000, guid: b2f78637102308449b97233a717a2e4a, type: 2}
+  m_Script: {fileID: 11500000, guid: a05a26392d3d37b44afe4958363e5013, type: 3}
+  m_Name: key_01
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  <ID>k__BackingField: key_01
+  <ItemName>k__BackingField: 'Key '
+  <Description>k__BackingField: Keys open door.
+  <Icon>k__BackingField: {fileID: -249422396151011416, guid: d68a1c72cc55f114291800f6550bf0a0, type: 3}
+  <Prefab>k__BackingField: {fileID: 6259938680952012238, guid: 1ac061267c23a2747966de1bdb067369, type: 3}
+  <IsStackable>k__BackingField: 0
+  <StackSize>k__BackingField: 1

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using NaughtyAttributes;
-public class HealthComponent : MonoBehaviour, IComponent, IDamagable
+public class HealthComponent : MonoBehaviour, IComponent, IDamageable
 {
     PlayerController _playerController;
 

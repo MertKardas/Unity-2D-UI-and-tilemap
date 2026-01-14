@@ -71,6 +71,19 @@ public class PlayerController : MonoBehaviour, ISavable {
             items = InventoryComponent.GetInventory()
         };
     }
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<ICollectable>(out var collectable)){
+            var item = collectable.Collect(this);
+            Debug.Log($"{item}"); 
+            if (item != null)
+            {
+
+                InventoryComponent.AddItem(item.ID);
+            }
+        }
+    }
 
     public void RestoreState(object data) {
         if (data is PlayerSaveData saveData) {
@@ -83,14 +96,16 @@ public class PlayerController : MonoBehaviour, ISavable {
             HealthComponent.Health = saveData.health;
             HealthComponent.MaxHealth = saveData.maxHealth;
             InventoryComponent.LoadInventory(saveData.items);
+            InventoryComponent.AddCoin(saveData.coin);
             // Restore player state from saveData
             if (saveData.StateData != null) {
                 Machine.RestoreState(saveData.StateData);
 
             }
         }
+
     }
-    //TODO runtime data is carried out later
+    
     [System.Serializable]
     public class PlayerSaveData {
         public StateData StateData;
@@ -107,6 +122,6 @@ public class PlayerController : MonoBehaviour, ISavable {
 
         public int coin;
         public float damage;
-        public List<string> items;
+        public List<InventoryItem> items;
     }
 }

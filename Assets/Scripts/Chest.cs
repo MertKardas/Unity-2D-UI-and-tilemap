@@ -1,7 +1,9 @@
 using UnityEngine;
    
-public class Chest : MonoBehaviour, IInteractable {
+public class Chest : MonoBehaviour, IInteractable, ISavable {
     public int Gold { get; set; } = 100;
+    string ISavable.UniqueId => GetComponent<SaveableEntity>().UniqueId; 
+
     private bool isOpen = false;
     [SerializeField] AudioData openSound;
     public bool IsInRange {
@@ -57,4 +59,24 @@ public class Chest : MonoBehaviour, IInteractable {
         IsOpen = true;
         return gold;    
     }
+    public object CaptureState() {
+        return new ChestSaveData {
+            isOpen = this.isOpen
+        };
+    }
+    public void RestoreState(object data) {
+        if(data == null) return;
+        if (data is ChestSaveData saveData) {
+            this.isOpen = saveData.isOpen;
+            if (isOpen){
+                animator.Play("Chest_Open", -1, 1f); // Set to the end of the open animation    
+               
+               
+            }
+        }
+    }
+}
+[System.Serializable]
+public class ChestSaveData {
+    public bool isOpen;
 }
