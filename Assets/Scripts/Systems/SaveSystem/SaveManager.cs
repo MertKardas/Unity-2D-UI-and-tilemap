@@ -29,9 +29,8 @@ public class SaveManager : Singleton<SaveManager> {
     public Result QuickSave() {
         string quickSaveSlotName = _settings.quickSaveFileName;
         string displayName = _settings.quickSaveDisplayName;
-        string sceneName = SceneManager.GetActiveScene().name;
+        string sceneName = _currentGameSaveData.SceneName;
         MetaData metaData = new MetaData(quickSaveSlotName, displayName, sceneName);    
-        _currentGameSaveData.SceneName = sceneName;
         return _saveService.Save(_currentGameSaveData, metaData);
     }
     public Result QuickLoad() {

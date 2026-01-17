@@ -10,16 +10,18 @@ public class SceneSaveLoader : MonoBehaviour
     private void Awake() {
     
         SceneManager.sceneLoaded += DistributeGameData;
-
+        //Test 
+        Invoke(nameof(SaveTest), 5f);
+        
     }
-    [Button]
+    
+    
     public void SaveTest()
     {//Test quicksave on F5 !!! Use new input system 
         
-        Debug.Log("F5 pressed, quicksaving...");
         CollectData();
         SaveManager.Instance.QuickSave();
-       
+       Debug.Log("Quicksave performed by SceneSaveLoader for testing.");
         
     }
 
@@ -35,6 +37,8 @@ public class SceneSaveLoader : MonoBehaviour
             {
                 
                 CollectData();
+                Debug.Log(SaveManager.Instance.CurrentGameSaveData.DataDict.Count 
+                + " items collected for autosave."); 
                 SaveManager.Instance.QuickSave();
             }
                 
@@ -44,14 +48,10 @@ public class SceneSaveLoader : MonoBehaviour
     private void DistributeGameData(Scene scene, LoadSceneMode mode) {
         if(scene.name == "MainMenu") 
             return;
-        var manager = SaveManager.Instance;
-        var data = manager.CurrentGameSaveData;
-
-        if (data == null) {
-            var newData = new GameSaveData();
-            manager.CurrentGameSaveData = newData;
+        
+        var data = SaveManager.Instance.CurrentGameSaveData;
+        if(data == null) 
             return;
-        }
         //find all ISavable in the scene
         var savable = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
             .OfType<ISavable>()
@@ -71,7 +71,9 @@ public class SceneSaveLoader : MonoBehaviour
         var data = SaveManager.Instance.CurrentGameSaveData;
         if(data == null) {
             data = new GameSaveData();
+            SaveManager.Instance.CurrentGameSaveData = data;
         }
+        data.SceneName = SceneManager.GetActiveScene().name;
         //find all ISavable in the scene
         var savable = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include,FindObjectsSortMode.None)
             .OfType<ISavable>()

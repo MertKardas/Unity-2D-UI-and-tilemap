@@ -1,7 +1,8 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class GameUI : MonoBehaviour {
+public class GameUI : MonoBehaviour
+{
     //Backing fields for UI Panels
     public StatsPanelUI StatsPanel;
     public DeathMenuUI PlayerDeathPanel;
@@ -9,7 +10,8 @@ public class GameUI : MonoBehaviour {
     public SettingsMenu SettingsPanel;
     public GameObject backgroundPanel;
     public UITransition panelTransition;
-    private void OnEnable() {
+    private void OnEnable()
+    {
         GameManager.Instance.OnGameover += OnGameover;
         GameManager.Instance.OnGameStarted += OnGameStarted;
         InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
@@ -17,49 +19,65 @@ public class GameUI : MonoBehaviour {
         (PauseMenu as IGamePanel).SetPanelController(this);
         (SettingsPanel as IGamePanel).SetPanelController(this);
     }
-    private void Start() {
+    private void Start()
+    {
         StatsPanel.gameObject.SetActive(true);
     }
-    private void OnDisable() {
-        if(GameManager.Instance != null) {
+    private void OnDisable()
+    {
+        if (GameManager.Instance != null)
+        {
             GameManager.Instance.OnGameover -= OnGameover;
             GameManager.Instance.OnGameStarted -= OnGameStarted;
         }
-        if(InputManager.Instance != null)
+        if (InputManager.Instance != null)
             InputManager.Instance.Unsubscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
     }
     //Cancel Input Handler
-    void OnCancel(InputAction.CallbackContext ctx) {
+    void OnCancel(InputAction.CallbackContext ctx)
+    {
         if (!ctx.started) return;
-        if (!PauseMenu.gameObject.activeInHierarchy && !backgroundPanel.gameObject.activeInHierarchy) {
+        if (!PauseMenu.gameObject.activeInHierarchy && !backgroundPanel.gameObject.activeInHierarchy)
+        {
             backgroundPanel.SetActive(true);
             SwitchPanel(StatsPanel.gameObject, PauseMenu.gameObject, panelTransition);
-        } else if (PauseMenu.gameObject.activeInHierarchy && backgroundPanel.gameObject.activeInHierarchy) {
+        }
+        else if (PauseMenu.gameObject.activeInHierarchy && backgroundPanel.gameObject.activeInHierarchy)
+        {
             SwitchPanel(null, StatsPanel.gameObject, panelTransition);
             backgroundPanel.SetActive(true);
         }
     }
-    private void OnGameover() {
+    private void OnGameover()
+    {
         backgroundPanel.SetActive(true);
-        if (PauseMenu.gameObject.activeInHierarchy) {
+        if (PauseMenu.gameObject.activeInHierarchy)
+        {
             //close pause menu first
             SwitchPanel(PauseMenu.gameObject, PlayerDeathPanel.gameObject, panelTransition);
             return;
-        } else if (SettingsPanel.gameObject.activeInHierarchy) {
+        }
+        else if (SettingsPanel.gameObject.activeInHierarchy)
+        {
             //close settings menu first
             SwitchPanel(null, PlayerDeathPanel.gameObject, panelTransition);
             return;
-        } else {
+        }
+        else
+        {
             SwitchPanel(StatsPanel.gameObject, PlayerDeathPanel.gameObject, panelTransition);
         }
     }
 
-            private void OnGameStarted() {
-                backgroundPanel.SetActive(false);
-            }
+    private void OnGameStarted()
+    {
+        backgroundPanel.SetActive(false);
+    }
 
-    public LTSeq SwitchPanel(GameObject fromPanel, GameObject toPanel, UITransition panelTransition) {
-        if (panelTransition == null) {
+    public LTSeq SwitchPanel(GameObject fromPanel, GameObject toPanel, UITransition panelTransition)
+    {
+        if (panelTransition == null)
+        {
             Debug.LogWarning("UITransition is not assigned");
             return LeanTween.sequence();
         }
@@ -68,6 +86,6 @@ public class GameUI : MonoBehaviour {
         return sequence;
     }
 
-    
+
 }
 

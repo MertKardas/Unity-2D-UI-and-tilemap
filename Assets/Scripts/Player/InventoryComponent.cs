@@ -2,80 +2,140 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using NaughtyAttributes;
+using Newtonsoft.Json;
+using System.IO;
 
 public class InventoryComponent : MonoBehaviour, IComponent
 {
-    
+    [SerializeField] private int _slotNumber = 5; // how many slots the inventory has
+    public int SlotNumber => _slotNumber;
     private List<InventoryItem> items = new List<InventoryItem>();
-    [field: SerializeField]public int Coin { get; private set; } = 0;  
+    [field: SerializeField] public int Coin { get; private set; } = 0;
     public event Action<int> OnCoinChanged;
     public event Action<int> OnCoinChangedAmount;
     public event Action<List<InventoryItem>> OnInventoryChanged;
-    public void Initialize(PlayerController controller) {}
-    public void AddCoin(int amount) {
+    public void Initialize(PlayerController controller) { }
+    public void AddCoin(int amount)
+    {
         Coin += amount;
         OnCoinChanged?.Invoke(Coin);
         OnCoinChangedAmount?.Invoke(amount);
     }
-    public void SpendMoney(int amount) {
-        if (Coin >= amount) {
+    public void SpendMoney(int amount)
+    {
+        if (Coin >= amount)
+        {
             Coin = Math.Max(Coin - amount, 0);
             OnCoinChanged?.Invoke(Coin);
             OnCoinChangedAmount?.Invoke(-amount);
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Not enough coins to spend.");
         }
     }
-    public void LoadInventory(List<InventoryItem> inventory) {
+    public void LoadInventory(List<InventoryItem> inventory)
+    {
         items = inventory;
     }
-    
-    public List<InventoryItem> GetInventory() {
+
+    public List<InventoryItem> GetInventory()
+    {
         return items;
     }
-    public void AddItem(string itemId) {
-        var itemData = ItemDataBase.Instance.GetItem(itemId);
-        if(itemData == null) {
-            Debug.LogWarning($"Item with ID {itemId} not found in database.");
-            return;
-        }
-      
-        if(itemData.IsStackable) {
-            var stackSize = itemData.StackSize;
+
+    /// <summary>
+    /// Adds an item to the inventory. 
+    /// </summary>
+    /// <param name="inventoryItem"></param>
+    /// <returns>Returns the number of items actually added.</returns>
+    public int AddItem(InventoryItem inventoryItem)
+    {
+        var itemId = inventoryItem.item;
+        var itemsToAdd = inventoryItem.quantity;
+        int itemsAdded = 0;
+
+        if (inventoryItem.itemData.IsStackable)
+        {
+            var stackSize = inventoryItem.itemData.StackSize;
             var existingItems = items.FindAll(i => i.item == itemId);
-            if(existingItems.Count > 0) {
-                //check for available stack space
-                foreach(var invItem in existingItems) {
-                    if(invItem.quantity < stackSize) {
-                        invItem.quantity += 1;
-                        OnInventoryChanged?.Invoke(items);
-                        return;
-                    }
+
+            // First, try to fill existing stacks
+            foreach (var invItem in existingItems)
+            {
+                if (itemsToAdd <= 0) break;
+
+                int availableSpace = stackSize - invItem.quantity;
+                if (availableSpace > 0)
+                {
+                    int amountToAdd = Mathf.Min(availableSpace, itemsToAdd);
+                    invItem.quantity += amountToAdd;
+                    itemsAdded += amountToAdd;
+                    itemsToAdd -= amountToAdd;
                 }
-                //All existing stacks are full, create a new stack
-                items.Add(new InventoryItem(itemId, 1));   
-                OnInventoryChanged?.Invoke(items);
-                return; 
-            }  
+            }
+
+            // Then, create new stacks for remaining items
+            while (itemsToAdd > 0)
+            {
+                if (items.Count >= _slotNumber)
+                {
+                    break; // Inventory full
+                }
+
+                int amountForNewStack = Mathf.Min(stackSize, itemsToAdd);
+                items.Add(new InventoryItem(itemId, amountForNewStack));
+                itemsAdded += amountForNewStack;
+                itemsToAdd -= amountForNewStack;
+            }
         }
-        else {
-            //Item is not stackable, add a new entry
-            items.Add(new InventoryItem(itemId, 1));
+        else
+        {
+            // Non-stackable items - each item takes one slot
+            while (itemsToAdd > 0)
+            {
+                if (items.Count >= _slotNumber)
+                {
+                    break; // Inventory full
+                }
+                items.Add(new InventoryItem(itemId, 1));
+                itemsAdded++;
+                itemsToAdd--;
+            }
+        }
+
+        if (itemsAdded > 0)
+        {
             OnInventoryChanged?.Invoke(items);
-            return;
         }
+
+        return itemsAdded;
     }
 }
 
 [Serializable]
 public class InventoryItem
 {
+    [JsonIgnore]
+    public ItemData itemData { get; private set; }
     public string item;
     public int quantity;
+    [JsonConstructor]
     public InventoryItem(string item, int quantity)
     {
         this.item = item;
+        itemData = ItemDataBase.Instance.GetItem(item);
+        if (itemData == null)
+        {
+            Debug.LogError($"Failed to load ItemData for item ID: {item}");
+        }
         this.quantity = quantity;
     }
-}
+    public InventoryItem(ItemData itemData, int quantity)
+    {
+        this.itemData = itemData;
+        this.item = itemData.ID;
+        this.quantity = quantity;
+    }
 
+}

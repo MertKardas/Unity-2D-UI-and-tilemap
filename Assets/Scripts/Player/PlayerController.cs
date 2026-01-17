@@ -8,7 +8,8 @@ using UnityEngine;
 /// This class handles player movements and interactions within the game.
 /// </summary>
 [RequireComponent(typeof(SaveableEntity))]
-public class PlayerController : MonoBehaviour, ISavable {
+public class PlayerController : MonoBehaviour, ISavable
+{
     //Player data. 
 
 
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour, ISavable {
 
     public string UniqueId => GetComponent<SaveableEntity>().UniqueId;
 
-    private void Awake() {
+    private void Awake()
+    {
         Machine = new StateMachine<PlayerController>();
         Machine.AddState(new LocomotionState(this, Machine));
         Machine.AddState(new TakingDamageState(this, Machine));
@@ -33,23 +35,28 @@ public class PlayerController : MonoBehaviour, ISavable {
         //Default state
 
     }
-    private void Update() {
+    private void Update()
+    {
         Machine?.Update();
     }
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         Machine?.FixedUpdate();
 
 
     }
 
 
-    private void Start() {
-        if (Machine.CurrentState == null) {
+    private void Start()
+    {
+        if (Machine.CurrentState == null)
+        {
             Machine.SetState(Machine.GetState<LocomotionState>());
         }
 
     }
-    private void InitializeComponents() {
+    private void InitializeComponents()
+    {
         (AttackComponent as IComponent)?.Initialize(this);
         (InteractionComponent as IComponent)?.Initialize(this);
         (MovementComponent as IComponent)?.Initialize(this);
@@ -57,8 +64,10 @@ public class PlayerController : MonoBehaviour, ISavable {
         (HealthComponent as IComponent)?.Initialize(this);
         (InventoryComponent as IComponent)?.Initialize(this);
     }
-    public object CaptureState() {
-        return new PlayerSaveData {
+    public object CaptureState()
+    {
+        return new PlayerSaveData
+        {
             StateData = Machine.GetCurrentStateData(),
             position = new float[] { transform.position.x, transform.position.y },
             velocity = new float[] { MovementComponent.CurrentVelocity.x, MovementComponent.CurrentVelocity.y },
@@ -71,22 +80,28 @@ public class PlayerController : MonoBehaviour, ISavable {
             items = InventoryComponent.GetInventory()
         };
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<ICollectable>(out var collectable)){
+        if (collision.TryGetComponent<ICollectable>(out var collectable))
+        {
             var item = collectable.Collect(this);
-            Debug.Log($"{item}"); 
             if (item != null)
             {
+                int itemsAdded = InventoryComponent.AddItem(item);
 
-                InventoryComponent.AddItem(item.ID);
+                if (collectable is DropObject dropObject)
+                {
+                    dropObject.OnItemsCollected(itemsAdded);
+                }
             }
         }
     }
 
-    public void RestoreState(object data) {
-        if (data is PlayerSaveData saveData) {
+    public void RestoreState(object data)
+    {
+        if (data is PlayerSaveData saveData)
+        {
 
             transform.position = new Vector3(saveData.position[0], saveData.position[1], 0);
             MovementComponent.CurrentVelocity = new Vector2(saveData.velocity[0], saveData.velocity[1]);
@@ -98,16 +113,18 @@ public class PlayerController : MonoBehaviour, ISavable {
             InventoryComponent.LoadInventory(saveData.items);
             InventoryComponent.AddCoin(saveData.coin);
             // Restore player state from saveData
-            if (saveData.StateData != null) {
+            if (saveData.StateData != null)
+            {
                 Machine.RestoreState(saveData.StateData);
 
             }
         }
 
     }
-    
+
     [System.Serializable]
-    public class PlayerSaveData {
+    public class PlayerSaveData
+    {
         public StateData StateData;
         public float[] position = new float[2];
         //Movement
