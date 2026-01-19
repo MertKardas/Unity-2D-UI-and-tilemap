@@ -21,6 +21,11 @@ public class InventoryComponent : MonoBehaviour, IComponent
         OnCoinChanged?.Invoke(Coin);
         OnCoinChangedAmount?.Invoke(amount);
     }
+    public void SetCoin(int amount)
+    {
+        Coin = amount;
+        OnCoinChanged?.Invoke(Coin);
+    }
     public void SpendMoney(int amount)
     {
         if (Coin >= amount)
@@ -111,8 +116,24 @@ public class InventoryComponent : MonoBehaviour, IComponent
 
         return itemsAdded;
     }
-}
+    public bool HasItem(string itemId, int quantity)
+    {
+        int totalQuantity = 0;
+        foreach (var item in items)
+        {
+            if (item.item == itemId)
+            {
+                totalQuantity += item.quantity;
+                if (totalQuantity >= quantity)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+}
 [Serializable]
 public class InventoryItem
 {

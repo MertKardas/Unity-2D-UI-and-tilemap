@@ -1,4 +1,4 @@
-﻿
+
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour, ISavable
             HealthComponent.Health = saveData.health;
             HealthComponent.MaxHealth = saveData.maxHealth;
             InventoryComponent.LoadInventory(saveData.items);
-            InventoryComponent.AddCoin(saveData.coin);
+            InventoryComponent.SetCoin(saveData.coin);
             // Restore player state from saveData
             if (saveData.StateData != null)
             {
@@ -122,23 +122,5 @@ public class PlayerController : MonoBehaviour, ISavable
 
     }
 
-    [System.Serializable]
-    public class PlayerSaveData
-    {
-        public StateData StateData;
-        public float[] position = new float[2];
-        //Movement
-
-        public float[] velocity = new float[2];
-        public float MaxSpeed;
-        public float acceleration;
-        public float deceleration;
-        //Health
-        public int health;
-        public int maxHealth;
-
-        public int coin;
-        public float damage;
-        public List<InventoryItem> items;
-    }
+    
 }

@@ -84,9 +84,3 @@ public class DropObject : MonoBehaviour, ICollectable, ISavable
     }
 }
 
-[Serializable]
-public class DropObjectSaveData
-{
-    public string itemID;
-    public int quantity;
-}
