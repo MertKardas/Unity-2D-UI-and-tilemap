@@ -15,7 +15,7 @@ public class InventoryComponent : MonoBehaviour, IComponent
     public event Action<int> OnCoinChangedAmount;
     public event Action<List<InventoryItem>> OnInventoryChanged;
     public void Initialize(PlayerController controller) { }
-    
+    #region COin 
     public void AddCoin(int amount)
     {
         Coin += amount;
@@ -40,6 +40,7 @@ public class InventoryComponent : MonoBehaviour, IComponent
             Debug.LogWarning("Not enough coins to spend.");
         }
     }
+    #endregion
     public void LoadInventory(List<InventoryItem> inventory)
     {
         items = inventory;
@@ -132,6 +133,34 @@ public class InventoryComponent : MonoBehaviour, IComponent
             }
         }
         return false;
+    }
+    public bool RemoveItem(string itemId, int quantity)
+    {
+        if (!HasItem(itemId, quantity))
+        {
+            return false;
+        }
+
+        int remaining = quantity;
+        for (int i = items.Count - 1; i >= 0 && remaining > 0; i--)
+        {
+            if (items[i].item == itemId)
+            {
+                if (items[i].quantity > remaining)
+                {
+                    items[i].quantity -= remaining;
+                    remaining = 0;
+                }
+                else
+                {
+                    remaining -= items[i].quantity;
+                    items.RemoveAt(i);
+                }
+            }
+        }
+
+        OnInventoryChanged?.Invoke(items);
+        return true;
     }
 
 }

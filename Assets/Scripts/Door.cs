@@ -13,9 +13,9 @@ public class Door : InteractableBase, ISavable
     [SerializeField] private ItemData _keyItem;
     private string _keyItemId => _keyItem != null ? _keyItem.ID : string.Empty;
 
-    private bool _isLocked;
+    private bool _isLocked = true;
 
-    public override bool CanInteract => base.CanInteract && !_isLocked;
+    public override bool CanInteract => base.CanInteract;
     public string UniqueId => GetComponent<SaveableEntity>().UniqueId;
 
     public override void Interact(PlayerController player)
@@ -34,6 +34,7 @@ public class Door : InteractableBase, ISavable
             if(_unlockDoorAudio != null)
                 AudioManager.Instance.PlaySound3D(_unlockDoorAudio, transform.position);
             Unlock();
+            player.InventoryComponent.RemoveItem(_keyItemId, 1);
         }
         else
         {
@@ -41,10 +42,9 @@ public class Door : InteractableBase, ISavable
                 AudioManager.Instance.PlaySound3D(_lockedDoorAudio, transform.position);
         }
     }
-    public override void SetInRange(bool value)
+    protected override void OnRangeChanged(bool inRange)   
     {
-        base.SetInRange(value);
-        _highlightObject.SetActive(value);
+        _highlightObject.SetActive(inRange);
     }
     public void Unlock() => _isLocked = false;
     public void Lock() => _isLocked = true;
@@ -59,7 +59,7 @@ public class Door : InteractableBase, ISavable
 
     public void RestoreState(object data)
     {
-        if (data is DoorSaveData saveData)
+        if (data is DoorSaveData saveData && saveData != null)
         {
             _isLocked = saveData.IsLocked;
         }
