@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _itemData: {fileID: 11400000, guid: cedbc675cc5bd2e46bf0dccb847c8a03, type: 2}
+  _collectAudio: {fileID: 11400000, guid: 20b2096966cb39d4091974f76f1b47df, type: 2}
+  _quantity: 1
 --- !u!61 &8264221847766401851
 BoxCollider2D:
   m_ObjectHideFlags: 0

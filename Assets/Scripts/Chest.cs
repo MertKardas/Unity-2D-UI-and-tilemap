@@ -1,82 +1,81 @@
 using UnityEngine;
-   
-public class Chest : MonoBehaviour, IInteractable, ISavable {
-    public int Gold { get; set; } = 100;
-    string ISavable.UniqueId => GetComponent<SaveableEntity>().UniqueId; 
 
-    private bool isOpen = false;
-    [SerializeField] AudioData openSound;
-    public bool IsInRange {
-        get => _isInRange;
-        set {
-            if (value) {
-                animator.SetBool(chestInteractable, true);
-                _isInRange = true;
-            } else {
-                animator.SetBool(chestInteractable, false);
-                _isInRange = false;
-            }
+public class Chest : InteractableBase, ISavable
+{
+    [SerializeField] private int _gold = 100;
+    [SerializeField] private AudioData _openSound;
+    [SerializeField] private string _openAnimationTrigger = "isOpen";
+    [SerializeField] private string _interactableAnimationBool = "isInteractable";
 
+    private Animator _animator;
+    private bool _isOpen;
+
+    public int Gold => _gold;
+    public bool IsOpen => _isOpen;
+
+    string ISavable.UniqueId => GetComponent<SaveableEntity>().UniqueId;
+
+    public override bool CanInteract => base.CanInteract && !_isOpen;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    protected override void OnRangeChanged(bool inRange)
+    {
+        if (_animator != null)
+        {
+            _animator.SetBool(_interactableAnimationBool, inRange);
         }
     }
-    private bool _isInRange = false;
 
-    [SerializeField] private string openAnimationParameter = "isOpen";
-    [SerializeField] private string chestInteractable = "isInteractable";
-    private Animator animator;
-    private void Awake() {
-        animator = GetComponent<Animator>();
-    }
-    public bool CanInteract => IsInRange && !IsOpen;
-       
-    
-    public bool IsOpen {
-        get { return isOpen; }
-        set 
-        { 
-            isOpen = value;
-            Debug.Log("Chest is now open: " + value);
-            if (value){
-                animator.SetTrigger(openAnimationParameter);
-                AudioManager.Instance.PlaySound(openSound);
-                
-            }
-        }
-    }
-    public bool TryInteract(PlayerController playerController) {
-       if (CanInteract) {
-            int goldReceived = OpenChest();
-            playerController.InventoryComponent.AddCoin(goldReceived);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int OpenChest() {
+    public override void Interact(PlayerController player)
+    {
+        if (!CanInteract) return;
 
-        int gold = Gold;
-        IsOpen = true;
-        return gold;    
+        int goldReceived = OpenChest();
+        player.InventoryComponent.AddCoin(goldReceived);
     }
-    public object CaptureState() {
-        return new ChestSaveData {
-            isOpen = this.isOpen
-        };
+
+    private int OpenChest()
+    {
+        _isOpen = true;
+
+        if (_animator != null)
+        {
+            _animator.SetTrigger(_openAnimationTrigger);
+        }
+
+        if (_openSound != null)
+        {
+            AudioManager.Instance.PlaySound(_openSound);
+        }
+
+        return _gold;
     }
-    public void RestoreState(object data) {
-        if(data == null) return;
-        if (data is ChestSaveData saveData) {
-            this.isOpen = saveData.isOpen;
-            if (isOpen){
-                animator.Play("Chest_Open", -1, 1f); // Set to the end of the open animation    
-               
-               
+
+    public object CaptureState()
+    {
+        return new ChestSaveData { isOpen = _isOpen };
+    }
+
+    public void RestoreState(object data)
+    {
+        if (data is ChestSaveData saveData)
+        {
+            _isOpen = saveData.isOpen;
+
+            if (_isOpen && _animator != null)
+            {
+                _animator.Play("Chest_Open", -1, 1f);
             }
         }
     }
 }
+
 [System.Serializable]
-public class ChestSaveData {
+public class ChestSaveData
+{
     public bool isOpen;
 }

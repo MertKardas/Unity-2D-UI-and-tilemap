@@ -15,31 +15,28 @@ public class InteractionComponent : MonoBehaviour,IComponent
 
     public void InteractAction() {
         if (interactables.Count == 0) return;
+
         IInteractable closest = interactables
-        .Where(a => a is MonoBehaviour mb && mb.transform != null) // Filter valid objects
-        .OrderBy(a => Vector2.Distance(transform.position, ((MonoBehaviour)a).transform.position))
-        .FirstOrDefault();
+            .Where(a => a is MonoBehaviour mb && mb.transform != null && a.CanInteract)
+            .OrderBy(a => Vector2.Distance(transform.position, ((MonoBehaviour)a).transform.position))
+            .FirstOrDefault();
 
         if (closest != null) {
-            bool success = closest.TryInteract(playerController);
-            if (success)
-                interactables.Remove(closest);
-
+            closest.Interact(playerController);
         }
     }
     
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.TryGetComponent<IInteractable>(out IInteractable interactable)) {
-            interactable.IsInRange = true;
-            if (interactable.CanInteract) {
-                interactables.Add(interactable);
-            }
+            interactable.SetInRange(true);
+            interactables.Add(interactable);
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.TryGetComponent<IInteractable>(out IInteractable interactable)) {
-            interactable.IsInRange = false;
+            interactable.SetInRange(false);
             interactables.Remove(interactable);
         }
     }

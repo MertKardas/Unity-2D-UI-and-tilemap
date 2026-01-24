@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
     public PauseMenu PauseMenu;
     public SettingsMenu SettingsPanel;
     public GameObject backgroundPanel;
+    public GameObject EndgGamePanel;
     public UITransition panelTransition;
     private void OnEnable()
     {
@@ -85,7 +86,23 @@ public class GameUI : MonoBehaviour
         var sequence = panelTransition.Transition(fromPanel, toPanel);
         return sequence;
     }
-
+    public LTDescr FadeOutScene()
+    {
+        EndgGamePanel.SetActive(true);
+        var canvasGroup = EndgGamePanel.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            Debug.LogWarning("CanvasGroup is not assigned to backgroundPanel");
+            return null;
+        }
+        canvasGroup.alpha = 0f;
+        var fadeOutTime = 1f;
+        var fadeOut = LeanTween
+            .alphaCanvas(canvasGroup, 1f, fadeOutTime)
+            .setEase(LeanTweenType.easeInOutSine)
+            .setIgnoreTimeScale(true);
+        return fadeOut;
+    }
 
 }
 

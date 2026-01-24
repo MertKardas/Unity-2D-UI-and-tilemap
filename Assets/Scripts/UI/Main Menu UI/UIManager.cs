@@ -38,12 +38,21 @@ public class UIManager : MonoBehaviour {
         Application.Quit();
 #endif
     }
-    public  void ResumeGame() {
+    public void ResumeGame() {
         var result = SaveManager.Instance.QuickLoad();
-        
-        var sceneName = SaveManager.Instance.CurrentGameSaveData.SceneName;
-        //Load the scene 
-        var asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+
+        if (!result.Success) {
+            Debug.LogError($"Failed to load save: {result.ErrorMessage}");
+            return;
+        }
+
+        var lastSceneName = SaveManager.Instance.CurrentGameSaveData.LastSceneName;
+        if (string.IsNullOrEmpty(lastSceneName)) {
+            Debug.LogError("No saved scene name found");
+            return;
+        }
+
+        var asyncOperation = SceneManager.LoadSceneAsync(lastSceneName);
         StartCoroutine(HandleSceneLoading(asyncOperation));
     }
     public void OpenURL(string url) {

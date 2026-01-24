@@ -107,9 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29a01f2e54689946abd8e1220b2e0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chest
-  openSound: {fileID: 11400000, guid: 2a9f63e3d41b11e46b644e516a818269, type: 2}
-  openAnimationParameter: isOpen
-  chestInteractable: isInteractable
+  _interactionPrompt: Interact
+  _gold: 100
+  _openSound: {fileID: 11400000, guid: eec9c4c51ee2c6545b0b18ec0d852d52, type: 2}
+  _openAnimationTrigger: isOpen
+  _interactableAnimationBool: isInteractable
 --- !u!61 &5726956335769569096
 BoxCollider2D:
   m_ObjectHideFlags: 0

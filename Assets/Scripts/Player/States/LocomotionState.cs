@@ -1,9 +1,11 @@
+using System.Buffers.Text;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class LocomotionState : HierarchicalState<PlayerController> {
     private HealthComponent _health;
     private InteractionComponent _interaction;
-
+    
     public LocomotionState(PlayerController controller, StateMachine<PlayerController> machine)
         : base(controller, machine) {
         _health = controller.HealthComponent;
@@ -20,7 +22,9 @@ public class LocomotionState : HierarchicalState<PlayerController> {
         _health.OnDeath += OnDeath;
         InputManager.Instance.Subscribe(InputType.Interact, OnInteract);
 
-        // Default sub-state'i baþlat
+        //test save for now 
+        
+
         if (_subStateMachine.CurrentState == null) {
             var idleState = _subStateMachine.GetState<IdleState>();
             _subStateMachine.SetState(idleState);
@@ -36,15 +40,22 @@ public class LocomotionState : HierarchicalState<PlayerController> {
         _health.OnDeath -= OnDeath;
         InputManager.Instance.Unsubscribe(InputType.Interact, OnInteract);
     }
+    public override void Update() {
+        if(Keyboard.current.f5Key.IsPressed()) {
+            Debug.Log("F5 pressed - Saving game.");
+            SaveManager.Instance.QuickSave();
+        }
+        base.Update();
+    }
 
     private void OnTakeDamage() {
-        // Parent state'e geçiþ
+        // Parent state'e geï¿½iï¿½
         var state = _machine.GetState<TakingDamageState>();
         _machine.SetState(state);
     }
 
     private void OnDeath() {
-        // Parent state'e geçiþ
+        // Parent state'e geï¿½iï¿½
         var state = _machine.GetState<DeathState>();
         _machine.SetState(state);
     }
@@ -52,6 +63,12 @@ public class LocomotionState : HierarchicalState<PlayerController> {
     private void OnInteract(InputAction.CallbackContext context) {
         if (context.performed) {
             _interaction?.InteractAction();
+        }
+    }
+    private void HandleSaveButton(InputAction.CallbackContext context) {
+        if (context.performed) {
+            Debug.Log("F5 pressed - Saving game.");
+            SaveManager.Instance.QuickSave();
         }
     }
 }

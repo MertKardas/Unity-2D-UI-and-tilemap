@@ -15,6 +15,7 @@ public class InventoryComponent : MonoBehaviour, IComponent
     public event Action<int> OnCoinChangedAmount;
     public event Action<List<InventoryItem>> OnInventoryChanged;
     public void Initialize(PlayerController controller) { }
+    
     public void AddCoin(int amount)
     {
         Coin += amount;

@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour, ISavable
         return new PlayerSaveData
         {
             StateData = Machine.GetCurrentStateData(),
-            position = new float[] { transform.position.x, transform.position.y },
-            velocity = new float[] { MovementComponent.CurrentVelocity.x, MovementComponent.CurrentVelocity.y },
+            position = transform.position,
+            velocity = new Vector2(MovementComponent.CurrentVelocity.x, MovementComponent.CurrentVelocity.y),
             acceleration = MovementComponent.Acceleration,
             deceleration = MovementComponent.Deceleration,
             MaxSpeed = MovementComponent.MaxSpeed,

@@ -1,193 +1,80 @@
 using UnityEngine;
 using System.Linq;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-public class SceneSaveLoader : MonoBehaviour
+public class SceneSaveLoader
 {
-    public static SceneSaveLoader Instance;
-    bool _isApplicationQuiting;
-    string currentSceneName;
-    List<string> dynamicObjectIds = new();
-    List<string> removedDynamicObjectIds = new();
-    
-    private void Awake()
+    public void DistributeGameData(GameSaveData saveData, string sceneName)
     {
-        //Scene singleton
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.sceneLoaded += DistributeGameData;
-    }
-
-    private void OnApplicationQuit()
-    {
-        _isApplicationQuiting = true;
-    }
-    
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= DistributeGameData;
-        
-        if (!_isApplicationQuiting)
-        {
-            if (GameManager.Instance.CurrentGameState != GameState.Gameover)
-            {
-                CollectData();
-                Debug.Log(SaveManager.Instance.CurrentGameSaveData.DataDict.Count
-                + " items collected for autosave.");
-                SaveManager.Instance.QuickSave();
-            }
-        }
-        
-        // ✅ Instance temizliği
-        if (Instance == this)
-        {
-            Instance = null;
-        }
-    }
-
-    private void DistributeGameData(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "MainMenu")
+        if (saveData == null)
             return;
 
-        var data = SaveManager.Instance.CurrentGameSaveData;
-        if (data == null)
-            return;
-            
-        // ✅ Scene adını güncelle
-        currentSceneName = scene.name;
-        
-        if (data.DynamicObjectRecord.TryGetValue(currentSceneName, out var ids))
-        {
-            dynamicObjectIds = ids;
-        }
-        else
-        {
-            dynamicObjectIds = new List<string>();
-        }
-        
-        // ✅ Önceki scene'den kalan removed listesini temizle
-        removedDynamicObjectIds.Clear();
-        
-        InstanstiateDynamicObjectsForScene();
-        
-        //find all ISavable in the scene
-        var savable = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-            .OfType<ISavable>()
-            .ToArray();
-            
-        //restore their state
-        foreach (var item in savable)
-        {
-            if (data.DataDict.TryGetValue(item.UniqueId, out object state))
-            {
-                item.RestoreState(state);
-            }
-        }
-    }
-    
-    public void CollectData()
-    {
-        Debug.Log("Collecting scene data for autosave...");
+        // Get data for this specific scene
+        if (!saveData.SceneData.TryGetValue(sceneName, out var sceneData))
+            return; // No saved data for this scene
 
-        var data = SaveManager.Instance.CurrentGameSaveData;
-        if (data == null)
+        // 1. Spawn dynamic objects for this scene
+        foreach (var id in sceneData.DynamicObjectIds ?? new List<string>())
         {
-            data = new GameSaveData();
-            SaveManager.Instance.CurrentGameSaveData = data;
+            if (!sceneData.SaveObjects.TryGetValue(id, out var raw)) continue;
+            var data = raw as DynamicObjectSaveData;
+            if (data == null) continue;
+
+            var item = ItemDataBase.Instance.GetItem(data.ItemId);
+            if (item?.Prefab == null) continue;
+
+            var pos = new Vector3(data.Position[0], data.Position[1], data.Position[2]);
+            var obj = Object.Instantiate(item.Prefab, pos, Quaternion.identity);
+
+            obj.GetComponent<SaveableEntity>().SetUniqueId(data.UniqueId);
+            obj.GetComponent<DropObject>().InitializeAsDynamic(item, 1);
         }
-        
-        data.SceneName = currentSceneName;
-        
-        // ✅ Daha temiz null check
-        if (!data.DynamicObjectRecord.ContainsKey(currentSceneName))
+
+        // 2. Restore all states for this scene
+        foreach (var savable in FindAllSavables())
         {
-            data.DynamicObjectRecord[currentSceneName] = new List<string>();
-        }
-        dynamicObjectIds = data.DynamicObjectRecord[currentSceneName];
-        
-        //find all ISavable in the scene
-        var savable = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-            .OfType<ISavable>()
-            .ToArray();
-            
-        //capture their state
-        foreach (var item in savable)
-        {
-            data.DataDict[item.UniqueId] = item.CaptureState();
-        }
-        
-        // ✅ Removed objeleri temizle
-        foreach (var id in removedDynamicObjectIds)
-        {
-            if (dynamicObjectIds.Contains(id))
+            if (sceneData.SaveObjects.TryGetValue(savable.UniqueId, out var state))
             {
-                dynamicObjectIds.Remove(id);
-            }
-            
-            // ✅ DataDict'ten de sil
-            if (data.DataDict.ContainsKey(id))
-            {
-                data.DataDict.Remove(id);
+                if (state is DynamicObjectSaveData dyn)
+                    savable.RestoreState(dyn.ComponentState);
+                else
+                    savable.RestoreState(state);
             }
         }
-        
-        data.DynamicObjectRecord[currentSceneName] = dynamicObjectIds;
-        
-        // ✅ Liste temizle
-        removedDynamicObjectIds.Clear();
     }
-    
-    private void InstanstiateDynamicObjectsForScene()
+
+    public SceneSaveData CollectSceneData()
     {
-        foreach (var id in dynamicObjectIds)
+        var sceneData = new SceneSaveData();
+
+        foreach (var savable in FindAllSavables())
         {
-            SaveManager.Instance.CurrentGameSaveData.DataDict.TryGetValue(id, out object state);
-            if (state is DropObjectSaveData dynamicObjectData)
+            var drop = (savable as MonoBehaviour)?.GetComponent<DropObject>();
+
+            if (drop != null && drop.IsDynamic)
             {
-                var itemID = dynamicObjectData.itemID;
-                var itemData = ItemDataBase.Instance.GetItem(itemID);
-                
-                // ✅ Null check ÖNCE
-                if (itemData == null || itemData.Prefab == null)
+                sceneData.DynamicObjectIds.Add(savable.UniqueId);
+                sceneData.SaveObjects[savable.UniqueId] = new DynamicObjectSaveData
                 {
-                    Debug.LogWarning($"Item data with ID {itemID} not found in database.");
-                    continue;
-                }
-                
-                var dropPrefab = itemData.Prefab;
-                var dropObject = Instantiate(dropPrefab);
+                    ItemId = drop.ItemId,
+                    UniqueId = savable.UniqueId,
+                    Position = new[] { drop.transform.position.x, drop.transform.position.y, drop.transform.position.z },
+                    ComponentState = savable.CaptureState()
+                };
+            }
+            else
+            {
+                sceneData.SaveObjects[savable.UniqueId] = savable.CaptureState();
             }
         }
+
+        return sceneData;
     }
 
-    public void RegisterDynamicObject(string uniqueId)
+    private ISavable[] FindAllSavables()
     {
-        if (!dynamicObjectIds.Contains(uniqueId))
-        {
-            dynamicObjectIds.Add(uniqueId);
-        }
-        
-        // ✅ Removed listesinden kaldır
-        if (removedDynamicObjectIds.Contains(uniqueId))
-        {
-            removedDynamicObjectIds.Remove(uniqueId);
-        }
-    }
-    
-    public void UnregisterDynamicObject(string uniqueId)
-    {
-        if (dynamicObjectIds.Contains(uniqueId))
-        {
-            dynamicObjectIds.Remove(uniqueId);
-            if (!removedDynamicObjectIds.Contains(uniqueId))
-                removedDynamicObjectIds.Add(uniqueId);
-        }   
+        return Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+            .OfType<ISavable>()
+            .ToArray();
     }
 }

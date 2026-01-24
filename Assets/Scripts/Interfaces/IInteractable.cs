@@ -1,5 +1,7 @@
-﻿internal interface IInteractable {
-    bool TryInteract(PlayerController playerController);
+public interface IInteractable
+{
     bool CanInteract { get; }
-    bool IsInRange { get; set; }
+    string InteractionPrompt { get; }
+    void Interact(PlayerController player);
+    void SetInRange(bool value);
 }

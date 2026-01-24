@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 [Serializable]
     public class PlayerSaveData
     {
         public StateData StateData;
-        public float[] position = new float[2];
+        public Vector2 position = new Vector2();
         //Movement
 
-        public float[] velocity = new float[2];
+        public Vector2 velocity = new Vector2();
         public float MaxSpeed;
         public float acceleration;
         public float deceleration;
