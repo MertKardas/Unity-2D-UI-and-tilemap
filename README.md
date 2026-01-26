@@ -2,7 +2,7 @@
 
 A **2D Top-Down RPG** project developed in **Unity**, built upon principles of **modular architecture**, **clean code**, and **high reusability**. The game features **4-directional movement mechanics** set within a **dark, atmospheric Vampire/Dungeon world**.
 
-[![Demo](intro/intro.png)](https://www.youtube.com/watch?v=ROPM4pSV86M)
+[![Demo](intro/intro.png)](https://www.youtube.com/watch?v=s4vGGgpIS2c)
 
 ## 🎯 Quick Summary
 
