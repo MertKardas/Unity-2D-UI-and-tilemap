@@ -12,10 +12,12 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
     [SerializeField] public  AudioData takeDamageClip;
     [SerializeField] public  AudioData deathClip;
     [SerializeField] public  AudioData attackClip;
+    [SerializeField] public  float runMoveSpeedMultiplier = 1.5f;
 
     [Header("Animation Parameters")]
     public static readonly int MovinSpeedgHash = Animator.StringToHash("Move");
     public static readonly int IsAttackingHash = Animator.StringToHash("IsAttacking");
+    public static readonly int MoveSpeedParamHash = Animator.StringToHash("MoveSpeed");
     public static readonly int TakeDamageHash = Animator.StringToHash("TakeDamage");
     public static readonly int DeathHash = Animator.StringToHash("Death");
     public static readonly int InputX = Animator.StringToHash("InputX");
@@ -47,6 +49,11 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
     public void SetMoving(bool isMoving) {
         _animator.SetFloat(MovinSpeedgHash, isMoving ? 1f : 0f);
     }
+
+    public void SetRunning(bool isRunning) {
+        SetMoving(isRunning);
+        _animator.SetFloat(MoveSpeedParamHash, isRunning ? runMoveSpeedMultiplier : 1f);
+    }
     
     public void PlayFootstepSound() {
         AudioManager.Instance.PlaySound(footstepClip, transform.position);
@@ -56,23 +63,23 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
         Vector2 direction;
 
         if (input.magnitude < 0.1f) {
-            // Hareket yoksa son yönü kullan
+            // Hareket yoksa son yï¿½nï¿½ kullan
             direction = LastDirection;
         } else {
-            // Diagonal input kontrolü
+            // Diagonal input kontrolï¿½
             bool isDiagonal = Mathf.Abs(input.x) > 0.1f && Mathf.Abs(input.y) > 0.1f;
 
             if (isDiagonal) {
-                // Son yönün hangi eksende olduðuna bak
+                // Son yï¿½nï¿½n hangi eksende olduï¿½una bak
                 if (Mathf.Abs(LastDirection.x) > 0.1f) {
-                    // Son yön yataydaysa, yatay ekseni kullan
+                    // Son yï¿½n yataydaysa, yatay ekseni kullan
                     direction = new Vector2(Mathf.Sign(input.x), 0);
                 } else {
-                    // Son yön dikeydeyse, dikey ekseni kullan
+                    // Son yï¿½n dikeydeyse, dikey ekseni kullan
                     direction = new Vector2(0, Mathf.Sign(input.y));
                 }
             } else {
-                // Tek yönlü input - normal 4 yön kilidi
+                // Tek yï¿½nlï¿½ input - normal 4 yï¿½n kilidi
                 if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) {
                     direction = new Vector2(Mathf.Sign(input.x), 0);
                 } else {

@@ -14,6 +14,7 @@ public class LocomotionState : HierarchicalState<PlayerController> {
         // Sub-state'leri ekle
         AddSubState(new IdleState(controller, _subStateMachine));
         AddSubState(new MoveState(controller, _subStateMachine));
+        AddSubState(new RunState(controller, _subStateMachine));
     }
 
     public override void Enter() {

@@ -1,143 +1,3489 @@
 fileFormatVersion: 2
 guid: 02fc5160b25dc4843bbe41476fa3ef8e
-TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6005816004801255186
-    second: Vampires2_Idle_0
+importerOverride:
+  nativeImporterType: 2089858483
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: b10b55a1aa6a1aa32521bc0cab59632e
+ScriptedImporter:
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 13
-  mipmaps:
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
     mipMapMode: 0
-    enableMipMap: 0
-    sRGBTexture: 1
-    linearTexture: 0
+    enableMipMap: 1
     fadeOut: 0
     borderMipMap: 0
     mipMapsPreserveCoverage: 0
     alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
-  bumpmap:
     convertToNormalMap: 0
-    externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
-  streamingMipmaps: 0
-  streamingMipmapsPriority: 0
-  vTOnly: 0
-  ignoreMipmapLimit: 0
-  grayScaleToAlpha: 0
-  generateCubemap: 6
-  cubemapConvolution: 0
-  seamlessCubemap: 0
-  textureFormat: 1
-  maxTextureSize: 2048
-  textureSettings:
-    serializedVersion: 2
-    filterMode: 1
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 32
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
-  nPOTScale: 0
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 2
-  spriteExtrude: 1
-  spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
-  alphaIsTransparency: 1
-  spriteTessellationDetail: -1
-  textureType: 8
-  textureShape: 1
-  singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
-  maxTextureSizeSet: 0
-  compressionQualitySet: 0
-  textureFormatSet: 0
-  ignorePngGamma: 0
-  applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 0
-  platformSettings:
-  - serializedVersion: 4
-    buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  spriteSheet:
-    serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Vampires2_Idle_0
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 16
-        width: 217
-        height: 224
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ee8277fe92e07aca0800000000000000
-      internalID: -6005816004801255186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline: []
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
-    physicsShape: []
-    bones: []
-    spriteID: 
-    internalID: 0
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 22eb0afb37a575d4fa5be6412075ab20
+    spriteBone: []
+    spriteOutline: []
     vertices: []
+    spritePhysicsOutline: []
     indices: 
     edges: []
-    weights: []
-    secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
-    nameFileIdTable:
-      Vampires2_Idle_0: -6005816004801255186
-  mipmapLimitGroupName: 
-  pSDRemoveMatte: 0
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  multiSpriteImportData: []
+  layeredSpriteImportData:
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 268
+      width: 21
+      height: 20
+    spriteID: fccfbf912ebf8a043b3b10c393a40789
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 268}
+    spritePosition: {x: 213, y: 219}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 212
+      y: 457
+      width: 13
+      height: 9
+    spriteID: 2af3221eabc159143b1eee28e5c77599
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 212, y: 457}
+    spritePosition: {x: 217, y: 217}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 214
+      y: 296
+      width: 19
+      height: 14
+    spriteID: d4f355f29377cd9478587c4e9394d5cb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 214, y: 296}
+    spritePosition: {x: 214, y: 212}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 186
+      y: 268
+      width: 27
+      height: 14
+    spriteID: b270b0f0251bda74a8442edd8ed9b35b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 186, y: 268}
+    spritePosition: {x: 210, y: 220}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 318
+      width: 25
+      height: 15
+    spriteID: 0c49650bbd896144cb6160f2fe738fc2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 318}
+    spritePosition: {x: 211, y: 216}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 58f01e97d239f5f4a87a5cd44f9ad381
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 22, y: 395}
+    spritePosition: {x: 215, y: 209}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 33
+      y: 268
+      width: 21
+      height: 20
+    spriteID: ab33dda014a662b418607bda5430668e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 33, y: 268}
+    spritePosition: {x: 149, y: 220}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 233
+      y: 457
+      width: 13
+      height: 9
+    spriteID: e4085ba3eceabdc4e85b60b8bee98cb2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 233, y: 457}
+    spritePosition: {x: 153, y: 218}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 190
+      y: 318
+      width: 17
+      height: 15
+    spriteID: 8e74a1064f3099c4f92fd1a879283010
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 190, y: 318}
+    spritePosition: {x: 151, y: 212}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 221
+      y: 268
+      width: 27
+      height: 14
+    spriteID: 143811dd57aac784db294d4f3fce0a4f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 221, y: 268}
+    spritePosition: {x: 146, y: 221}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 318
+      width: 23
+      height: 15
+    spriteID: 1d87fc96d356d764eb8dafcbc63ce0d7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 318}
+    spritePosition: {x: 148, y: 216}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 47
+      y: 395
+      width: 17
+      height: 9
+    spriteID: c8a33998fc2ad904fb788c0834e914b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 47, y: 395}
+    spritePosition: {x: 151, y: 209}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 62
+      y: 268
+      width: 21
+      height: 20
+    spriteID: 88afdd4192bf0c14799ec39c7ed5edf6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 62, y: 268}
+    spritePosition: {x: 85, y: 221}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 179
+      y: 419
+      width: 13
+      height: 9
+    spriteID: 02dd679771afe0244b8b47a98a1c0831
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 179, y: 419}
+    spritePosition: {x: 89, y: 219}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 83
+      y: 341
+      width: 15
+      height: 16
+    spriteID: b8a383b2a882dba4db09483ac9c2e372
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 83, y: 341}
+    spritePosition: {x: 88, y: 212}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 296
+      width: 27
+      height: 14
+    spriteID: e63b87600d4219144a7785fbaccc9af2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 296}
+    spritePosition: {x: 82, y: 222}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 341
+      width: 19
+      height: 18
+    spriteID: 75148e0c290720e49b8760ea708ad034
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 341}
+    spritePosition: {x: 86, y: 214}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 72
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 4b766bac5e03b7a41a1345a0bfa1d902
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 72, y: 395}
+    spritePosition: {x: 87, y: 209}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 91
+      y: 268
+      width: 21
+      height: 20
+    spriteID: e8b803fee60c77c47ba87e720734eae0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 91, y: 268}
+    spritePosition: {x: 21, y: 220}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 200
+      y: 419
+      width: 13
+      height: 9
+    spriteID: 287e71d0ff31df749988c008d7c2f366
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 200, y: 419}
+    spritePosition: {x: 25, y: 218}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 215
+      y: 318
+      width: 17
+      height: 15
+    spriteID: e9dfb6234853cba4281bfe606833f5ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 215, y: 318}
+    spritePosition: {x: 23, y: 212}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 39
+      y: 296
+      width: 27
+      height: 14
+    spriteID: ddabd2741770fc84e8c21cd1e825d71f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 39, y: 296}
+    spritePosition: {x: 18, y: 221}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 268
+      width: 25
+      height: 16
+    spriteID: f66ff9a30aed8744fb911773104de740
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 120, y: 268}
+    spritePosition: {x: 19, y: 215}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 97
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 2bd55e1b22eacba469bdcc7581703d44
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 97, y: 395}
+    spritePosition: {x: 23, y: 209}
+  - name: cloak_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 37
+      y: 318
+      width: 25
+      height: 15
+    spriteID: 3e1d64f90a2804145af9ca848f02717b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 37, y: 318}
+    spritePosition: {x: 211, y: 152}
+  - name: insect_legs_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 74
+      y: 296
+      width: 27
+      height: 14
+    spriteID: dc818d5f8f8f2e74391cbdf4f54ce58c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 74, y: 296}
+    spritePosition: {x: 210, y: 156}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 196
+      y: 367
+      width: 21
+      height: 15
+    spriteID: f309eecea2a447d4a94ba5d1e4cb9b61
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 196, y: 367}
+    spritePosition: {x: 213, y: 160}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 221
+      y: 419
+      width: 13
+      height: 9
+    spriteID: 801ed07e16d279f44ae58760c0476759
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 221, y: 419}
+    spritePosition: {x: 217, y: 153}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 241
+      y: 296
+      width: 19
+      height: 14
+    spriteID: b58632f9ec2240b4d91bad882c4904aa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 241, y: 296}
+    spritePosition: {x: 214, y: 148}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 122
+      y: 395
+      width: 17
+      height: 9
+    spriteID: b4ac16baff634ce41a43a738505bed3e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 122, y: 395}
+    spritePosition: {x: 215, y: 145}
+  - name: cloak_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 101
+      y: 318
+      width: 23
+      height: 15
+    spriteID: 4d640097e94b02e489e33efa8ffc1ce2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 101, y: 318}
+    spritePosition: {x: 148, y: 152}
+  - name: insect_legs_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 109
+      y: 296
+      width: 27
+      height: 14
+    spriteID: 4be66a49a8acea84c88bf2c159171413
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 109, y: 296}
+    spritePosition: {x: 146, y: 157}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 225
+      y: 367
+      width: 21
+      height: 15
+    spriteID: 89e26e75ddad0ee4fabd1cc6f4ddd23e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 225, y: 367}
+    spritePosition: {x: 149, y: 161}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 242
+      y: 419
+      width: 13
+      height: 9
+    spriteID: c9e490711f720e7479ff985065cdc14b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 242, y: 419}
+    spritePosition: {x: 153, y: 154}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 318
+      width: 17
+      height: 15
+    spriteID: 36be3e5e1631b1042a85d2db6113bf6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 240, y: 318}
+    spritePosition: {x: 151, y: 148}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 147
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 76059783ba3d70144aec518b2a0c024d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 147, y: 395}
+    spritePosition: {x: 151, y: 145}
+  - name: cloak_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 31
+      y: 341
+      width: 19
+      height: 18
+    spriteID: dc9655cc47d0f8a498de85a7def33947
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 31, y: 341}
+    spritePosition: {x: 86, y: 150}
+  - name: insect_legs_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 144
+      y: 296
+      width: 27
+      height: 14
+    spriteID: f659ea4088c606d4aa7199614736c4e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 144, y: 296}
+    spritePosition: {x: 82, y: 158}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 132
+      y: 318
+      width: 21
+      height: 15
+    spriteID: 0da5333113fabce409bf8773cbf937de
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 132, y: 318}
+    spritePosition: {x: 85, y: 162}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 38
+      y: 479
+      width: 13
+      height: 9
+    spriteID: 557f9204bb190634bb35f867526c7b4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 38, y: 479}
+    spritePosition: {x: 89, y: 155}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 106
+      y: 341
+      width: 15
+      height: 16
+    spriteID: b9c3e40fcb9947d4db586b30cba870f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 106, y: 341}
+    spritePosition: {x: 88, y: 148}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 172
+      y: 395
+      width: 17
+      height: 9
+    spriteID: e18f544cfc8f2c0488dae855ad8eb49e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 172, y: 395}
+    spritePosition: {x: 87, y: 145}
+  - name: cloak_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 153
+      y: 268
+      width: 25
+      height: 16
+    spriteID: 1eaf564311e80984a937dfb8735f2d43
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 153, y: 268}
+    spritePosition: {x: 19, y: 151}
+  - name: insect_legs_top
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 179
+      y: 296
+      width: 27
+      height: 14
+    spriteID: f3e71d08d243aaf42a2f359acf47b486
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 179, y: 296}
+    spritePosition: {x: 18, y: 157}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 161
+      y: 318
+      width: 21
+      height: 15
+    spriteID: de9d3e3bf54e56b4fa70b1dae5f61389
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 161, y: 318}
+    spritePosition: {x: 21, y: 161}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 59
+      y: 479
+      width: 13
+      height: 9
+    spriteID: 4449ec0866d37774ba4920ce6cce737b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 59, y: 479}
+    spritePosition: {x: 25, y: 154}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 341
+      width: 17
+      height: 15
+    spriteID: 72d657a2775e5bb45a9e923486d303c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 58, y: 341}
+    spritePosition: {x: 23, y: 148}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 197
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 86fb2da6e14156f44835e493b56f334b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 197, y: 395}
+    spritePosition: {x: 23, y: 145}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 367
+      width: 16
+      height: 20
+    spriteID: d42db8b3955eda64582755900127ac54
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 367}
+    spritePosition: {x: 213, y: 91}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 479
+      width: 8
+      height: 8
+    spriteID: 6c602b79aa8c6b8419b97e2e562b0ec9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 80, y: 479}
+    spritePosition: {x: 218, y: 89}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 247
+      y: 395
+      width: 11
+      height: 13
+    spriteID: 7369177ce6cc95f4385a7c24bf949070
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 247, y: 395}
+    spritePosition: {x: 218, y: 84}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 457
+      width: 9
+      height: 14
+    spriteID: c30adc857ad1f364f810b3e70d3af5f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 457}
+    spritePosition: {x: 223, y: 90}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 341
+      width: 13
+      height: 14
+    spriteID: ef262567f483d1f4e84aabe3a65b48a8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 129, y: 341}
+    spritePosition: {x: 222, y: 88}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 222
+      y: 395
+      width: 17
+      height: 9
+    spriteID: 06a6d99af1f74644f9b848f75f524d0b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 222, y: 395}
+    spritePosition: {x: 215, y: 81}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 367
+      width: 16
+      height: 20
+    spriteID: 159483b2051d8dd4f81a74c97a112e65
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 367}
+    spritePosition: {x: 149, y: 92}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 479
+      width: 8
+      height: 8
+    spriteID: 82715ea33a74a5045abfa3ad8d74c93c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 96, y: 479}
+    spritePosition: {x: 154, y: 90}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 457
+      width: 10
+      height: 14
+    spriteID: 0d4bd08d91f608e48a0c76c62345e321
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 457}
+    spritePosition: {x: 154, y: 84}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 93
+      y: 457
+      width: 9
+      height: 14
+    spriteID: 77622ade36a3f2343b4f8d5c6d9d23d4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 93, y: 457}
+    spritePosition: {x: 159, y: 91}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 171
+      y: 341
+      width: 12
+      height: 15
+    spriteID: 5ddf3b9de47a82e4697e431df5f19ca8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 171, y: 341}
+    spritePosition: {x: 158, y: 88}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 2f5b9fdf814c10c4aa6968dfc656ddd4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 419}
+    spritePosition: {x: 151, y: 81}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 52
+      y: 367
+      width: 16
+      height: 20
+    spriteID: 7a5786f2d7351b4489f5aaa15ed894bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 52, y: 367}
+    spritePosition: {x: 85, y: 93}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 112
+      y: 479
+      width: 8
+      height: 8
+    spriteID: 4bcc7420560a1934b924cab08de06b63
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 112, y: 479}
+    spritePosition: {x: 90, y: 91}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 479
+      width: 9
+      height: 15
+    spriteID: 900da4fa566bb2f4791a38ce0bfcdb13
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 479}
+    spritePosition: {x: 90, y: 84}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 457
+      width: 9
+      height: 14
+    spriteID: 81a2874a0135d0540ad77af11d3dd076
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 110, y: 457}
+    spritePosition: {x: 95, y: 92}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 211
+      y: 341
+      width: 10
+      height: 17
+    spriteID: 77c2220c55f1cfe47a0cefe48b5b38df
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 211, y: 341}
+    spritePosition: {x: 94, y: 87}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 29
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 8eb242ce2f1fc7b4e8b5e011e4ad9699
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 29, y: 419}
+    spritePosition: {x: 87, y: 81}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 367
+      width: 16
+      height: 20
+    spriteID: 32a638756c1a95946bf15ef6e62771f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 367}
+    spritePosition: {x: 21, y: 92}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 128
+      y: 479
+      width: 8
+      height: 8
+    spriteID: e2dc0cf8c5eaa384b82267e8a1c759b6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 128, y: 479}
+    spritePosition: {x: 26, y: 90}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 22
+      y: 457
+      width: 10
+      height: 14
+    spriteID: 6eddfc3f118b4b741a3c3659acabfa43
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 22, y: 457}
+    spritePosition: {x: 26, y: 84}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 127
+      y: 457
+      width: 9
+      height: 14
+    spriteID: 2b54e921909c0ff46939e077fd7e9724
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 127, y: 457}
+    spritePosition: {x: 31, y: 91}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 247
+      y: 341
+      width: 10
+      height: 16
+    spriteID: ba742e9cb2bbb6b4e878369aa1223c17
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 247, y: 341}
+    spritePosition: {x: 30, y: 87}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 8830d9718238e9d4786f7dde21e15fc7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 419}
+    spritePosition: {x: 23, y: 81}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 100
+      y: 367
+      width: 16
+      height: 20
+    spriteID: abbcefffac6dfe04bb980960b8b813a1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 100, y: 367}
+    spritePosition: {x: 218, y: 27}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 144
+      y: 479
+      width: 8
+      height: 8
+    spriteID: bd4fe5d34def2f44d8f5a89aba54ea8d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 144, y: 479}
+    spritePosition: {x: 221, y: 25}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 436
+      width: 11
+      height: 13
+    spriteID: 80da79d543456594aa4cd035573f3d28
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 436}
+    spritePosition: {x: 218, y: 20}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 144
+      y: 457
+      width: 9
+      height: 14
+    spriteID: 753ac8343daf49d4cb5e2cf26daed04c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 144, y: 457}
+    spritePosition: {x: 215, y: 26}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 150
+      y: 341
+      width: 13
+      height: 14
+    spriteID: 082ffa245a156924c935b0a9421efb34
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 150, y: 341}
+    spritePosition: {x: 212, y: 24}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 18ba3e937cc2b794ab74b936f2553183
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 419}
+    spritePosition: {x: 215, y: 17}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 124
+      y: 367
+      width: 16
+      height: 20
+    spriteID: 9ae2123e6d15834449654101e9a218ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 124, y: 367}
+    spritePosition: {x: 154, y: 28}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 479
+      width: 8
+      height: 8
+    spriteID: d82d7a4731b74874e95da8598fcbb3fa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 160, y: 479}
+    spritePosition: {x: 157, y: 26}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 457
+      width: 10
+      height: 14
+    spriteID: 72fd816246ddf29489f2396fa562995d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 40, y: 457}
+    spritePosition: {x: 155, y: 20}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 161
+      y: 457
+      width: 9
+      height: 14
+    spriteID: 3b21e1c7a6d20594e857dfd8fc4ba85e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 161, y: 457}
+    spritePosition: {x: 151, y: 27}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 191
+      y: 341
+      width: 12
+      height: 15
+    spriteID: f87e32f95ab2149479cfae28e667facc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 191, y: 341}
+    spritePosition: {x: 149, y: 24}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 104
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 59b5b5255dbf336439a609cb6baec633
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 104, y: 419}
+    spritePosition: {x: 151, y: 17}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 148
+      y: 367
+      width: 16
+      height: 20
+    spriteID: f863fad9068188a489d2edaf660e65cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 148, y: 367}
+    spritePosition: {x: 90, y: 29}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 176
+      y: 479
+      width: 8
+      height: 8
+    spriteID: 72bd38e5636102c4aa65acc39b2586e1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 176, y: 479}
+    spritePosition: {x: 93, y: 27}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 21
+      y: 479
+      width: 9
+      height: 15
+    spriteID: 9ffc37ac6e240f14a89f7e19d0d90aa6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 21, y: 479}
+    spritePosition: {x: 92, y: 20}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 178
+      y: 457
+      width: 9
+      height: 14
+    spriteID: a28762d299c554a44be53e69e63014fb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 178, y: 457}
+    spritePosition: {x: 87, y: 28}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 229
+      y: 341
+      width: 10
+      height: 17
+    spriteID: a061ad1dce5c9c146a72bef802690a3e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 229, y: 341}
+    spritePosition: {x: 87, y: 23}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 129
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 23003b3d054edef419c5bbc6bd591993
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 129, y: 419}
+    spritePosition: {x: 87, y: 17}
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 172
+      y: 367
+      width: 16
+      height: 20
+    spriteID: 097ad4dfb65f3ce4aaf07e6c041257cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 172, y: 367}
+    spritePosition: {x: 26, y: 28}
+  - name: armor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 192
+      y: 479
+      width: 8
+      height: 8
+    spriteID: 63caf566133c43948a518e3bf50bfb12
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 192, y: 479}
+    spritePosition: {x: 29, y: 26}
+  - name: body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 58
+      y: 457
+      width: 10
+      height: 14
+    spriteID: ff04456d41b81ac438e2e73ee1b69ec6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 58, y: 457}
+    spritePosition: {x: 27, y: 20}
+  - name: insect_legs
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 195
+      y: 457
+      width: 9
+      height: 14
+    spriteID: fe48786db05b6ac428d88beee541c6b5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 195, y: 457}
+    spritePosition: {x: 23, y: 27}
+  - name: cloak
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 395
+      width: 10
+      height: 16
+    spriteID: 9da128fc1f422df43a443d32b2491423
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 395}
+    spritePosition: {x: 23, y: 23}
+  - name: shadow
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 154
+      y: 419
+      width: 17
+      height: 9
+    spriteID: 0b78796540b3d5d47a9cf0bf839effd9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 154, y: 419}
+    spritePosition: {x: 23, y: 17}
+  - name: Background
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 256
+      height: 256
+    spriteID: dd57ab12263044e4da2aa14d2141f632
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 0, y: 0}
+  spriteImportData: []
+  rigSpriteImportData: []
+  sharedRigSpriteImportData: []
+  mosaicSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  generateTileAssets: 0
+  tilePaletteCellLayout: 0
+  tilePaletteHexagonLayout: 0
+  tilePaletteCellSize: {x: 1, y: 1, z: 0}
+  tilePaletteCellSizing: 0
+  transparencySortMode: 0
+  transparencySortAxis: {x: 0, y: 0, z: 1}
+  tileTemplate: {instanceID: 0}
+  padding: 4
+  spriteSizeExpand: 0
+  skeletonAssetReferenceID: 
+  pipeline: {instanceID: 0}
+  pipelineVersion: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: Vampires2_Idle_front
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 2d9bec9cdf9b2dc489d4478b181b43cd
+    layerID: 38
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Frame 4
+    spriteName: 
+    isGroup: 1
+    parentIndex: 0
+    spriteID: 1195e244696e90143b6b92ed02ac47d3
+    layerID: 37
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 1
+    spriteID: fccfbf912ebf8a043b3b10c393a40789
+    layerID: 36
+    mosaicPosition: {x: 4, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 2af3221eabc159143b1eee28e5c77599
+    layerID: 35
+    mosaicPosition: {x: 212, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 1
+    spriteID: d4f355f29377cd9478587c4e9394d5cb
+    layerID: 34
+    mosaicPosition: {x: 214, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 1
+    spriteID: b270b0f0251bda74a8442edd8ed9b35b
+    layerID: 33
+    mosaicPosition: {x: 186, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 0c49650bbd896144cb6160f2fe738fc2
+    layerID: 32
+    mosaicPosition: {x: 4, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 1
+    spriteID: 58f01e97d239f5f4a87a5cd44f9ad381
+    layerID: 31
+    mosaicPosition: {x: 22, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 3
+    spriteName: 
+    isGroup: 1
+    parentIndex: 0
+    spriteID: ac0109093b616c4479006696ffaa8b60
+    layerID: 29
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 8
+    spriteID: ab33dda014a662b418607bda5430668e
+    layerID: 28
+    mosaicPosition: {x: 33, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 8
+    spriteID: e4085ba3eceabdc4e85b60b8bee98cb2
+    layerID: 27
+    mosaicPosition: {x: 233, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 8
+    spriteID: 8e74a1064f3099c4f92fd1a879283010
+    layerID: 26
+    mosaicPosition: {x: 190, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 8
+    spriteID: 143811dd57aac784db294d4f3fce0a4f
+    layerID: 25
+    mosaicPosition: {x: 221, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 8
+    spriteID: 1d87fc96d356d764eb8dafcbc63ce0d7
+    layerID: 24
+    mosaicPosition: {x: 70, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 8
+    spriteID: c8a33998fc2ad904fb788c0834e914b5
+    layerID: 23
+    mosaicPosition: {x: 47, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 2
+    spriteName: 
+    isGroup: 1
+    parentIndex: 0
+    spriteID: 7ee4c0cba37a5a24aa66cf5ee95eca53
+    layerID: 21
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 88afdd4192bf0c14799ec39c7ed5edf6
+    layerID: 20
+    mosaicPosition: {x: 62, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 02dd679771afe0244b8b47a98a1c0831
+    layerID: 19
+    mosaicPosition: {x: 179, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 15
+    spriteID: b8a383b2a882dba4db09483ac9c2e372
+    layerID: 18
+    mosaicPosition: {x: 83, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 15
+    spriteID: e63b87600d4219144a7785fbaccc9af2
+    layerID: 17
+    mosaicPosition: {x: 4, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 75148e0c290720e49b8760ea708ad034
+    layerID: 16
+    mosaicPosition: {x: 4, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 4b766bac5e03b7a41a1345a0bfa1d902
+    layerID: 15
+    mosaicPosition: {x: 72, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: 0
+    spriteID: fa884f5606280e64a9442a82375e6bc9
+    layerID: 13
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 22
+    spriteID: e8b803fee60c77c47ba87e720734eae0
+    layerID: 12
+    mosaicPosition: {x: 91, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 22
+    spriteID: 287e71d0ff31df749988c008d7c2f366
+    layerID: 11
+    mosaicPosition: {x: 200, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 22
+    spriteID: e9dfb6234853cba4281bfe606833f5ce
+    layerID: 10
+    mosaicPosition: {x: 215, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 22
+    spriteID: ddabd2741770fc84e8c21cd1e825d71f
+    layerID: 9
+    mosaicPosition: {x: 39, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 22
+    spriteID: f66ff9a30aed8744fb911773104de740
+    layerID: 8
+    mosaicPosition: {x: 120, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 22
+    spriteID: 2bd55e1b22eacba469bdcc7581703d44
+    layerID: 7
+    mosaicPosition: {x: 97, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Vampires2_Idle_back
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 3ecf1c3e698c0524b9002b81dcfc6844
+    layerID: 72
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Frame 4
+    spriteName: 
+    isGroup: 1
+    parentIndex: 29
+    spriteID: 992b788a18e4be2459602d6ba4125ab9
+    layerID: 71
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: cloak_top
+    spriteName: cloak_top
+    isGroup: 0
+    parentIndex: 30
+    spriteID: 3e1d64f90a2804145af9ca848f02717b
+    layerID: 70
+    mosaicPosition: {x: 37, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs_top
+    spriteName: insect_legs_top
+    isGroup: 0
+    parentIndex: 30
+    spriteID: dc818d5f8f8f2e74391cbdf4f54ce58c
+    layerID: 69
+    mosaicPosition: {x: 74, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 30
+    spriteID: f309eecea2a447d4a94ba5d1e4cb9b61
+    layerID: 68
+    mosaicPosition: {x: 196, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 30
+    spriteID: 801ed07e16d279f44ae58760c0476759
+    layerID: 67
+    mosaicPosition: {x: 221, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 30
+    spriteID: b58632f9ec2240b4d91bad882c4904aa
+    layerID: 66
+    mosaicPosition: {x: 241, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 30
+    spriteID: b4ac16baff634ce41a43a738505bed3e
+    layerID: 65
+    mosaicPosition: {x: 122, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 3
+    spriteName: 
+    isGroup: 1
+    parentIndex: 29
+    spriteID: 079e39ff2272b3345b7368eb4afedf02
+    layerID: 63
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: cloak_top
+    spriteName: cloak_top
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 4d640097e94b02e489e33efa8ffc1ce2
+    layerID: 62
+    mosaicPosition: {x: 101, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs_top
+    spriteName: insect_legs_top
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 4be66a49a8acea84c88bf2c159171413
+    layerID: 61
+    mosaicPosition: {x: 109, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 89e26e75ddad0ee4fabd1cc6f4ddd23e
+    layerID: 60
+    mosaicPosition: {x: 225, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 37
+    spriteID: c9e490711f720e7479ff985065cdc14b
+    layerID: 59
+    mosaicPosition: {x: 242, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 36be3e5e1631b1042a85d2db6113bf6a
+    layerID: 58
+    mosaicPosition: {x: 240, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 37
+    spriteID: 76059783ba3d70144aec518b2a0c024d
+    layerID: 57
+    mosaicPosition: {x: 147, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 2
+    spriteName: 
+    isGroup: 1
+    parentIndex: 29
+    spriteID: 79505bcc7e45de2438bff4740c7f3071
+    layerID: 55
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: cloak_top
+    spriteName: cloak_top
+    isGroup: 0
+    parentIndex: 44
+    spriteID: dc9655cc47d0f8a498de85a7def33947
+    layerID: 54
+    mosaicPosition: {x: 31, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs_top
+    spriteName: insect_legs_top
+    isGroup: 0
+    parentIndex: 44
+    spriteID: f659ea4088c606d4aa7199614736c4e1
+    layerID: 53
+    mosaicPosition: {x: 144, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 44
+    spriteID: 0da5333113fabce409bf8773cbf937de
+    layerID: 52
+    mosaicPosition: {x: 132, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 44
+    spriteID: 557f9204bb190634bb35f867526c7b4c
+    layerID: 51
+    mosaicPosition: {x: 38, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 44
+    spriteID: b9c3e40fcb9947d4db586b30cba870f1
+    layerID: 50
+    mosaicPosition: {x: 106, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 44
+    spriteID: e18f544cfc8f2c0488dae855ad8eb49e
+    layerID: 49
+    mosaicPosition: {x: 172, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: 29
+    spriteID: c807b35e6e3b49e4eba5c6b5df76fe32
+    layerID: 47
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: cloak_top
+    spriteName: cloak_top
+    isGroup: 0
+    parentIndex: 51
+    spriteID: 1eaf564311e80984a937dfb8735f2d43
+    layerID: 46
+    mosaicPosition: {x: 153, y: 268}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs_top
+    spriteName: insect_legs_top
+    isGroup: 0
+    parentIndex: 51
+    spriteID: f3e71d08d243aaf42a2f359acf47b486
+    layerID: 45
+    mosaicPosition: {x: 179, y: 296}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 51
+    spriteID: de9d3e3bf54e56b4fa70b1dae5f61389
+    layerID: 44
+    mosaicPosition: {x: 161, y: 318}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 51
+    spriteID: 4449ec0866d37774ba4920ce6cce737b
+    layerID: 43
+    mosaicPosition: {x: 59, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 51
+    spriteID: 72d657a2775e5bb45a9e923486d303c5
+    layerID: 42
+    mosaicPosition: {x: 58, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 51
+    spriteID: 86fb2da6e14156f44835e493b56f334b
+    layerID: 41
+    mosaicPosition: {x: 197, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Vampires2_Idle_left
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: c0e762d050979d444a81c82438c467a5
+    layerID: 106
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Frame 4
+    spriteName: 
+    isGroup: 1
+    parentIndex: 58
+    spriteID: 9ff068d887de0ee44b662c38af6220c9
+    layerID: 105
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 59
+    spriteID: d42db8b3955eda64582755900127ac54
+    layerID: 104
+    mosaicPosition: {x: 4, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 59
+    spriteID: 6c602b79aa8c6b8419b97e2e562b0ec9
+    layerID: 103
+    mosaicPosition: {x: 80, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 59
+    spriteID: 7369177ce6cc95f4385a7c24bf949070
+    layerID: 102
+    mosaicPosition: {x: 247, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 59
+    spriteID: c30adc857ad1f364f810b3e70d3af5f1
+    layerID: 101
+    mosaicPosition: {x: 76, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 59
+    spriteID: ef262567f483d1f4e84aabe3a65b48a8
+    layerID: 100
+    mosaicPosition: {x: 129, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 59
+    spriteID: 06a6d99af1f74644f9b848f75f524d0b
+    layerID: 99
+    mosaicPosition: {x: 222, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 3
+    spriteName: 
+    isGroup: 1
+    parentIndex: 58
+    spriteID: bc498791ed7dd4b4da63a048eea066dc
+    layerID: 97
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 159483b2051d8dd4f81a74c97a112e65
+    layerID: 96
+    mosaicPosition: {x: 28, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 82715ea33a74a5045abfa3ad8d74c93c
+    layerID: 95
+    mosaicPosition: {x: 96, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 0d4bd08d91f608e48a0c76c62345e321
+    layerID: 94
+    mosaicPosition: {x: 4, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 77622ade36a3f2343b4f8d5c6d9d23d4
+    layerID: 93
+    mosaicPosition: {x: 93, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 5ddf3b9de47a82e4697e431df5f19ca8
+    layerID: 92
+    mosaicPosition: {x: 171, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 66
+    spriteID: 2f5b9fdf814c10c4aa6968dfc656ddd4
+    layerID: 91
+    mosaicPosition: {x: 4, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 2
+    spriteName: 
+    isGroup: 1
+    parentIndex: 58
+    spriteID: 83b32429687d5104ab603ef4c311a6f0
+    layerID: 89
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 7a5786f2d7351b4489f5aaa15ed894bb
+    layerID: 88
+    mosaicPosition: {x: 52, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 4bcc7420560a1934b924cab08de06b63
+    layerID: 87
+    mosaicPosition: {x: 112, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 900da4fa566bb2f4791a38ce0bfcdb13
+    layerID: 86
+    mosaicPosition: {x: 4, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 81a2874a0135d0540ad77af11d3dd076
+    layerID: 85
+    mosaicPosition: {x: 110, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 77c2220c55f1cfe47a0cefe48b5b38df
+    layerID: 84
+    mosaicPosition: {x: 211, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 73
+    spriteID: 8eb242ce2f1fc7b4e8b5e011e4ad9699
+    layerID: 83
+    mosaicPosition: {x: 29, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: 58
+    spriteID: 8458c6c6d1f9998489bb9e4f3596aa3c
+    layerID: 81
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 80
+    spriteID: 32a638756c1a95946bf15ef6e62771f2
+    layerID: 80
+    mosaicPosition: {x: 76, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 80
+    spriteID: e2dc0cf8c5eaa384b82267e8a1c759b6
+    layerID: 79
+    mosaicPosition: {x: 128, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 80
+    spriteID: 6eddfc3f118b4b741a3c3659acabfa43
+    layerID: 78
+    mosaicPosition: {x: 22, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 80
+    spriteID: 2b54e921909c0ff46939e077fd7e9724
+    layerID: 77
+    mosaicPosition: {x: 127, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 80
+    spriteID: ba742e9cb2bbb6b4e878369aa1223c17
+    layerID: 76
+    mosaicPosition: {x: 247, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 80
+    spriteID: 8830d9718238e9d4786f7dde21e15fc7
+    layerID: 75
+    mosaicPosition: {x: 54, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Vampires2_Idle_right
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: b4a0035e6b348c84e965f6c12410b90e
+    layerID: 140
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Frame 4
+    spriteName: 
+    isGroup: 1
+    parentIndex: 87
+    spriteID: c8d5ba51fb43ad248a05a07b2b22abb4
+    layerID: 139
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 88
+    spriteID: abbcefffac6dfe04bb980960b8b813a1
+    layerID: 138
+    mosaicPosition: {x: 100, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 88
+    spriteID: bd4fe5d34def2f44d8f5a89aba54ea8d
+    layerID: 137
+    mosaicPosition: {x: 144, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 88
+    spriteID: 80da79d543456594aa4cd035573f3d28
+    layerID: 136
+    mosaicPosition: {x: 4, y: 436}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 88
+    spriteID: 753ac8343daf49d4cb5e2cf26daed04c
+    layerID: 135
+    mosaicPosition: {x: 144, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 88
+    spriteID: 082ffa245a156924c935b0a9421efb34
+    layerID: 134
+    mosaicPosition: {x: 150, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 88
+    spriteID: 18ba3e937cc2b794ab74b936f2553183
+    layerID: 133
+    mosaicPosition: {x: 79, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 3
+    spriteName: 
+    isGroup: 1
+    parentIndex: 87
+    spriteID: dcb8af901d9b6d84d9bfec5543372d69
+    layerID: 131
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 9ae2123e6d15834449654101e9a218ce
+    layerID: 130
+    mosaicPosition: {x: 124, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 95
+    spriteID: d82d7a4731b74874e95da8598fcbb3fa
+    layerID: 129
+    mosaicPosition: {x: 160, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 72fd816246ddf29489f2396fa562995d
+    layerID: 128
+    mosaicPosition: {x: 40, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 3b21e1c7a6d20594e857dfd8fc4ba85e
+    layerID: 127
+    mosaicPosition: {x: 161, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 95
+    spriteID: f87e32f95ab2149479cfae28e667facc
+    layerID: 126
+    mosaicPosition: {x: 191, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 95
+    spriteID: 59b5b5255dbf336439a609cb6baec633
+    layerID: 125
+    mosaicPosition: {x: 104, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 2
+    spriteName: 
+    isGroup: 1
+    parentIndex: 87
+    spriteID: 41371e0abe59f464c8510ad5de10a83b
+    layerID: 123
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 102
+    spriteID: f863fad9068188a489d2edaf660e65cf
+    layerID: 122
+    mosaicPosition: {x: 148, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 102
+    spriteID: 72bd38e5636102c4aa65acc39b2586e1
+    layerID: 121
+    mosaicPosition: {x: 176, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 102
+    spriteID: 9ffc37ac6e240f14a89f7e19d0d90aa6
+    layerID: 120
+    mosaicPosition: {x: 21, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 102
+    spriteID: a28762d299c554a44be53e69e63014fb
+    layerID: 119
+    mosaicPosition: {x: 178, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 102
+    spriteID: a061ad1dce5c9c146a72bef802690a3e
+    layerID: 118
+    mosaicPosition: {x: 229, y: 341}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 102
+    spriteID: 23003b3d054edef419c5bbc6bd591993
+    layerID: 117
+    mosaicPosition: {x: 129, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Frame 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: 87
+    spriteID: 85b5ce17d6a84d24bba2d4281c221b7c
+    layerID: 115
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: 109
+    spriteID: 097ad4dfb65f3ce4aaf07e6c041257cf
+    layerID: 114
+    mosaicPosition: {x: 172, y: 367}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: armor
+    spriteName: armor
+    isGroup: 0
+    parentIndex: 109
+    spriteID: 63caf566133c43948a518e3bf50bfb12
+    layerID: 113
+    mosaicPosition: {x: 192, y: 479}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: body
+    spriteName: body
+    isGroup: 0
+    parentIndex: 109
+    spriteID: ff04456d41b81ac438e2e73ee1b69ec6
+    layerID: 112
+    mosaicPosition: {x: 58, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: insect_legs
+    spriteName: insect_legs
+    isGroup: 0
+    parentIndex: 109
+    spriteID: fe48786db05b6ac428d88beee541c6b5
+    layerID: 111
+    mosaicPosition: {x: 195, y: 457}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: cloak
+    spriteName: cloak
+    isGroup: 0
+    parentIndex: 109
+    spriteID: 9da128fc1f422df43a443d32b2491423
+    layerID: 110
+    mosaicPosition: {x: 4, y: 395}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: shadow
+    spriteName: shadow
+    isGroup: 0
+    parentIndex: 109
+    spriteID: 0b78796540b3d5d47a9cf0bf839effd9
+    layerID: 109
+    mosaicPosition: {x: 154, y: 419}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Background
+    spriteName: Background
+    isGroup: 0
+    parentIndex: -1
+    spriteID: dd57ab12263044e4da2aa14d2141f632
+    layerID: 4
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  mosaicPSDLayers: []
+  rigPSDLayers: []
+  sharedRigPSDLayers: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

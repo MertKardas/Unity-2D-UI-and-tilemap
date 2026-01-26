@@ -1,10 +1,8 @@
 using UnityEngine;
 using MyUtility;
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using System.Collections;
 //SerializableDictionary  reference
 using AYellowpaper.SerializedCollections; 
 public class ItemDataBase : Singleton<ItemDataBase>

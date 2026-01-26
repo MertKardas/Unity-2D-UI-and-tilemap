@@ -23,6 +23,7 @@ public class InputManager : Singleton<InputManager> {
             { InputType.Move, _inputActions.Player.Move },
             { InputType.Attack, _inputActions.Player.Attack },
             { InputType.Cancel, _inputActions.UI.Cancel },
+            { InputType.Run, _inputActions.Player.Sprint }
         };
     }
     
@@ -102,6 +103,7 @@ public enum InputType {
     Interact,
     Move,
     Attack,
+    Run,
     //UI
     Cancel
 }

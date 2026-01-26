@@ -18,6 +18,8 @@ public class SettingsMenu : MonoBehaviour, IGamePanel {
     }
     private void OnEnable()
     {
+        InitializeSliders();
+
         masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
         musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
@@ -25,6 +27,14 @@ public class SettingsMenu : MonoBehaviour, IGamePanel {
         uiVolumeSlider.onValueChanged.AddListener(OnUIVolumeChanged);
         canvasGroup.interactable = false;
         InputManager.Instance.Subscribe(InputType.Cancel, OnCancel, InputActionPhase.Started);
+    }
+
+    private void InitializeSliders() {
+        masterVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetVolume(AudioType.Master));
+        musicVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetVolume(AudioType.Music));
+        sfxVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetVolume(AudioType.SFX));
+        ambienceVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetVolume(AudioType.Ambience));
+        uiVolumeSlider.SetValueWithoutNotify(AudioManager.Instance.GetVolume(AudioType.UI));
     }
     void IGamePanel.SetPanelController(GameUI controller) {
         gameUI = controller;

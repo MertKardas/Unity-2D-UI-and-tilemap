@@ -7,6 +7,10 @@ public class DeathMenuUI : MonoBehaviour,IGamePanel
     {
         GameManager.Instance.RestartGame();
     }
+    public void ReturnToMainMenu()
+    {
+        GameManager.Instance.ReturnToMainMenu();
+    }
     public void QuitGame()
     {
 #if UNITY_EDITOR

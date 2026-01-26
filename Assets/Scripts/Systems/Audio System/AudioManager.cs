@@ -7,15 +7,12 @@ using System.Collections.Generic;
 public class AudioManager : Singleton<AudioManager> {
 
     // --- STRUCT (ZERO-GARBAGE) ---
-    // Class yerine Struct kullanýyoruz.
-    // 'endTime' yerine 'elapsed' sayacý kullanýyoruz ki Pause yapýnca süreyi dondurabilelim.
     private struct ActiveSound {
         public AudioSource source;
-        public AudioData data; 
-        public float duration;      // Sesin toplam süresi
-        public float elapsed;       // Ne kadar süredir çalýyor?
+        public AudioData data;
+        public float elapsed;       // Safety buffer for first-frame check
         public bool isUnscaled;     // UI sesi mi?
-        public bool isPaused;       // Þu an duraklatýldý mý?
+        public bool isPaused;
     }
 
     [Header("Settings")]
@@ -42,7 +39,7 @@ public class AudioManager : Singleton<AudioManager> {
 
     private ObjectPool<AudioSource> audioPool;
 
-    // Kapasiteyi baþtan veriyoruz (Allocation önlemek için)
+    // Kapasiteyi baï¿½tan veriyoruz (Allocation ï¿½nlemek iï¿½in)
     private List<ActiveSound> activeSounds = new List<ActiveSound>(64);
 
     private AudioSource musicSource;
@@ -56,35 +53,29 @@ public class AudioManager : Singleton<AudioManager> {
 
     // --- MAIN LOOP ---
     private void Update() {
-        // Tersten döngü (Silme iþlemi için güvenli)
         for (int i = activeSounds.Count - 1; i >= 0; i--) {
-            // Struct'ýn kopyasýný alýyoruz
             ActiveSound activeSound = activeSounds[i];
 
-            // 1. Güvenlik Kontrolü: Source yok olduysa listeden sil
+            // 1. Safety check: Source destroyed
             if (activeSound.source == null || !activeSound.source.gameObject.activeSelf) {
                 activeSounds.RemoveAt(i);
                 continue;
             }
 
-            // 2. Loop sesleri süre takibine girmez (Manuel durdurulur)
+            // 2. Skip looping sounds (manually stopped)
             if (activeSound.source.loop) continue;
 
-            // 3. Pause Kontrolü: Eðer ses duraklatýldýysa süreyi (elapsed) arttýrma!
+            // 3. Skip paused sounds
             if (activeSound.isPaused) continue;
 
-            // 4. Süre Takibi
+            // 4. Update elapsed time (safety buffer for first-frame)
             float dt = activeSound.isUnscaled ? Time.unscaledDeltaTime : Time.deltaTime;
             activeSound.elapsed += dt;
-
-            // Struct deðer tipidir, kopyayý deðiþtirdik. Listeyi güncellememiz lazým.
-            // Bu iþlem Stack üzerinde olduðu için çok hýzlýdýr.
             activeSounds[i] = activeSound;
 
-            // 5. Süre Doldu mu?
-            if (activeSound.elapsed >= activeSound.duration) {
+            // 5. Check if sound finished (with safety buffer)
+            if (!activeSound.source.isPlaying && activeSound.elapsed > 0.05f) {
                 ReturnToPool(activeSound.source);
-                // ReturnToPool listeyi güncelleyeceði için burada RemoveAt çaðýrmýyoruz.
             }
         }
     }
@@ -93,13 +84,15 @@ public class AudioManager : Singleton<AudioManager> {
         audioPool = new ObjectPool<AudioSource>(
             createFunc: () => { 
                 var _audioGO = new GameObject("PooledAudioSource");
-                _audioGO.AddComponent<AudioSource>();
-                return _audioGO.GetComponent<AudioSource>();
+                var audioSource = _audioGO.AddComponent<AudioSource>();
+                return audioSource;
             },
             actionOnGet: source => source.gameObject.SetActive(true),
             actionOnRelease: source => {
                 source.Stop();
                 source.clip = null;
+                source.volume = 1f;
+                source.ignoreListenerPause = false;
                 source.gameObject.SetActive(false);
                 if (source.transform.parent != transform) source.transform.SetParent(transform);
             },
@@ -111,11 +104,9 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     private void InitMusicSource() {
-        var _audioGO = new GameObject("MusicSource_Template");
-        _audioGO.AddComponent<AudioSource>();
-        GameObject musicGO = Instantiate(_audioGO, transform);
-        musicGO.name = "MusicSource_Main";
-        musicSource = musicGO.GetComponent<AudioSource>();
+        var musicGO = new GameObject("MusicSource_Main");
+        musicGO.transform.SetParent(transform);
+        musicSource = musicGO.AddComponent<AudioSource>();
         musicSource.outputAudioMixerGroup = musicGroup;
         musicSource.loop = true;
     }
@@ -127,10 +118,10 @@ public class AudioManager : Singleton<AudioManager> {
 
         AudioSource source = audioPool.Get();
 
-        // Data uygula ve süreyi al
-        data.ApplyDataToSource(source, out float length);
+        data.ApplyDataToSource(source, out _);
 
         source.outputAudioMixerGroup = GetMixerGroupByType(data.audioType);
+        source.ignoreListenerPause = (data.audioType == AudioType.UI);
 
         if (parent != null) {
             source.transform.SetParent(parent);
@@ -141,11 +132,8 @@ public class AudioManager : Singleton<AudioManager> {
 
         source.Play();
 
-        // --- TRACKING ---
-        // Yeni struct oluþturup listeye atýyoruz. (Garbage Free)
         activeSounds.Add(new ActiveSound {
             source = source,
-            duration = length,
             elapsed = 0f,
             isUnscaled = (data.audioType == AudioType.UI),
             isPaused = false,
@@ -162,10 +150,10 @@ public class AudioManager : Singleton<AudioManager> {
 
     #endregion
 
-    #region Pause & Resume Logic (YENÝ)
+    #region Pause & Resume Logic (YENï¿½)
 
     /// <summary>
-    /// Belirli bir türdeki (Örn: SFX) tüm aktif sesleri duraklatýr.
+    /// Belirli bir tï¿½rdeki (ï¿½rn: SFX) tï¿½m aktif sesleri duraklatï¿½r.
     /// </summary>
     public void PauseAudioByType(AudioType type) {
         if (type == AudioType.Music) { PauseMusic(); return; }
@@ -173,22 +161,22 @@ public class AudioManager : Singleton<AudioManager> {
         var targetGroup = GetMixerGroupByType(type);
 
         for (int i = 0; i < activeSounds.Count; i++) {
-            // Struct kopyasýný al
+            // Struct kopyasï¿½nï¿½ al
             ActiveSound sound = activeSounds[i];
 
-            // Eðer o gruba aitse duraklat
+            // Eï¿½er o gruba aitse duraklat
             if (sound.source.outputAudioMixerGroup == targetGroup && !sound.isPaused) {
                 sound.source.Pause();
                 sound.isPaused = true;
 
-                // Struct'ý listeye geri yaz (Güncelleme)
+                // Struct'ï¿½ listeye geri yaz (Gï¿½ncelleme)
                 activeSounds[i] = sound;
             }
         }
     }
 
     /// <summary>
-    /// Belirli bir türdeki duraklatýlmýþ sesleri devam ettirir.
+    /// Belirli bir tï¿½rdeki duraklatï¿½lmï¿½ï¿½ sesleri devam ettirir.
     /// </summary>
     public void ResumeAudioByType(AudioType type) {
         if (type == AudioType.Music) { ResumeMusic(); return; }
@@ -202,19 +190,19 @@ public class AudioManager : Singleton<AudioManager> {
                 sound.source.UnPause();
                 sound.isPaused = false;
 
-                // Struct'ý listeye geri yaz
+                // Struct'ï¿½ listeye geri yaz
                 activeSounds[i] = sound;
             }
         }
     }
 
     /// <summary>
-    /// UI hariç her þeyi duraklatýr (Genelde oyun içi Pause menüsü için)
+    /// UI hariï¿½ her ï¿½eyi duraklatï¿½r (Genelde oyun iï¿½i Pause menï¿½sï¿½ iï¿½in)
     /// </summary>
     public void PauseAllGameSounds() {
         PauseAudioByType(AudioType.SFX);
         PauseAudioByType(AudioType.Ambience);
-        // Müzik genelde devam eder ama istersen: PauseMusic();
+        // Mï¿½zik genelde devam eder ama istersen: PauseMusic();
     }
 
     public void ResumeAllGameSounds() {
@@ -260,7 +248,7 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     private void ReturnToPool(AudioSource source) {
-        // Manuel for döngüsü (Lambda allocation'dan kaçmak için)
+        // Manuel for dï¿½ngï¿½sï¿½ (Lambda allocation'dan kaï¿½mak iï¿½in)
         int index = -1;
         for (int i = 0; i < activeSounds.Count; i++) {
             if (activeSounds[i].source == source) {
@@ -270,8 +258,8 @@ public class AudioManager : Singleton<AudioManager> {
         }
 
         if (index >= 0) {
-            // Swap Removal: Listenin ortasýndan silmek yerine sonuncuyu buraya kopyalayýp sonuncuyu sil.
-            // Bu iþlem CPU dostudur (Kaydýrma yapmaz).
+            // Swap Removal: Listenin ortasï¿½ndan silmek yerine sonuncuyu buraya kopyalayï¿½p sonuncuyu sil.
+            // Bu iï¿½lem CPU dostudur (Kaydï¿½rma yapmaz).
             int lastIndex = activeSounds.Count - 1;
             if (index < lastIndex) {
                 activeSounds[index] = activeSounds[lastIndex];
@@ -285,9 +273,9 @@ public class AudioManager : Singleton<AudioManager> {
     public void StopAllAudio() {
         StopMusic();
 
-        // Listeyi boþaltýrken tersten gidip havuza atýyoruz
+        // Listeyi boï¿½altï¿½rken tersten gidip havuza atï¿½yoruz
         while (activeSounds.Count > 0) {
-            // Son elemanýn kaynaðýný al
+            // Son elemanï¿½n kaynaï¿½ï¿½nï¿½ al
             var source = activeSounds[activeSounds.Count - 1].source;
             // Havuza iade et (ReturnToPool metodu listeyi de temizleyecektir)
             ReturnToPool(source);
@@ -299,7 +287,7 @@ public class AudioManager : Singleton<AudioManager> {
 
         var targetGroup = GetMixerGroupByType(type);
 
-        // Tersten dönüyoruz çünkü silme iþlemi yapacaðýz
+        // Tersten dï¿½nï¿½yoruz ï¿½ï¿½nkï¿½ silme iï¿½lemi yapacaï¿½ï¿½z
         for (int i = activeSounds.Count - 1; i >= 0; i--) {
             if (activeSounds[i].source.outputAudioMixerGroup == targetGroup) {
                 ReturnToPool(activeSounds[i].source);
@@ -309,11 +297,50 @@ public class AudioManager : Singleton<AudioManager> {
 
     #endregion
 
+    #region Fade Methods
+
+    public void FadeOutSound(AudioSource source, float duration) {
+        if (source == null || !source.gameObject.activeSelf) return;
+
+        LeanTween.value(source.gameObject, source.volume, 0f, duration)
+            .setOnUpdate((float val) => source.volume = val)
+            .setIgnoreTimeScale(true)
+            .setOnComplete(() => StopSound(source));
+    }
+
+    public void FadeOutSound(AudioData data, float duration) {
+        if (data == null) return;
+
+        for (int i = 0; i < activeSounds.Count; i++) {
+            if (activeSounds[i].data == data) {
+                FadeOutSound(activeSounds[i].source, duration);
+            }
+        }
+    }
+
+    public void FadeOutMusic(float duration) {
+        if (musicSource == null || !musicSource.isPlaying) return;
+
+        LeanTween.value(musicSource.gameObject, musicSource.volume, 0f, duration)
+            .setOnUpdate((float val) => musicSource.volume = val)
+            .setIgnoreTimeScale(true)
+            .setOnComplete(() => {
+                StopMusic();
+                musicSource.volume = 1f;
+            });
+    }
+
+    
+    #endregion
+
     #region Music & Volume Control
     public void PlayMusic(AudioClip musicClip, bool loop = true) {
         if (musicSource.clip == musicClip) return;
         musicSource.Stop();
         musicSource.clip = musicClip;
+        //for now, set volume to 0.5f. Later, we can adjust it based on settings.
+        musicSource.volume = 0.5f;
+       
         musicSource.loop = loop;
         musicSource.Play();
     }
@@ -329,6 +356,18 @@ public class AudioManager : Singleton<AudioManager> {
             AudioType.Ambience => ambienceGroup,
             _ => sfxGroup
         };
+    }
+
+    public float GetVolume(AudioType type) {
+        string key = type switch {
+            AudioType.Master => VolumePrefKey,
+            AudioType.Music => MusicVolumePrefKey,
+            AudioType.SFX => SfxVolumePrefKey,
+            AudioType.UI => UiVolumePrefKey,
+            AudioType.Ambience => AmbienceVolumePrefKey,
+            _ => VolumePrefKey
+        };
+        return PlayerPrefs.GetFloat(key, 1f);
     }
 
     public void SetVolume(AudioType type, float value) {

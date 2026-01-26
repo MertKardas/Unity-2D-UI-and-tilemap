@@ -12,6 +12,8 @@ public class ItemData: ScriptableObject {
     [field: SerializeField, ShowAssetPreview] public GameObject Prefab { get; private set; }
     [field: SerializeField] public bool IsStackable { get; private set; }
     [field: SerializeField, ShowIf("IsStackable")] public int StackSize { get; private set; }
+
+#if UNITY_EDITOR   
     private void OnValidate() {
         if(string.IsNullOrEmpty(ID)) {
             ID = System.IO.Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this));
@@ -23,4 +25,5 @@ public class ItemData: ScriptableObject {
             StackSize = 1;
         }
     }
+    #endif
 }

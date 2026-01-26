@@ -1,10 +1,12 @@
 using MyUtility;
+using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
 //Notes: Metadata is cached in the beginning for quick access.
 public class SaveManager : Singleton<SaveManager>
 {
+    public event Action<Result> OnSaveAfter; 
     private SaveService _saveService;
     private SaveSystemSettings _settings;
     private SceneSaveLoader _sceneDataLoader;
@@ -67,8 +69,10 @@ public class SaveManager : Singleton<SaveManager>
         // Get or create scene-specific data and collect current scene's objects
         var sceneData = _sceneDataLoader.CollectSceneData();
         CurrentGameSaveData.SceneData[currentScene] = sceneData;
-
-        return _saveService.Save(_currentGameSaveData, metaData);
+        var result = _saveService.Save(_currentGameSaveData, metaData);
+        
+        OnSaveAfter?.Invoke(result);
+        return result; 
     }
 
     public Result QuickLoad()
