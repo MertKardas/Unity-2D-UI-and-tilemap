@@ -5,9 +5,20 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour {
     [Scene, SerializeField] private string firstLevel;
     [SerializeField] private Button resumeGameButton;
+    [SerializeField] private Button firstSelectedButton;
+    private void Start() {
+        resumeGameButton.interactable = false; 
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton.gameObject);
+        var result = SaveManager.Instance.LoadAllMetadata(out var metadatas);
+        if(result.Success && metadatas.Length >0) {
+            resumeGameButton.interactable = true;
+        }
+    }
     public void LoadNewgameScene() {
         var asyncOperation = SceneManager.LoadSceneAsync(firstLevel);
         
@@ -17,7 +28,7 @@ public class UIManager : MonoBehaviour {
         // Optional: Monitor loading progress
         StartCoroutine(HandleSceneLoading(asyncOperation));
     }
-
+//Wut bunun burada ne işi var ? ? ?? ? 
     private IEnumerator HandleSceneLoading(AsyncOperation asyncOperation) {
         // Wait until scene is fully loaded (0.9 = 90% ready)
         while (asyncOperation.progress < 0.9f) {
@@ -58,13 +69,7 @@ public class UIManager : MonoBehaviour {
     public void OpenURL(string url) {
         Application.OpenURL(url);
     }
-    private void Start() {
-        resumeGameButton.interactable = false; 
-        var result = SaveManager.Instance.LoadAllMetadata(out var metadatas);
-        if(result.Success && metadatas.Length >0) {
-            resumeGameButton.interactable = true;
-        }
-    }
+    
    
 }
 

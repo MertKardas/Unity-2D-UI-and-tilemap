@@ -1,7 +1,7 @@
 using NaughtyAttributes;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Audio; 
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -12,6 +12,7 @@ public class PlayerVisualComponent : MonoBehaviour, IComponent {
     [SerializeField] public  AudioData takeDamageClip;
     [SerializeField] public  AudioData deathClip;
     [SerializeField] public  AudioData attackClip;
+    [SerializeField]public AudioResource test; 
     [SerializeField] public  float runMoveSpeedMultiplier = 1.5f;
 
     [Header("Animation Parameters")]

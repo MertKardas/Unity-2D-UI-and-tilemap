@@ -20,11 +20,10 @@ public class UITransition : ScriptableObject, IPanelTransition {
         if (from != null)
         {
             var fromCanvasGroup = from.GetComponent<CanvasGroup>();
-            var fromRectTransform = from.GetComponent<RectTransform>();
 
-            if (fromCanvasGroup == null || fromRectTransform == null)
+            if (fromCanvasGroup == null)
             {
-                Debug.LogWarning("UITransition: 'from' panel missing CanvasGroup or RectTransform");
+                Debug.LogWarning("UITransition: 'from' panel missing CanvasGroup");
                 return LeanTween.sequence();
             }
         }
@@ -32,22 +31,20 @@ public class UITransition : ScriptableObject, IPanelTransition {
         if (to != null)
         {
             var toCanvasGroup = to.GetComponent<CanvasGroup>();
-            var toRectTransform = to.GetComponent<RectTransform>();
 
-            if (toCanvasGroup == null || toRectTransform == null)
+            if (toCanvasGroup == null)
             {
-                Debug.LogWarning("UITransition: 'to' panel missing CanvasGroup or RectTransform");
+                Debug.LogWarning("UITransition: 'to' panel missing CanvasGroup");
                 return LeanTween.sequence();
             }
         }
 
         var sequence = LeanTween.sequence();
 
-        // Handle fade out / scale down of 'from' panel
+        // Handle fade out of 'from' panel
         if (from != null)
         {
             var fromCanvasGroup = from.GetComponent<CanvasGroup>();
-            var fromRectTransform = from.GetComponent<RectTransform>();
 
             LeanTween.cancel(from);
             sequence.append(
@@ -64,26 +61,18 @@ public class UITransition : ScriptableObject, IPanelTransition {
                     })
             );
 
-            sequence.insert(
-                LeanTween
-                    .scale(fromRectTransform, Vector3.zero, time)
-                    .setEase(fromEaseType)
-                    .setIgnoreTimeScale(useUnscaledTime)
-            );
         }
 
-        // Handle fade in / scale up of 'to' panel
+        // Handle fade in of 'to' panel
         if (to != null)
         {
             var toCanvasGroup = to.GetComponent<CanvasGroup>();
-            var toRectTransform = to.GetComponent<RectTransform>();
 
             LeanTween.cancel(to);
 
             // Set initial state
             to.SetActive(true);
             toCanvasGroup.alpha = 0f;
-            toRectTransform.localScale = Vector3.zero;
             toCanvasGroup.interactable = false;
 
             sequence.append(
@@ -94,12 +83,7 @@ public class UITransition : ScriptableObject, IPanelTransition {
                     .setOnComplete(() => toCanvasGroup.interactable = true)
             );
 
-            sequence.insert(
-                LeanTween
-                    .scale(toRectTransform, Vector3.one, time)
-                    .setEase(toEaseType)
-                    .setIgnoreTimeScale(useUnscaledTime)
-            );
+           
         }
 
         return sequence;

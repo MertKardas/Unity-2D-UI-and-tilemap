@@ -52,7 +52,7 @@ public class Trap : MonoBehaviour, ISavable
     public void ActivatePeaks()
     {
      
-        AudioManager.Instance.PlaySound(trapSFX);
+        AudioManager.Instance.PlaySound(trapSFX, transform.position);
         trapCollider.enabled = true;
     }
     //Deactivated by animation event
